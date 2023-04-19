@@ -9,6 +9,8 @@ SEH.data    = {
   yaseyla_frost_bomb_2 = 183783,
   yaseyla_wamasu_charge = 191133,
   yaseyla_archer_true_shot = 184802,
+  yaseyla_shrapnel_cd = 52, -- how often it can cast shrapnel in execute
+  yaseyla_shrapnel_duration = 11,
 
   hindered_effect = 165972,
 

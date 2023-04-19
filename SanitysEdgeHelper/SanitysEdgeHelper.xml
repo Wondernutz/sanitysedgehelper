@@ -3,7 +3,7 @@
     <TopLevelControl name="SEHMessage1" mouseEnabled="true" movable="true" clampedToScreen="true">
       <Dimensions x="800" y="200" />
       <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-150" />
-      <OnMoveStop>QDRH.OnSEHMessage1Move()</OnMoveStop>
+      <OnMoveStop>SEH.OnSEHMessage1Move()</OnMoveStop>
 
       <Controls>
         <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|144|soft-shadow-thick" inheritAlpha="true" color="99CCFF"
@@ -16,7 +16,7 @@
     <TopLevelControl name="SEHMessage2" mouseEnabled="true" movable="true" clampedToScreen="true">
       <Dimensions x="800" y="200" />
       <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="50" />
-      <OnMoveStop>QDRH.OnSEHMessage2Move()</OnMoveStop>
+      <OnMoveStop>SEH.OnSEHMessage2Move()</OnMoveStop>
       
       <Controls>
         <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|144|soft-shadow-thick" inheritAlpha="true" color="FF5733"
@@ -29,7 +29,7 @@
     <TopLevelControl name="SEHMessage3" mouseEnabled="true" movable="true" clampedToScreen="true">
       <Dimensions x="800" y="200" />
       <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="150" />
-      <OnMoveStop>QDRH.OnSEHMessage3Move()</OnMoveStop>
+      <OnMoveStop>SEH.OnSEHMessage3Move()</OnMoveStop>
       
       <Controls>
         <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|144|soft-shadow-thick" inheritAlpha="true" color="FF00FF"
@@ -42,7 +42,7 @@
     <TopLevelControl name="SEHStatus" mouseEnabled="true" movable="true" clampedToScreen="true">
       <Dimensions x="500" y="200" />
       <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-150" offsetX="600" />
-      <OnMoveStop>QDRH.OnSEHStatusMove()</OnMoveStop>
+      <OnMoveStop>SEH.OnSEHStatusMove()</OnMoveStop>
       <Controls>
       <Label name="$(parent)LabelAddonName" font="EsoUI/Common/Fonts/univers67.otf|16|soft-shadow-thick" color="FFFFFF" text="Sanity's Edge Helper" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
           <Dimensions x="600" y="50" />
@@ -57,6 +57,16 @@
       <Label name="$(parent)LabelTop" font="ZoFontWinH1" color="FFFFFF" text="TOP MESSAGE" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
           <Dimensions x="600" y="50" />
           <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="-60" offsetX="0"/>
+      </Label>
+
+      <!-- Boss 1: Yaseyla -->
+      <Label name="$(parent)LabelYaseyla1" font="ZoFontWinH1" color="CCCC66" text="Next Shrapnel:" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="0"/>
+      </Label>
+      <Label name="$(parent)LabelYaseyla1Value" font="ZoFontWinH1" color="ff8500" text="60s" verticalAlignment="CENTER" horizontalAlignment="LEFT" alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="0" offsetX="230"/>
       </Label>
       
       </Controls>

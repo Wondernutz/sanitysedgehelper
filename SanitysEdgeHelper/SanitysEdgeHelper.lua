@@ -15,6 +15,9 @@ SEH.status = {
   isTwelvane = false,
   isAnsuul = false,
   isHMBoss = false,
+
+  yaseylaLastShrapnel = 0,
+  yaseylaShrapnelBanner = 0,
   
   locked = true,
   
@@ -34,6 +37,9 @@ SEH.status = {
 SEH.settings = {
   showHinderedIcon = true,
 
+  -- Yaseyla
+  showShrapnel = true,
+
   -- Misc
   uiCustomScale = 1,
 }
@@ -49,7 +55,6 @@ function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTa
 end
 
 function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
-
   if abilityId == SEH.data.hindered_effect then
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
@@ -58,9 +63,14 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.Frost_Bomb(result, targetUnitId, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_deflect then
+  --[[if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_deflect then
     CombatAlerts.CastAlertsStart(abilityId, "Shrapnel", hitValue, nil, nil, nil)
     SEH.ObnoxiousSound(SOUNDS.BATTLEGROUND_CAPTURE_FLAG_TAKEN_OWN_TEAM, 1)
+  end--]]
+
+  -- Yaseyla Shrapnel
+  if abilityId == SEH.data.yaseyla_deflect then
+    SEH.Yaseyla.Shrapnel(result)
   end
 
   if result == ACTION_RESULT_BEGIN and targetType == COMBAT_UNIT_TYPE_PLAYER and abilityId == SEH.data.yaseyla_fire_bombs then
@@ -71,10 +81,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 1})
   end
 
-  if result == ACTION_RESULT_BEGIN and targetType == COMBAT_UNIT_TYPE_PLAYER and abilityId == SEH.data.yaseyla_archer_true_shot then
+  --[[if result == ACTION_RESULT_BEGIN and targetType == COMBAT_UNIT_TYPE_PLAYER and abilityId == SEH.data.yaseyla_archer_true_shot then
     -- -3: ranged alert
     CombatAlerts.AlertCast(abilityId, sourceName, hitValue, {-3, 1})
-  end
+  end--]]
 
   --[[ Light/heavy attacks (1.5s windup) alert for non-tanks.
   if result == ACTION_RESULT_BEGIN and targetType == COMBAT_UNIT_TYPE_PLAYER and (
@@ -108,10 +118,10 @@ function SEH.UpdateTick(gameTimeMs)
     return
   end
   
-  --[[ Boss 1: Yaseyla
+  -- Boss 1: Yaseyla
   if SEH.status.isYaseyla then
     SEH.Laseyla.UpdateTick(timeSec)
-  end--]]
+  end
 
 end
 
@@ -147,6 +157,14 @@ function SEH.ResetStatus()
   SEH.status.debuffTracker = {}
   SEH.status.unitDamageTaken = {}
 
+  SEH.status.yaseylaLastShrapnel = 0
+  if CombatAlerts.DisableBanner then
+    if SEH.status.yaseylaShrapnelBanner ~= 0 then
+      CombatAlerts.DisableBanner(SEH.status.yaseylaShrapnelBanner)
+    end
+  end
+  SEH.status.yaseylaShrapnelBanner = 0
+
   SEH.status.mainTankTag = ""
 end
 
@@ -171,7 +189,7 @@ function SEH.BossesChanged()
       -- TODO: Remove UI after killing Ansuul.
     else
       if bossName ~= SEH.status.currentBoss then
-        --d("[QDRH] Boss change. Name = " .. bossName)
+        --d("[SEH] Boss change. Name = " .. bossName)
       end
       SEH.status.currentBoss = bossName
     end
@@ -212,7 +230,6 @@ end
 
 function SEH.PlayerActivated()
   -- Disable all visible UI elements at startup.
-  --QDRH.HideAllUI(true)
   SEH.UnlockUI(false)
 
   if GetZoneId(GetUnitZoneIndex("player")) ~= SEH.data.sanitysEdgeId then
@@ -223,7 +240,7 @@ function SEH.PlayerActivated()
   end
 
   if not SEH.active and not SEH.savedVariables.hideWelcome then
-    d("|cFF6200[QDRH] Thanks for using Wonder's Sanity Edge Helper " .. SEH.version ..".|r Please send issues on discord Wondernuts#1973")
+    d("|cFF6200[SEH] Thanks for using Sanity Edge Helper " .. SEH.version ..".|r Please send issues on discord Wondernuts#1973")
   end
   SEH.active = true
   SEHStatusLabelAddonName:SetText("Sanity's Edge Helper " .. SEH.version)
