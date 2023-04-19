@@ -57,6 +57,21 @@ function SEH.Menu.AddonMenu()
     },
     {
       type = "header",
+      name = "Yaseyla",
+      reference = "YaseylaHeader"
+    },
+    {
+      type    = "checkbox",
+      name    = "Panel: Shrapnel timer",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showShrapnel end,
+      setFunc = function(newValue) SEH.savedVariables.showShrapnel = newValue end,
+    },
+    {
+      type = "divider",
+    },
+    {
+      type = "header",
       name = "Misc",
       reference = "SanitysEdgeMiscMenu"
     },

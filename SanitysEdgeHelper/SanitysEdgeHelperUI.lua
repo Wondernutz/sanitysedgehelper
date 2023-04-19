@@ -102,11 +102,15 @@ function SEH.HideAllUI(hide)
   -- Generic
   SEHStatusLabelTop:SetHidden(hide)
 
+  -- Yaseyla
+  SEHStatusLabelYaseyla1:SetHidden(hide)
+  SEHStatusLabelYaseyla1Value:SetHidden(hide)
+
 end
 
 
 function SEH.CommandLine(param)
-  local help = "[QDRH] Usage: /qdrh {lock,unlock}"
+  local help = "[SEH] Usage: /seh {lock,unlock}"
   if param == nil or param == "" then
     d(help)
   elseif param == "lock" then

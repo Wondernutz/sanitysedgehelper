@@ -25,9 +25,96 @@ function SEH.Yaseyla.Frost_Bomb(result, targetUnitId, hitValue)
       SEH.GetTagForId(targetUnitId),
       "SanitysEdgeHelper/icons/ice-pin.dds",
       hitValue)
-  elseif result == ACTION_RESULT_HEAL_ABSORBED then
-    -- TODO: Track how much healing is left.
   elseif result == ACTION_RESULT_EFFECT_FADED then
     SEH.RemoveIcon(SEH.GetTagForId(targetUnitId))
   end
+end
+
+function SEH.Yaseyla.Shrapnel(result)
+  -- Shrapnel on HM is cast at Boss health percentages of 80%, 55%, 25% and every ~50s after 25%.
+  if not SEH.status.isHMBoss then
+    return
+  end
+
+  if result == ACTION_RESULT_BEGIN then
+    SEH.status.yaseylaLastShrapnel = GetGameTimeSeconds()
+    SEH.status.yaseylaShrapnelBanner = CombatAlerts.StartBanner(
+      "STACK! |c99CCFF(Shrapnel)|r", GetAbilityName(SEH.data.yaseyla_deflect), 0xFF5733FF, SEH.data.yaseyla_deflect, true, nil)
+
+  else
+    if SEH.status.yaseylaShrapnelBanner ~= 0 then
+      CombatAlerts.DisableBanner(SEH.status.yaseylaShrapnelBanner)
+      SEH.status.yaseylaShrapnelBanner = 0
+    end
+  end
+end
+
+function SEH.Yaseyla.CurrentHealthPercentage()
+  currentTargetHP, maxTargetHP, effmaxTargetHP = GetUnitPower("boss1", POWERTYPE_HEALTH)
+  return currentTargetHP / maxTargetHP * 100
+end
+
+function SEH.Yaseyla.UpdateTick(timeSec)
+
+  -- Shrapnel
+  local shrapnelDelta = timeSec - SEH.status.yaseylaLastShrapnel
+  -- Time left for next cast
+  local shrapnelTimeLeft = SEH.data.yaseyla_shrapnel_cd - shrapnelDelta
+  -- Time left of damage
+  local shrapnelDamageTimeLeft = SEH.data.yaseyla_shrapnel_duration - shrapnelDelta
+
+  local currentHealthPercentage = SEH.Yaseyla.CurrentHealthPercentage()
+
+  if shrapnelDamageTimeLeft > 0 then
+    SEHStatusLabelYaseyla1Value:SetColor(
+      SEH.data.color.green[1],
+      SEH.data.color.green[2],
+      SEH.data.color.green[3])
+    if shrapnelDamageTimeLeft > 3 then
+      SEHStatusLabelYaseyla1Value:SetText("HEAL: " .. string.format("%.0f", shrapnelDamageTimeLeft) .. "s ")
+    else
+      -- Add a decimal when it approaches 0.
+      SEHStatusLabelYaseyla1Value:SetText("HEAL: " .. string.format("%.1f", shrapnelDamageTimeLeft) .. "s ")
+    end
+  
+  elseif currentHealthPercentage > 80 then
+    SEHStatusLabelYaseyla1Value:SetColor(
+      SEH.data.color.orange[1],
+      SEH.data.color.orange[2],
+      SEH.data.color.orange[3])
+    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", currentHealthPercentage - 80) .. "% ")
+
+  elseif currentHealthPercentage > 55 then
+    SEHStatusLabelYaseyla1Value:SetColor(
+      SEH.data.color.orange[1],
+      SEH.data.color.orange[2],
+      SEH.data.color.orange[3])
+    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", currentHealthPercentage - 55) .. "% ")
+
+  elseif currentHealthPercentage > 25 then
+    SEHStatusLabelYaseyla1Value:SetColor(
+      SEH.data.color.orange[1],
+      SEH.data.color.orange[2],
+      SEH.data.color.orange[3])
+    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", currentHealthPercentage - 25) .. "% ")
+
+  elseif shrapnelTimeLeft > 0 then 
+    SEHStatusLabelYaseyla1Value:SetColor(
+      SEH.data.color.orange[1],
+      SEH.data.color.orange[2],
+      SEH.data.color.orange[3])
+    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", shrapnelTimeLeft) .. "s ")
+
+  else
+    -- If you wipe during green, it would stay green without this color re-set.
+    SEHStatusLabelYaseyla1Value:SetColor(
+      SEH.data.color.orange[1],
+      SEH.data.color.orange[2],
+      SEH.data.color.orange[3])
+    SEHStatusLabelYaseyla1Value:SetText("INC")
+  end
+
+  SEHStatusLabelYaseyla1:SetHidden(not SEH.savedVariables.showShrapnel)
+  SEHStatusLabelYaseyla1Value:SetHidden(not SEH.savedVariables.showShrapnel)
+
 end
