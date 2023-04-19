@@ -17,7 +17,6 @@ SEH.status = {
   isHMBoss = false,
 
   yaseylaLastShrapnel = 0,
-  yaseylaShrapnelBanner = 0,
   
   locked = true,
   
@@ -59,26 +58,26 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
 
-  if abilityId == SEH.data.yaseyla_frost_bomb_1 or abilityId == SEH.data.yaseyla_frost_bomb_2 then
-    SEH.Yaseyla.Frost_Bomb(result, targetUnitId, hitValue)
+  if abilityId == SEH.data.yaseyla_frost_bomb_target then
+    SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValue)
   end
 
-  --[[if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_deflect then
-    CombatAlerts.CastAlertsStart(abilityId, "Shrapnel", hitValue, nil, nil, nil)
-    SEH.ObnoxiousSound(SOUNDS.BATTLEGROUND_CAPTURE_FLAG_TAKEN_OWN_TEAM, 1)
-  end--]]
+  if abilityId == SEH.data.yaseyla_frost_bomb_applied or abilityId == SEH.data.yaseyla_frost_bomb_applied_2 then
+    SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
+  end
 
   -- Yaseyla Shrapnel
   if abilityId == SEH.data.yaseyla_deflect then
-    SEH.Yaseyla.Shrapnel(result)
+    SEH.Yaseyla.Shrapnel(result, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and targetType == COMBAT_UNIT_TYPE_PLAYER and abilityId == SEH.data.yaseyla_fire_bombs then
-    CombatAlerts.AlertCast(abilityId, sourceName, hitValue, {-2, 1})
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_fire_bombs then
+    CombatAlerts.Alert("", "Fire Bombs", 0xFF6600FF, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_wamasu_charge then
-    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 1})
+    CombatAlerts.Alert("", "Wamasu Charge", 0xFFD666FF, SOUNDS.DUEL_START, hitValue)
+    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
   end
 
   --[[if result == ACTION_RESULT_BEGIN and targetType == COMBAT_UNIT_TYPE_PLAYER and abilityId == SEH.data.yaseyla_archer_true_shot then
@@ -158,12 +157,6 @@ function SEH.ResetStatus()
   SEH.status.unitDamageTaken = {}
 
   SEH.status.yaseylaLastShrapnel = 0
-  if CombatAlerts.DisableBanner then
-    if SEH.status.yaseylaShrapnelBanner ~= 0 then
-      CombatAlerts.DisableBanner(SEH.status.yaseylaShrapnelBanner)
-    end
-  end
-  SEH.status.yaseylaShrapnelBanner = 0
 
   SEH.status.mainTankTag = ""
 end

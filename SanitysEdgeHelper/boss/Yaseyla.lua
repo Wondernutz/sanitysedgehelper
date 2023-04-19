@@ -19,7 +19,12 @@ function SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
 end
 
-function SEH.Yaseyla.Frost_Bomb(result, targetUnitId, hitValue)
+function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValue)
+  if targetType == COMBAT_UNIT_TYPE_PLAYER then
+    CombatAlerts.Alert("", "Frost Bomb (self)", 0x66CCFFFF, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  end
+
+  --[[
   if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
     SEH.AddIconForDuration(
       SEH.GetTagForId(targetUnitId),
@@ -27,10 +32,21 @@ function SEH.Yaseyla.Frost_Bomb(result, targetUnitId, hitValue)
       hitValue)
   elseif result == ACTION_RESULT_EFFECT_FADED then
     SEH.RemoveIcon(SEH.GetTagForId(targetUnitId))
+  end--]]
+end
+
+function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
+  if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
+    SEH.AddIconForDuration(
+      SEH.GetTagForId(targetUnitId),
+      "SanitysEdgeHelper/icons/ice.dds",
+      hitValue)
+  elseif result == ACTION_RESULT_EFFECT_FADED then
+    SEH.RemoveIcon(SEH.GetTagForId(targetUnitId))
   end
 end
 
-function SEH.Yaseyla.Shrapnel(result)
+function SEH.Yaseyla.Shrapnel(result, hitValue)
   -- Shrapnel on HM is cast at Boss health percentages of 80%, 55%, 25% and every ~50s after 25%.
   if not SEH.status.isHMBoss then
     return
@@ -38,14 +54,7 @@ function SEH.Yaseyla.Shrapnel(result)
 
   if result == ACTION_RESULT_BEGIN then
     SEH.status.yaseylaLastShrapnel = GetGameTimeSeconds()
-    SEH.status.yaseylaShrapnelBanner = CombatAlerts.StartBanner(
-      "STACK! |c99CCFF(Shrapnel)|r", GetAbilityName(SEH.data.yaseyla_deflect), 0xFF5733FF, SEH.data.yaseyla_deflect, true, nil)
-
-  else
-    if SEH.status.yaseylaShrapnelBanner ~= 0 then
-      CombatAlerts.DisableBanner(SEH.status.yaseylaShrapnelBanner)
-      SEH.status.yaseylaShrapnelBanner = 0
-    end
+    CombatAlerts.Alert("", "Shrapnel", 0xFF0033FF, SOUNDS.DUEL_START, hitValue)
   end
 end
 
@@ -114,7 +123,9 @@ function SEH.Yaseyla.UpdateTick(timeSec)
     SEHStatusLabelYaseyla1Value:SetText("INC")
   end
 
-  SEHStatusLabelYaseyla1:SetHidden(not SEH.savedVariables.showShrapnel)
-  SEHStatusLabelYaseyla1Value:SetHidden(not SEH.savedVariables.showShrapnel)
+  if SEH.status.isHMBoss then
+    SEHStatusLabelYaseyla1:SetHidden(not SEH.savedVariables.showShrapnel)
+    SEHStatusLabelYaseyla1Value:SetHidden(not SEH.savedVariables.showShrapnel)
+  end
 
 end
