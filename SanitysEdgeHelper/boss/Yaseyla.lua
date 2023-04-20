@@ -64,6 +64,13 @@ function SEH.Yaseyla.CurrentHealthPercentage()
 end
 
 function SEH.Yaseyla.UpdateTick(timeSec)
+  if not SEH.status.isHMBoss then
+    return
+  end
+
+  SEHStatus:SetHidden(not SEH.savedVariables.showShrapnel)
+  SEHStatusLabelYaseyla1:SetHidden(not SEH.savedVariables.showShrapnel)
+  SEHStatusLabelYaseyla1Value:SetHidden(not SEH.savedVariables.showShrapnel)
 
   -- Shrapnel
   local shrapnelDelta = timeSec - SEH.status.yaseylaLastShrapnel
@@ -121,11 +128,6 @@ function SEH.Yaseyla.UpdateTick(timeSec)
       SEH.data.color.orange[2],
       SEH.data.color.orange[3])
     SEHStatusLabelYaseyla1Value:SetText("INC")
-  end
-
-  if SEH.status.isHMBoss then
-    SEHStatusLabelYaseyla1:SetHidden(not SEH.savedVariables.showShrapnel)
-    SEHStatusLabelYaseyla1Value:SetHidden(not SEH.savedVariables.showShrapnel)
   end
 
 end

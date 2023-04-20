@@ -119,7 +119,7 @@ function SEH.UpdateTick(gameTimeMs)
   
   -- Boss 1: Yaseyla
   if SEH.status.isYaseyla then
-    SEH.Laseyla.UpdateTick(timeSec)
+    SEH.Yaseyla.UpdateTick(timeSec)
   end
 
 end
