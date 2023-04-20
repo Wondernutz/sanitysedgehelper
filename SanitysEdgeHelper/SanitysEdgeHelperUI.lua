@@ -107,13 +107,6 @@ function SEH.HideAllUI(hide)
   SEHStatusLabelYaseyla1Value:SetHidden(hide)
   SEHStatusLabelYaseyla2:SetHidden(hide)
   SEHStatusLabelYaseyla2Value:SetHidden(hide)
-
-  -- Twelvane
-  SEHStatusLabelTwelvane1:SetHidden(hide)
-  SEHStatusLabelTwelvane1Value:SetHidden(hide)
-  SEHStatusLabelTwelvane2:SetHidden(hide)
-  SEHStatusLabelTwelvane2Value:SetHidden(hide)
-
 end
 
 
