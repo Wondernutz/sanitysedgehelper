@@ -77,25 +77,6 @@
           <Dimensions x="600" y="50" />
           <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="40" offsetX="230"/>
       </Label>
-
-      <!-- Boss 2: Twelvane -->
-      <Label name="$(parent)LabelTwelvane1" font="ZoFontWinH1" color="CCCC66" text="Next Shrapnel:" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
-          <Dimensions x="600" y="50" />
-          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="0"/>
-      </Label>
-      <Label name="$(parent)LabelTwelvane1Value" font="ZoFontWinH1" color="ff8500" text="60s" verticalAlignment="CENTER" horizontalAlignment="LEFT" alpha="0.85">
-          <Dimensions x="600" y="50" />
-          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="0" offsetX="230"/>
-      </Label>
-
-      <Label name="$(parent)LabelTwelvane2" font="ZoFontWinH1" color="FF6600" text="Next Firebombs:" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
-          <Dimensions x="600" y="50" />
-          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="40"/>
-      </Label>
-      <Label name="$(parent)LabelTwelvane2Value" font="ZoFontWinH1" color="ff8500" text="INC" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
-          <Dimensions x="600" y="50" />
-          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="40" offsetX="230"/>
-      </Label>
       
       </Controls>
     </TopLevelControl>
