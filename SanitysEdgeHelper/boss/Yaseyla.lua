@@ -21,7 +21,7 @@ end
 
 function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValue)
   if targetType == COMBAT_UNIT_TYPE_PLAYER then
-    CombatAlerts.Alert("", "Frost Bomb (self)", 0x66CCFFFF, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    SEH.Alert("", "Frost Bomb (self)", 0x66CCFFFF, SEH.data.yaseyla_frost_bomb_target, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
 
   --[[
@@ -54,7 +54,7 @@ function SEH.Yaseyla.Shrapnel(result, hitValue)
 
   if result == ACTION_RESULT_BEGIN then
     SEH.status.yaseylaLastShrapnel = GetGameTimeSeconds()
-    CombatAlerts.Alert("", "Shrapnel", 0xFF0033FF, SOUNDS.DUEL_START, hitValue)
+    SEH.Alert("", "Shrapnel (STACK!)", 0xFF0033FF, SEH.data.yaseyla_deflect, SOUNDS.DUEL_START, hitValue)
   end
 end
 
@@ -87,10 +87,10 @@ function SEH.Yaseyla.UpdateTick(timeSec)
       SEH.data.color.green[2],
       SEH.data.color.green[3])
     if shrapnelDamageTimeLeft > 3 then
-      SEHStatusLabelYaseyla1Value:SetText("HEAL: " .. string.format("%.0f", shrapnelDamageTimeLeft) .. "s ")
+      SEHStatusLabelYaseyla1Value:SetText("ACTIVE: " .. string.format("%.0f", shrapnelDamageTimeLeft) .. "s ")
     else
       -- Add a decimal when it approaches 0.
-      SEHStatusLabelYaseyla1Value:SetText("HEAL: " .. string.format("%.1f", shrapnelDamageTimeLeft) .. "s ")
+      SEHStatusLabelYaseyla1Value:SetText("ACTIVE: " .. string.format("%.1f", shrapnelDamageTimeLeft) .. "s ")
     end
   
   elseif currentHealthPercentage > 80 then

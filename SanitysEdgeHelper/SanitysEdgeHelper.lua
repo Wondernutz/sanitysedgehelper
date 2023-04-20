@@ -72,11 +72,11 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_fire_bombs then
-    CombatAlerts.Alert("", "Fire Bombs", 0xFF6600FF, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
+    SEH.Alert("", "Fire Bombs", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_wamasu_charge then
-    CombatAlerts.Alert("", "Wamasu Charge", 0xFFD666FF, SOUNDS.DUEL_START, hitValue)
+    SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.DUEL_START, hitValue)
     CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
   end
 
