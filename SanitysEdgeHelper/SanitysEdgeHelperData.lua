@@ -17,6 +17,21 @@ SEH.data    = {
   yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
 
   hindered_effect = 165972,
+  
+  -- Archwizard Twelvane / Chimera
+  twelvane_mantle_wamasu   = 184984, --green portal buff
+  twelvane_mantle_lion     = 184983, --red portal buff
+  twelvane_mantle_gryphon  = 183640, --blue portal buff
+  twelvane_chimera_maul    = 186937, --chimera maul
+  --twelvane_chimera_inferno = 186948, --chimera chain inferno cast
+  --twelvane_chimera_bolt    = 186960, --chimera chain bolt
+  twelvane_inferno_debuff1 = 198613, --inferno debuff before sunburst
+  twelvane_inferno_debuff2 = 186953, --inferno debuff before sunburst
+  twelvane_inferno_debuff3 = 186952, --inferno debuff before sunburst
+  twelvane_sunburst        = 1.6   , --sunburst right after inferno debuff
+  twelvane_chimera_chain   = 183858, --chimera chain lightning
+  twelvane_circuit_charge  = 199235, --debuff from chain lightning hit/spread
+  twelvane_add_spawn       = 28    , --wamasu/lion/gryphon spawn
 
   -- TODO: Consider using UnpackRGBA(0xFFFFFFFF)
   -- Colors
