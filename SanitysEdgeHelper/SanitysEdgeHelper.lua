@@ -83,21 +83,21 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
   end
 
-  --[[if result == ACTION_RESULT_BEGIN and targetType == COMBAT_UNIT_TYPE_PLAYER and abilityId == SEH.data.yaseyla_archer_true_shot then
-    -- -3: ranged alert
-    CombatAlerts.AlertCast(abilityId, sourceName, hitValue, {-3, 1})
-  end--]]
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    SEH.Alert("", "Sunburst (self)", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  end
 
-  --[[ Light/heavy attacks (1.5s windup) alert for non-tanks.
-  if result == ACTION_RESULT_BEGIN and targetType == COMBAT_UNIT_TYPE_PLAYER and (
-    abilityId == SEH.data.guardian_crush or 
-    abilityId == SEH.data.guardian_claw) then
-    local isDPS, isHeal, isTank = GetPlayerRoles()
-    if not isTank then
-      CombatAlerts.AlertCast(abilityId, sourceName, hitValue, {-2, 2})
-    end
-  end--]]
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
+    SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 10000)
+  end
 
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
+    SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.DUEL_START, hitValue)
+  end
+
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
+    SEH.Alert("", "Execute (INTERRUPT)", 0xFF0033FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  end
 end
 
 function SEH.UpdateSlowTick(gameTimeMs)

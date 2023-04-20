@@ -16,6 +16,12 @@ SEH.data    = {
   yaseyla_firebombs_preexecute_cd = 24, -- how often it can cast firebombs pre-execute
   yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
 
+  ansuul_sunburst = 199344,
+  ansuul_wrack = 184621,
+  ansuul_wrathstorm = 198759,
+  ansuul_calamity = 186728,
+  ansuul_execute = 198797,
+
   hindered_effect = 165972,
   
   -- Archwizard Twelvane / Chimera
