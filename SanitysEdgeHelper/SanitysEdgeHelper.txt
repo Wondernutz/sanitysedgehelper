@@ -13,4 +13,5 @@ SanitysEdgeHelperUI.lua
 SanitysEdgeHelperUtil.lua
 SanitysEdgeHelperMenu.lua
 boss/Yaseyla.lua
+boss/Twelvane.lua
 SanitysEdgeHelper.xml
