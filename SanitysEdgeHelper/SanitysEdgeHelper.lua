@@ -17,6 +17,8 @@ SEH.status = {
   isHMBoss = false,
 
   yaseylaLastShrapnel = 0,
+  yaseylaLastFirebombs = 0,
+  yaseylaIsFirstFirebombs = true,
   
   locked = true,
   
@@ -38,6 +40,7 @@ SEH.settings = {
 
   -- Yaseyla
   showShrapnel = true,
+  showFirebombs = true,
 
   -- Misc
   uiCustomScale = 1,
@@ -157,6 +160,8 @@ function SEH.ResetStatus()
   SEH.status.unitDamageTaken = {}
 
   SEH.status.yaseylaLastShrapnel = 0
+  SEH.status.yaseylaLastFirebombs = 0
+  SEH.status.yaseylaIsFirstFirebombs = true
 
   SEH.status.mainTankTag = ""
 end

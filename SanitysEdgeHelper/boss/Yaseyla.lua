@@ -47,11 +47,6 @@ function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
 end
 
 function SEH.Yaseyla.Shrapnel(result, hitValue)
-  -- Shrapnel on HM is cast at Boss health percentages of 80%, 55%, 25% and every ~50s after 25%.
-  if not SEH.status.isHMBoss then
-    return
-  end
-
   if result == ACTION_RESULT_BEGIN then
     SEH.status.yaseylaLastShrapnel = GetGameTimeSeconds()
     SEH.Alert("", "Shrapnel (STACK!)", 0xFF0033FF, SEH.data.yaseyla_deflect, SOUNDS.DUEL_START, hitValue)
@@ -68,7 +63,13 @@ function SEH.Yaseyla.UpdateTick(timeSec)
     return
   end
 
-  SEHStatus:SetHidden(not SEH.savedVariables.showShrapnel)
+  SEHStatus:SetHidden(not (SEH.savedVariables.showShrapnel or SEH.savedVariables.showFirebombs))
+  SEH.Yaseyla.UpdateShrapnelTick(timeSec)
+  SEH.Yaseyla.UpdateFirebombsTick(timeSec)
+end
+
+function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
+  -- Shrapnel on HM is cast at Boss health percentages of 80%, 55%, 25% and every ~52s after 25%.
   SEHStatusLabelYaseyla1:SetHidden(not SEH.savedVariables.showShrapnel)
   SEHStatusLabelYaseyla1Value:SetHidden(not SEH.savedVariables.showShrapnel)
 
@@ -129,5 +130,38 @@ function SEH.Yaseyla.UpdateTick(timeSec)
       SEH.data.color.orange[3])
     SEHStatusLabelYaseyla1Value:SetText("INC")
   end
+end
 
+function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
+  -- Firebombs on HM is cast at every ~24s before 25%, and every ~12s after 25%.
+  SEHStatusLabelYaseyla2:SetHidden(not SEH.savedVariables.showFirebombs)
+  SEHStatusLabelYaseyla2Value:SetHidden(not SEH.savedVariables.showFirebombs)
+
+  local firebombsDelta = timeSec - SEH.status.yaseylaLastFirebombs
+
+  local currentHealthPercentage = SEH.Yaseyla.CurrentHealthPercentage()
+
+  if SEH.status.yaseylaIsFirstFirebombs then
+    local firebombsTimeLeft = SEH.data.yaseyla_firebombs_first_cd - firebombsDelta
+    SEH.status.yaseylaIsFirstFirebombs = false
+  elseif currentHealthPercentage > 25 then
+    local firebombsTimeLeft = SEH.data.yaseyla_firebombs_preexecute_cd - firebombsDelta
+  else
+    local firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
+  end
+
+  if firebombsTimeLeft > 0 then 
+    SEHStatusLabelYaseyla2Value:SetColor(
+      SEH.data.color.orange[1],
+      SEH.data.color.orange[2],
+      SEH.data.color.orange[3])
+    SEHStatusLabelYaseyla2Value:SetText(string.format("%.0f", firebombsTimeLeft) .. "s ")
+  else
+    -- If you wipe during green, it would stay green without this color re-set.
+    SEHStatusLabelYaseyla2Value:SetColor(
+      SEH.data.color.orange[1],
+      SEH.data.color.orange[2],
+      SEH.data.color.orange[3])
+    SEHStatusLabelYaseyla2Value:SetText("INC")
+  end
 end

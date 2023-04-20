@@ -12,6 +12,9 @@ SEH.data    = {
   yaseyla_archer_true_shot = 184802,
   yaseyla_shrapnel_cd = 52, -- how often it can cast shrapnel in execute
   yaseyla_shrapnel_duration = 11,
+  yaseyla_firebombs_first_cd = 9, -- how soon the first firebomb can be cast
+  yaseyla_firebombs_preexecute_cd = 24, -- how often it can cast firebombs pre-execute
+  yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
 
   hindered_effect = 165972,
 

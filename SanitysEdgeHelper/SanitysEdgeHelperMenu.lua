@@ -68,6 +68,13 @@ function SEH.Menu.AddonMenu()
       setFunc = function(newValue) SEH.savedVariables.showShrapnel = newValue end,
     },
     {
+      type    = "checkbox",
+      name    = "Panel: Firebombs timer",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showFirebombs end,
+      setFunc = function(newValue) SEH.savedVariables.showFirebombs = newValue end,
+    },
+    {
       type = "divider",
     },
     {
