@@ -203,6 +203,23 @@ function SEH.ObnoxiousSound(sound, count)
     end )
 end
 
+function SEH.Alert( textMinor, textMajor, color, icon, sound, duration )
+	if (not duration) then duration = 2000 end
+
+	local id = CombatAlerts.StartBanner(textMinor, textMajor, color, icon, true, sound)
+
+	EVENT_MANAGER:UnregisterForUpdate(CombatAlerts.banners[id].name)
+	EVENT_MANAGER:RegisterForUpdate(
+		CombatAlerts.banners[id].name,
+		duration,
+		function( )
+			CombatAlerts.DisableBanner(id)
+		end
+	)
+
+	return(id)
+end
+
 -- Debug functions
 
 function SEH.GroupNames()

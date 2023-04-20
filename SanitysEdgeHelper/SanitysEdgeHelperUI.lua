@@ -105,6 +105,8 @@ function SEH.HideAllUI(hide)
   -- Yaseyla
   SEHStatusLabelYaseyla1:SetHidden(hide)
   SEHStatusLabelYaseyla1Value:SetHidden(hide)
+  SEHStatusLabelYaseyla2:SetHidden(hide)
+  SEHStatusLabelYaseyla2Value:SetHidden(hide)
 
 end
 

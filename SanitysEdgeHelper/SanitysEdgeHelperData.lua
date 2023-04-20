@@ -5,12 +5,16 @@ SEH.data    = {
   -- Yaseyla
   yaseyla_deflect = 184823,
   yaseyla_fire_bombs = 183660,
-  yaseyla_frost_bomb_1 = 185403,
-  yaseyla_frost_bomb_2 = 183783,
+  yaseyla_frost_bomb_target = 185404, --185403,
+  yaseyla_frost_bomb_applied = 185403,
+  yaseyla_frost_bomb_applied_2 = 183783,
   yaseyla_wamasu_charge = 191133,
   yaseyla_archer_true_shot = 184802,
   yaseyla_shrapnel_cd = 52, -- how often it can cast shrapnel in execute
   yaseyla_shrapnel_duration = 11,
+  yaseyla_firebombs_first_cd = 9, -- how soon the first firebomb can be cast
+  yaseyla_firebombs_preexecute_cd = 24, -- how often it can cast firebombs pre-execute
+  yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
 
   hindered_effect = 165972,
 
