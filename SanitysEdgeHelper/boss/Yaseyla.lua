@@ -49,6 +49,7 @@ end
 function SEH.Yaseyla.Shrapnel(result, hitValue)
   if result == ACTION_RESULT_BEGIN then
     SEH.status.yaseylaLastShrapnel = GetGameTimeSeconds()
+    SEH.status.yaseylaShrapnelCount = SEH.status.yaseylaShrapnelCount + 1
     SEH.Alert("", "Shrapnel (STACK!)", 0xFF0033FF, SEH.data.yaseyla_deflect, SOUNDS.BATTLEGROUND_CAPTURE_FLAG_TAKEN_OWN_TEAM, hitValue)
   end
 end
@@ -69,14 +70,14 @@ function SEH.Yaseyla.UpdateTick(timeSec)
 end
 
 function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
-  -- Shrapnel on HM is cast at Boss health percentages of 80%, 55%, 25% and every ~52s after 25%.
+  -- Shrapnel on HM is cast at Boss health percentages of 81%, 55%, 25% and every ~52s after 25%.
   SEHStatusLabelYaseyla1:SetHidden(not SEH.savedVariables.showShrapnel)
   SEHStatusLabelYaseyla1Value:SetHidden(not SEH.savedVariables.showShrapnel)
 
   -- Shrapnel
   local shrapnelDelta = timeSec - SEH.status.yaseylaLastShrapnel
-  -- Time left for next cast
-  local shrapnelTimeLeft = SEH.data.yaseyla_shrapnel_cd - shrapnelDelta
+  -- Time left for next cast in execute
+  local shrapnelTimeLeftExecute = SEH.data.yaseyla_shrapnel_execute_cd - shrapnelDelta
   -- Time left of damage
   local shrapnelDamageTimeLeft = SEH.data.yaseyla_shrapnel_duration - shrapnelDelta
 
@@ -94,33 +95,26 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
       SEHStatusLabelYaseyla1Value:SetText("ACTIVE: " .. string.format("%.1f", shrapnelDamageTimeLeft) .. "s ")
     end
   
-  elseif currentHealthPercentage > 80 then
+  elseif SEH.status.yaseylaShrapnelCount < 3 then
+    local nextShrapnelPercentage = SEH.data.yaseyla_shrapnel_thresholds[SEH.status.yaseylaShrapnelCount + 1]
+    local percentageToNextShrapnel = currentHealthPercentage - nextShrapnelPercentage
+    if percentageToNextShrapnel > 0 then
+      local displayText = string.format("%.0f", percentageToNextShrapnel) .. "% "
+    else
+      local displayText = "INC"
+    end
     SEHStatusLabelYaseyla1Value:SetColor(
       SEH.data.color.orange[1],
       SEH.data.color.orange[2],
       SEH.data.color.orange[3])
-    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", currentHealthPercentage - 80) .. "% ")
+    SEHStatusLabelYaseyla1Value:SetText(displayText)
 
-  elseif currentHealthPercentage > 55 then
+  elseif shrapnelTimeLeftExecute > 0 then 
     SEHStatusLabelYaseyla1Value:SetColor(
       SEH.data.color.orange[1],
       SEH.data.color.orange[2],
       SEH.data.color.orange[3])
-    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", currentHealthPercentage - 55) .. "% ")
-
-  elseif currentHealthPercentage > 25 then
-    SEHStatusLabelYaseyla1Value:SetColor(
-      SEH.data.color.orange[1],
-      SEH.data.color.orange[2],
-      SEH.data.color.orange[3])
-    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", currentHealthPercentage - 25) .. "% ")
-
-  elseif shrapnelTimeLeft > 0 then 
-    SEHStatusLabelYaseyla1Value:SetColor(
-      SEH.data.color.orange[1],
-      SEH.data.color.orange[2],
-      SEH.data.color.orange[3])
-    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", shrapnelTimeLeft) .. "s ")
+    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", shrapnelTimeLeftExecute) .. "s ")
 
   else
     -- If you wipe during green, it would stay green without this color re-set.
@@ -133,7 +127,7 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
 end
 
 function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
-  -- Firebombs on HM is cast at every ~24s before 25%, and every ~12s after 25%.
+  -- Firebombs on HM is cast at every ~24s before 30%, and every ~12s after 30%.
   SEHStatusLabelYaseyla2:SetHidden(not SEH.savedVariables.showFirebombs)
   SEHStatusLabelYaseyla2Value:SetHidden(not SEH.savedVariables.showFirebombs)
 
@@ -144,7 +138,7 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
   if SEH.status.yaseylaIsFirstFirebombs then
     local firebombsTimeLeft = SEH.data.yaseyla_firebombs_first_cd - firebombsDelta
     SEH.status.yaseylaIsFirstFirebombs = false
-  elseif currentHealthPercentage > 25 then
+  elseif currentHealthPercentage > 30 then
     local firebombsTimeLeft = SEH.data.yaseyla_firebombs_preexecute_cd - firebombsDelta
   else
     local firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
