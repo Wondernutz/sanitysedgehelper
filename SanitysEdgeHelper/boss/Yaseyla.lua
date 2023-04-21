@@ -98,10 +98,9 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
   elseif SEH.status.yaseylaShrapnelCount < 3 then
     local nextShrapnelPercentage = SEH.data.yaseyla_shrapnel_thresholds[SEH.status.yaseylaShrapnelCount + 1]
     local percentageToNextShrapnel = currentHealthPercentage - nextShrapnelPercentage
-    if percentageToNextShrapnel > 0 then
-      local displayText = string.format("%.0f", percentageToNextShrapnel) .. "% "
-    else
-      local displayText = "INC"
+    local displayText = string.format("%.0f", percentageToNextShrapnel) .. "% "
+    if percentageToNextShrapnel <= 0 then
+      displayText = "INC"
     end
     SEHStatusLabelYaseyla1Value:SetColor(
       SEH.data.color.orange[1],
@@ -135,13 +134,14 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
 
   local currentHealthPercentage = SEH.Yaseyla.CurrentHealthPercentage()
 
+  local firebombsTimeLeft = 0
   if SEH.status.yaseylaIsFirstFirebombs then
-    local firebombsTimeLeft = SEH.data.yaseyla_firebombs_first_cd - firebombsDelta
+    firebombsTimeLeft = SEH.data.yaseyla_firebombs_first_cd - firebombsDelta
     SEH.status.yaseylaIsFirstFirebombs = false
   elseif currentHealthPercentage > 30 then
-    local firebombsTimeLeft = SEH.data.yaseyla_firebombs_preexecute_cd - firebombsDelta
+    firebombsTimeLeft = SEH.data.yaseyla_firebombs_preexecute_cd - firebombsDelta
   else
-    local firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
+    firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
   end
 
   if firebombsTimeLeft > 0 then 
