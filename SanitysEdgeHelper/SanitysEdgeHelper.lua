@@ -69,7 +69,7 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
   end
 
-  -- Yaseyla Shrapnel
+  -- Yaseyla
   if abilityId == SEH.data.yaseyla_deflect then
     SEH.Yaseyla.Shrapnel(result, hitValue)
   end
@@ -83,6 +83,16 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
   end
 
+  -- Twelvane/Chimera
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_inferno then
+    SEH.Alert("", "Sunbursts", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  end
+
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt then
+    SEH.Alert("", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
+  end
+
+  -- Ansuul
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Sunburst (self)", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
@@ -178,7 +188,6 @@ function SEH.GetBossName()
 end
 
 function SEH.BossesChanged()
-	--local bossName = string.lower(GetUnitName("boss1"))
   local bossName = SEH.GetBossName()
   local lastBossName = SEH.status.currentBoss
   if bossName ~= nil then
@@ -205,7 +214,6 @@ function SEH.BossesChanged()
     }
 
     -- Check for HM.
-    -- TODO: Check if this works for Reef Guardian since "boss1" disappears, but then hp is nil so it shouldn't update.
     if bossName ~= nil and maxTargetHP ~= nil and hardmodeHealth[bossName] ~= nil then
       if maxTargetHP > hardmodeHealth[bossName] then
         SEH.status.isHMBoss = true
@@ -246,7 +254,7 @@ function SEH.PlayerActivated()
   EVENT_MANAGER:UnregisterForEvent(SEH.name .. "CombatEvent", EVENT_COMBAT_EVENT )
   EVENT_MANAGER:RegisterForEvent(SEH.name .. "CombatEvent", EVENT_COMBAT_EVENT, SEH.CombatEvent)
   
-  -- Bufs/debuffs
+  -- Buffs/debuffs
   EVENT_MANAGER:UnregisterForEvent(SEH.name .. "Buffs", EVENT_EFFECT_CHANGED )
   EVENT_MANAGER:RegisterForEvent(SEH.name .. "Buffs", EVENT_EFFECT_CHANGED, SEH.EffectChanged)
   
