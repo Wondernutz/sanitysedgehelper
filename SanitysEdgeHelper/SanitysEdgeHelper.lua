@@ -19,6 +19,7 @@ SEH.status = {
   yaseylaLastShrapnel = 0,
   yaseylaLastFirebombs = 0,
   yaseylaIsFirstFirebombs = true,
+  yaseylaShrapnelCount = 0,
   
   locked = true,
   
@@ -176,6 +177,7 @@ function SEH.ResetStatus()
   SEH.status.yaseylaLastShrapnel = 0
   SEH.status.yaseylaLastFirebombs = 0
   SEH.status.yaseylaIsFirstFirebombs = true
+  SEH.status.yaseylaShrapnelCount = 0
 
   SEH.status.mainTankTag = ""
 end
