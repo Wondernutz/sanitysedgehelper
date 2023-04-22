@@ -47,10 +47,17 @@ function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
 end
 
 function SEH.Yaseyla.Shrapnel(result, hitValue)
-  if result == ACTION_RESULT_BEGIN then
+  if result == ACTION_RESULT_BEGIN and hitValue > 1000 then
     SEH.status.yaseylaLastShrapnel = GetGameTimeSeconds()
     SEH.status.yaseylaShrapnelCount = SEH.status.yaseylaShrapnelCount + 1
     SEH.Alert("", "Shrapnel (STACK!)", 0xFF0033FF, SEH.data.yaseyla_deflect, SOUNDS.BATTLEGROUND_CAPTURE_FLAG_TAKEN_OWN_TEAM, hitValue)
+  end
+end
+
+function SEH.Yaseyla.FireBombs(result, hitValue)
+  if result == ACTION_RESULT_BEGIN then
+    SEH.status.yaseylaLastFirebombs = GetGameTimeSeconds()
+    SEH.Alert("", "Fire Bombs", 0xFF6600FF, SEH.data.yaseyla_fire_bombs, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 end
 
