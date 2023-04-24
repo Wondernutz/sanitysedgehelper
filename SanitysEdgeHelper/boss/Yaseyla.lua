@@ -47,10 +47,22 @@ function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
 end
 
 function SEH.Yaseyla.Shrapnel(result, hitValue)
-  if result == ACTION_RESULT_BEGIN then
+  if result == ACTION_RESULT_BEGIN and hitValue > 1000 then
     SEH.status.yaseylaLastShrapnel = GetGameTimeSeconds()
     SEH.status.yaseylaShrapnelCount = SEH.status.yaseylaShrapnelCount + 1
     SEH.Alert("", "Shrapnel (STACK!)", 0xFF0033FF, SEH.data.yaseyla_deflect, SOUNDS.BATTLEGROUND_CAPTURE_FLAG_TAKEN_OWN_TEAM, hitValue)
+  end
+end
+
+function SEH.Yaseyla.FireBombs(result, targetType, hitValue)
+  if result == ACTION_RESULT_BEGIN then
+    SEH.status.yaseylaLastFirebombs = GetGameTimeSeconds()
+    SEH.status.yaseylaIsFirstFirebombs = false
+    SEH.Alert("", "Fire Bombs", 0xFF6600FF, SEH.data.yaseyla_fire_bombs, SOUNDS.OBJECTIVE_DISCOVERED, 1500)
+
+    if targetType == COMBAT_UNIT_TYPE_PLAYER then
+      CombatAlerts.AlertCast(SEH.data.yaseyla_fire_bombs, "Fire Bombs", hitValue, {-2, 0})
+    end
   end
 end
 
@@ -137,7 +149,6 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
   local firebombsTimeLeft = 0
   if SEH.status.yaseylaIsFirstFirebombs then
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_first_cd - firebombsDelta
-    SEH.status.yaseylaIsFirstFirebombs = false
   elseif currentHealthPercentage > 30 then
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_preexecute_cd - firebombsDelta
   else
