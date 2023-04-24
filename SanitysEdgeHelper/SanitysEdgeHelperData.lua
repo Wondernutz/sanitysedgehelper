@@ -8,7 +8,7 @@ SEH.data    = {
   yaseyla_frost_bomb_target = 185404, --185403,
   yaseyla_frost_bomb_applied = 185403,
   yaseyla_frost_bomb_applied_2 = 183783,
-  yaseyla_wamasu_charge = 191133,
+  yaseyla_wamasu_charge = 200544,
   yaseyla_archer_true_shot = 184802,
   yaseyla_shrapnel_execute_cd = 52, -- how often it can cast shrapnel in execute
   yaseyla_shrapnel_duration = 11,
@@ -44,11 +44,6 @@ SEH.data    = {
   twelvane_chimera_chain   = 183858, --chimera chain lightning
   twelvane_circuit_charge  = 199235, --debuff from chain lightning hit/spread
   twelvane_add_spawn       = 28    , --wamasu/lion/gryphon spawn
-  mantle_pos_list = {
-    [1] = {182503,40390,222654}, --green?
-    [2] = {187466,40385,222654}, --red?
-    [3] = {184996,40390,228135}, --blue?
-  },
 
   -- TODO: Consider using UnpackRGBA(0xFFFFFFFF)
   -- Colors

@@ -32,7 +32,7 @@ function SEH.Twelvane.AddLionIcons()
 end
   
 function SEH.Twelvane.RemoveLionIcons()
-  SEH.DiscardPositionIconsList(SEH.status.twelvaneLionIcons)
+  SEH.DiscardPositionIconList(SEH.status.twelvaneLionIcons)
   SEH.status.twelvaneLionIcons = {}
 end
 
