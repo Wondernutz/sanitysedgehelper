@@ -24,6 +24,8 @@ SEH.data    = {
   ansuul_wrathstorm = 198759,
   ansuul_calamity = 186728,
   ansuul_execute = 198797,
+  ansuul_warlock_sunburst = 187059,
+  ansuul_warlock_wrathstorm = 189163,
   ansuul_poisoned_mind = 184710,
 
   hindered_effect = 165972,

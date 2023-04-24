@@ -58,10 +58,20 @@ function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTa
 end
 
 function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt then
+  --  d("Ability: " .. abilityName .. ", ID: " .. abilityId .. ", Hit Value: " .. tostring(hitValue))
+  --end
+
   if abilityId == SEH.data.hindered_effect then
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
 
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_wamasu_charge then
+    SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.DUEL_START, hitValue)
+    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
+  end
+
+  -- Yaseyla
   if abilityId == SEH.data.yaseyla_frost_bomb_target then
     SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValue)
   end
@@ -70,18 +80,12 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
   end
 
-  -- Yaseyla
   if abilityId == SEH.data.yaseyla_deflect then
     SEH.Yaseyla.Shrapnel(result, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_fire_bombs then
-    SEH.Alert("", "Fire Bombs", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
-  end
-
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_wamasu_charge then
-    SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.DUEL_START, hitValue)
-    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
+  if abilityId == SEH.data.yaseyla_fire_bombs then
+    SEH.Yaseyla.FireBombs(result, targetType, hitValue)
   end
 
   -- Twelvane/Chimera
@@ -89,17 +93,18 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Alert("", "Sunbursts", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt then
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt and hitValue > 500 then
     SEH.Alert("", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
   -- Ansuul
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Sunburst (self)", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, {-2, 0})
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
-    SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 10000)
+    SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
@@ -175,7 +180,7 @@ function SEH.ResetStatus()
   SEH.status.unitDamageTaken = {}
 
   SEH.status.yaseylaLastShrapnel = 0
-  SEH.status.yaseylaLastFirebombs = 0
+  SEH.status.yaseylaLastFirebombs = GetGameTimeSeconds()
   SEH.status.yaseylaIsFirstFirebombs = true
   SEH.status.yaseylaShrapnelCount = 0
 
