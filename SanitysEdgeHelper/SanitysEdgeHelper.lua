@@ -93,6 +93,18 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Alert("", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
+  if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.twelvane_mantle_wamasu and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    SEH.Alert("", "Green Portal", 0x02FF00FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 5000)
+  end
+
+  if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.twelvane_mantle_lion and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    SEH.Alert("", "Red Portal", 0xFF0000FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 5000)
+  end
+
+  if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.twelvane_mantle_gryphon and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    SEH.Alert("", "Blue Portal", 0x0005FFFF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 5000)
+  end
+
   -- Ansuul
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Sunburst (self)", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
