@@ -23,6 +23,10 @@ SEH.status = {
   
   locked = true,
   
+  twelvaneWamasuIcon  = {}
+  twelvaneLionIcon    = {}
+  twelvaneGryphonIcon = {}
+
   unitDamageTaken = {}, -- unitDamageTaken[unitId] = all damage events for a given id.
   --[[ TODO: Damage events to track:
     ACTION_RESULT_DAMAGE,
@@ -42,6 +46,11 @@ SEH.settings = {
   -- Yaseyla
   showShrapnel = true,
   showFirebombs = true,
+
+  -- Twelvane
+  showWamasuIcon  = true,
+  showLionIcon    = true,
+  showGryphonIcon = true,
 
   -- Misc
   uiCustomScale = 1,
@@ -224,6 +233,12 @@ function SEH.BossesChanged()
     SEH.status.isAnsuul = false
     SEH.status.isHMBoss = false
 
+    SEH.Twelvane.RemoveWamasuIcon()
+    SEH.Twelvane.RemoveLionIcon()
+    SEH.Twelvane.RemoveGryphonIcon()
+
+
+
     local currentTargetHP, maxTargetHP, effmaxTargetHP = GetUnitPower("boss1", POWERTYPE_HEALTH)
     local hardmodeHealth = {
       [SEH.data.yaseylaName] = 70000000, -- vet 65M, HM 97.8M
@@ -245,6 +260,9 @@ function SEH.BossesChanged()
     end
     if string.match(bossName, SEH.data.twelvaneName) then
       SEH.status.isTwelvane = true
+      SEH.Twelvane.AddWamasuIcon()
+      SEH.Twelvane.AddLionIcon()
+      SEH.Twelvane.AddGryphonIcon()
     end
     if string.match(bossName, SEH.data.ansuulName) then
       SEH.status.isAnsuul = true

@@ -79,6 +79,35 @@ function SEH.Menu.AddonMenu()
     },
     {
       type = "header",
+      name = "Twelvane",
+      reference = "TwelvaneHeader"
+    },
+    {
+      type    = "checkbox",
+      name    = "Icon: Wamasu",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showWamasuIcon end,
+      setFunc = function(newValue) SEH.savedVariables.showWamasuIcon = newValue end,
+    },
+    {
+      type    = "checkbox",
+      name    = "Icon: Lion",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showLionIcon end,
+      setFunc = function(newValue) SEH.savedVariables.showLionIcon = newValue end,
+    },
+    {
+      type    = "checkbox",
+      name    = "Icon: Gryphon",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showGryphonIcon end,
+      setFunc = function(newValue) SEH.savedVariables.showGryphonIcon = newValue end,
+    },
+    {
+      type = "divider",
+    },
+    {
+      type = "header",
       name = "Misc",
       reference = "SanitysEdgeMiscMenu"
     },

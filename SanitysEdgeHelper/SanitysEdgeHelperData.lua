@@ -42,6 +42,11 @@ SEH.data    = {
   twelvane_chimera_chain   = 183858, --chimera chain lightning
   twelvane_circuit_charge  = 199235, --debuff from chain lightning hit/spread
   twelvane_add_spawn       = 28    , --wamasu/lion/gryphon spawn
+  mantle_pos_list = {
+    [1] = {182503,40390,222654}, --green?
+    [2] = {187466,40385,222654}, --red?
+    [3] = {184996,40390,228135}, --blue?
+  },
 
   -- TODO: Consider using UnpackRGBA(0xFFFFFFFF)
   -- Colors
