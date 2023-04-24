@@ -107,7 +107,11 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
-    SEH.Alert("", "Execute (INTERRUPT)", 0xFF0033FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    SEH.Alert("", "Execute (INTERRUPT)", 0xFF0033FF, abilityId, SOUNDS.DUEL_START, hitValue)
+  end
+
+  if abilityId == SEH.data.ansuul_poisoned_mind then
+    SEH.Ansuul.Poisoned_Mind(result, targetType, targetUnitId, hitValue)
   end
 end
 
