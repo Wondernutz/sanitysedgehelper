@@ -2,10 +2,10 @@ SEH = SEH or {}
 local SEH = SEH
 SEH.Twelvane = {}
 
-function SEH.Twelvane.AddWamasuIcon()
-    if SEH.savedVariables.showWamasuIcon and table.getn(SEH.status.twelvaneWamasuIcon) == 0 and SEH.hasOSI() then
+function SEH.Twelvane.AddWamasuIcons()
+    if SEH.savedVariables.showWamasuIcons and table.getn(SEH.status.twelvaneWamasuIcons) == 0 and SEH.hasOSI() then
       for i=1,3 do
-        table.insert(SEH.status.twelvaneWamasuIcon, 
+        table.insert(SEH.status.twelvaneWamasuIcons, 
           OSI.CreatePositionIcon(
             SEH.data.mantle_pos_list[i][1],
             "SanitysEdgeHelper/icons/squaretwo_green.dds",
@@ -14,15 +14,15 @@ function SEH.Twelvane.AddWamasuIcon()
     end
   end
   
-  function SEH.Twelvane.RemoveWamasuIcon()
-    SEH.DiscardPositionIconList(SEH.status.twelvaneWamasuIcon)
-    SEH.status.twelvaneWamasuIcon = {}
+  function SEH.Twelvane.RemoveWamasuIcons()
+    SEH.DiscardPositionIconList(SEH.status.twelvaneWamasuIcons)
+    SEH.status.twelvaneWamasuIcons = {}
   end
 
-  function SEH.Twelvane.AddLionIcon()
-    if SEH.savedVariables.showLionIcon and table.getn(SEH.status.twelvaneLionIcon) == 0 and SEH.hasOSI() then
+  function SEH.Twelvane.AddLionIcons()
+    if SEH.savedVariables.showLionIcons and table.getn(SEH.status.twelvaneLionIcons) == 0 and SEH.hasOSI() then
       for i=1,3 do
-        table.insert(SEH.status.twelvaneLionIcon, 
+        table.insert(SEH.status.twelvaneLionIcons, 
           OSI.CreatePositionIcon(
             SEH.data.mantle_pos_list[i][2],
             "SanitysEdgeHelper/icons/squaretwo_red.dds",
@@ -31,15 +31,15 @@ function SEH.Twelvane.AddWamasuIcon()
     end
   end
   
-  function SEH.Twelvane.RemoveLionIcon()
-    SEH.DiscardPositionIconList(SEH.status.twelvaneLionIcon)
-    SEH.status.twelvaneLionIcon = {}
+  function SEH.Twelvane.RemoveLionIcons()
+    SEH.DiscardPositionIconsList(SEH.status.twelvaneLionIcons)
+    SEH.status.twelvaneLionIcons = {}
   end
 
-  function SEH.Twelvane.AddGryphonIcon()
-    if SEH.savedVariables.showGryphonIcon and table.getn(SEH.status.twelvaneGryphonIcon) == 0 and SEH.hasOSI() then
+  function SEH.Twelvane.AddGryphonIcons()
+    if SEH.savedVariables.showGryphonIcons and table.getn(SEH.status.twelvaneGryphonIcons) == 0 and SEH.hasOSI() then
       for i=1,3 do
-        table.insert(SEH.status.twelvaneGryphonIcon, 
+        table.insert(SEH.status.twelvaneGryphonIcons, 
           OSI.CreatePositionIcon(
             SEH.data.mantle_pos_list[i][3],
             "SanitysEdgeHelper/icons/squaretwo_blue.dds",
@@ -48,7 +48,7 @@ function SEH.Twelvane.AddWamasuIcon()
     end
   end
   
-  function SEH.Twelvane.RemoveGryphonIcon()
-    SEH.DiscardPositionIconList(SEH.status.twelvaneGryphonIcon)
-    SEH.status.twelvaneGryphonIcon = {}
+  function SEH.Twelvane.RemoveGryphonIcons()
+    SEH.DiscardPositionIconList(SEH.status.twelvaneGryphonIcons)
+    SEH.status.twelvaneGryphonIcons = {}
   end
