@@ -8,7 +8,7 @@ function SEH.Twelvane.AddWamasuIcon()
         table.insert(SEH.status.twelvaneWamasuIcon, 
           OSI.CreatePositionIcon(
             SEH.data.mantle_pos_list[i][1],
-            "OdySupportIcons/icons/squares/squaretwo_green.dds",
+            "SanitysEdgeHelper/icons/squaretwo_green.dds",
             2 * OSI.GetIconSize()))
       end
     end
@@ -25,7 +25,7 @@ function SEH.Twelvane.AddWamasuIcon()
         table.insert(SEH.status.twelvaneLionIcon, 
           OSI.CreatePositionIcon(
             SEH.data.mantle_pos_list[i][2],
-            "OdySupportIcons/icons/squares/squaretwo_red.dds",
+            "SanitysEdgeHelper/icons/squaretwo_red.dds",
             2 * OSI.GetIconSize()))
       end
     end
@@ -42,7 +42,7 @@ function SEH.Twelvane.AddWamasuIcon()
         table.insert(SEH.status.twelvaneGryphonIcon, 
           OSI.CreatePositionIcon(
             SEH.data.mantle_pos_list[i][3],
-            "OdySupportIcons/icons/squares/squaretwo_blue.dds",
+            "SanitysEdgeHelper/icons/squaretwo_blue.dds",
             2 * OSI.GetIconSize()))
       end
     end
