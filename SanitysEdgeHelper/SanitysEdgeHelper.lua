@@ -23,9 +23,9 @@ SEH.status = {
   
   locked = true,
   
-  twelvaneWamasuIcon  = {}
-  twelvaneLionIcon    = {}
-  twelvaneGryphonIcon = {}
+  twelvaneWamasuIcon  = {},
+  twelvaneLionIcon    = {},
+  twelvaneGryphonIcon = {},
 
   unitDamageTaken = {}, -- unitDamageTaken[unitId] = all damage events for a given id.
   --[[ TODO: Damage events to track:
