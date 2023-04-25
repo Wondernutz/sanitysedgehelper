@@ -23,8 +23,6 @@ function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValu
   if targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Frost Bomb (self)", 0x66CCFFFF, SEH.data.yaseyla_frost_bomb_target, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
-
-  --[[
   if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
     SEH.AddIconForDuration(
       SEH.GetTagForId(targetUnitId),
@@ -32,7 +30,7 @@ function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValu
       hitValue)
   elseif result == ACTION_RESULT_EFFECT_FADED then
     SEH.RemoveIcon(SEH.GetTagForId(targetUnitId))
-  end--]]
+  end
 end
 
 function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
