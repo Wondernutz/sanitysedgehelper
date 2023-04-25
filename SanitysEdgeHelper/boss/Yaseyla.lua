@@ -136,7 +136,7 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
 end
 
 function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
-  -- Firebombs on HM is cast at every ~24s before 30%, and every ~12s after 30%.
+  -- Firebombs on HM is cast at every ~24s before 25%, and every ~12s after 25%.
   SEHStatusLabelYaseyla2:SetHidden(not SEH.savedVariables.showFirebombs)
   SEHStatusLabelYaseyla2Value:SetHidden(not SEH.savedVariables.showFirebombs)
 
@@ -147,7 +147,7 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
   local firebombsTimeLeft = 0
   if SEH.status.yaseylaIsFirstFirebombs then
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_first_cd - firebombsDelta
-  elseif currentHealthPercentage > 30 then
+  elseif currentHealthPercentage > 25 then
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_preexecute_cd - firebombsDelta
   else
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
