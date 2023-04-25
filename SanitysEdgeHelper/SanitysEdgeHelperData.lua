@@ -2,13 +2,16 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.data    = {
+
+  trash_wamasu_charge = 200544,
+
   -- Yaseyla
   yaseyla_deflect = 184823,
   yaseyla_fire_bombs = 183660,
   yaseyla_frost_bomb_target = 185404, --185403,
   yaseyla_frost_bomb_applied = 185403,
   yaseyla_frost_bomb_applied_2 = 183783,
-  yaseyla_wamasu_charge = 200544,
+  yaseyla_wamasu_charge = 191133,
   yaseyla_archer_true_shot = 184802,
   yaseyla_shrapnel_execute_cd = 52, -- how often it can cast shrapnel in execute
   yaseyla_shrapnel_duration = 11,

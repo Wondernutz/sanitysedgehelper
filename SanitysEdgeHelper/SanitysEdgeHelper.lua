@@ -66,7 +66,7 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_wamasu_charge then
+  if result == ACTION_RESULT_BEGIN and (abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge) then
     SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.DUEL_START, hitValue)
     CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
   end

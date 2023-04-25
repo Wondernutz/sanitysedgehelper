@@ -11,7 +11,7 @@ function SEH.Ansuul.Poisoned_Mind(result, targetType, targetUnitId, hitValue)
   if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
     SEH.AddIconForDuration(
       SEH.GetTagForId(targetUnitId),
-      "SanitysEdgeHelper/icons/PoisonDropSmall.dds",
+      "SanitysEdgeHelper/icons/PoisonDropLarge.dds",
       hitValue)
   elseif result == ACTION_RESULT_EFFECT_FADED then
     SEH.RemoveIcon(SEH.GetTagForId(targetUnitId))

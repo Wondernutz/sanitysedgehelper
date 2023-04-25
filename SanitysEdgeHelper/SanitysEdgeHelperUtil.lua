@@ -85,7 +85,7 @@ end
 
 function SEH.AddIconDisplayName(displayName, texture)
   if SEH.hasOSI() then
-    OSI.SetMechanicIconForUnit(string.lower(displayName), texture, 2 * OSI.GetIconSize())
+    OSI.SetMechanicIconForUnit(string.lower(displayName), texture, 1.5 * OSI.GetIconSize())
   end
 end
 
