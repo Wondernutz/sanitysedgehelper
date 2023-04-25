@@ -66,7 +66,7 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_wamasu_charge then
+  if result == ACTION_RESULT_BEGIN and (abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge) then
     SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.DUEL_START, hitValue)
     CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
   end
@@ -97,6 +97,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Alert("", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_chain_lightning and hitValue > 1000 then
+    SEH.Alert("", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  end
+
   -- Ansuul
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Sunburst (self)", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
@@ -117,6 +121,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
 
   if abilityId == SEH.data.ansuul_poisoned_mind then
     SEH.Ansuul.Poisoned_Mind(result, targetType, targetUnitId, hitValue)
+  end
+
+  if abilityId == SEH.data.ansuul_manic_phobia then
+    SEH.Ansuul.Manic_Phobia(result, targetType, targetUnitId, hitValue)
   end
 end
 

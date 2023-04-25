@@ -23,8 +23,6 @@ function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValu
   if targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Frost Bomb (self)", 0x66CCFFFF, SEH.data.yaseyla_frost_bomb_target, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
-
-  --[[
   if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
     SEH.AddIconForDuration(
       SEH.GetTagForId(targetUnitId),
@@ -32,7 +30,7 @@ function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValu
       hitValue)
   elseif result == ACTION_RESULT_EFFECT_FADED then
     SEH.RemoveIcon(SEH.GetTagForId(targetUnitId))
-  end--]]
+  end
 end
 
 function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
@@ -138,7 +136,7 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
 end
 
 function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
-  -- Firebombs on HM is cast at every ~24s before 30%, and every ~12s after 30%.
+  -- Firebombs on HM is cast at every ~24s before 25%, and every ~12s after 25%.
   SEHStatusLabelYaseyla2:SetHidden(not SEH.savedVariables.showFirebombs)
   SEHStatusLabelYaseyla2Value:SetHidden(not SEH.savedVariables.showFirebombs)
 
@@ -149,7 +147,7 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
   local firebombsTimeLeft = 0
   if SEH.status.yaseylaIsFirstFirebombs then
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_first_cd - firebombsDelta
-  elseif currentHealthPercentage > 30 then
+  elseif currentHealthPercentage > 25 then
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_preexecute_cd - firebombsDelta
   else
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta

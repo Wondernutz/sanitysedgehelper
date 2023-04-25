@@ -2,6 +2,9 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.data    = {
+
+  trash_wamasu_charge = 200544,
+
   -- Yaseyla
   yaseyla_deflect = 184823,
   yaseyla_fire_bombs = 183660,
@@ -27,6 +30,7 @@ SEH.data    = {
   ansuul_warlock_sunburst = 187059,
   ansuul_warlock_wrathstorm = 189163,
   ansuul_poisoned_mind = 184710,
+  ansuul_manic_phobia = 185117,
 
   hindered_effect = 165972,
   
@@ -41,7 +45,7 @@ SEH.data    = {
   twelvane_inferno_debuff2 = 186953, --inferno debuff before sunburst
   twelvane_inferno_debuff3 = 186952, --inferno debuff before sunburst
   twelvane_sunburst        = 1.6   , --sunburst right after inferno debuff
-  twelvane_chimera_chain   = 183858, --chimera chain lightning
+  twelvane_chimera_chain_lightning = 183858, --chimera chain lightning
   twelvane_circuit_charge  = 199235, --debuff from chain lightning hit/spread
   twelvane_add_spawn       = 28    , --wamasu/lion/gryphon spawn
 
