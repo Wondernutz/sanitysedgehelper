@@ -17,3 +17,9 @@ function SEH.Ansuul.Poisoned_Mind(result, targetType, targetUnitId, hitValue)
     SEH.RemoveIcon(SEH.GetTagForId(targetUnitId))
   end
 end
+
+function SEH.Ansuul.Manic_Phobia(result, targetType, targetUnitId, hitValue)
+  if result == ACTION_RESULT_BEGIN then
+    SEH.Alert("", string.format("Banish (%s)", SEH.GetTagForId(targetUnitId)), 0x303B4CFF, SEH.data.ansuul_manic_phobia, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
+  end
+end
