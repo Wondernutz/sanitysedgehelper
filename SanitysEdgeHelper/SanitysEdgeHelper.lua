@@ -108,7 +108,7 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
-    SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
+    SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 10000)
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
