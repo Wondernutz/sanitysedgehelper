@@ -75,6 +75,13 @@ function SEH.Menu.AddonMenu()
       setFunc = function(newValue) SEH.savedVariables.showFirebombs = newValue end,
     },
     {
+      type    = "checkbox",
+      name    = "Panel: Chain Pull timer",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showChains end,
+      setFunc = function(newValue) SEH.savedVariables.showChains = newValue end,
+    },
+    {
       type = "divider",
     },
     {

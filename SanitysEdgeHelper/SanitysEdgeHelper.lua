@@ -18,7 +18,9 @@ SEH.status = {
 
   yaseylaLastShrapnel = 0,
   yaseylaLastFirebombs = 0,
+  yaseylaLastChains = 0,
   yaseylaIsFirstFirebombs = true,
+  yaseylaIsFirstChains = true,
   yaseylaShrapnelCount = 0,
   
   locked = true,
@@ -42,6 +44,7 @@ SEH.settings = {
   -- Yaseyla
   showShrapnel = true,
   showFirebombs = true,
+  showChains = true,
 
   -- Misc
   uiCustomScale = 1,
@@ -58,8 +61,9 @@ function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTa
 end
 
 function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
-  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt then
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.olms_swipe then
   --  d("Ability: " .. abilityName .. ", ID: " .. abilityId .. ", Hit Value: " .. tostring(hitValue))
+  --  d(string.format("Target name: %s, Target type: %s, targetUnitId: %d, GetNameForId: %s", targetName, targetType, targetUnitId, SEH.GetNameForId(targetUnitId)))
   --end
 
   if abilityId == SEH.data.hindered_effect then
@@ -86,6 +90,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
 
   if abilityId == SEH.data.yaseyla_fire_bombs then
     SEH.Yaseyla.FireBombs(result, targetType, hitValue)
+  end
+
+  if abilityId == SEH.data.yaseyla_chain_pull then
+    SEH.Yaseyla.Chain_Pull(result, targetType, hitValue)
   end
 
   -- Twelvane/Chimera
@@ -189,7 +197,9 @@ function SEH.ResetStatus()
 
   SEH.status.yaseylaLastShrapnel = 0
   SEH.status.yaseylaLastFirebombs = GetGameTimeSeconds()
+  SEH.status.yaseylaLastChains = GetGameTimeSeconds()
   SEH.status.yaseylaIsFirstFirebombs = true
+  SEH.status.yaseylaIsFirstChains = true
   SEH.status.yaseylaShrapnelCount = 0
 
   SEH.status.mainTankTag = ""
