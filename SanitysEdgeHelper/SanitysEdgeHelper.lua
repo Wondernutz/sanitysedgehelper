@@ -18,9 +18,11 @@ SEH.status = {
 
   yaseylaLastShrapnel = 0,
   yaseylaLastFirebombs = 0,
+  yaseylaLastFrostbombs = 0,
   yaseylaLastChains = 0,
   yaseylaLastIgniteBlame = 0,
   yaseylaIsFirstFirebombs = true,
+  yaseylaIsFirstFrostbombs = true,
   yaseylaIsFirstChains = true,
   yaseylaShrapnelCount = 0,
   
@@ -45,6 +47,7 @@ SEH.settings = {
   -- Yaseyla
   showShrapnel = true,
   showFirebombs = true,
+  showFrostbombs = false,
   showChains = false,
 
   -- Misc
@@ -204,8 +207,10 @@ function SEH.ResetStatus()
   SEH.status.yaseylaLastShrapnel = 0
   SEH.status.yaseylaLastIgniteBlame = 0
   SEH.status.yaseylaLastFirebombs = GetGameTimeSeconds()
+  SEH.status.yaseylaLastFrostbombs = GetGameTimeSeconds()
   SEH.status.yaseylaLastChains = GetGameTimeSeconds()
   SEH.status.yaseylaIsFirstFirebombs = true
+  SEH.status.yaseylaIsFirstFrostbombs = true
   SEH.status.yaseylaIsFirstChains = true
   SEH.status.yaseylaShrapnelCount = 0
 

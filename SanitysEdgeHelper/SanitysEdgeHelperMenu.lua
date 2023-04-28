@@ -76,8 +76,15 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
+      name    = "Panel: Frostbombs timer",
+      default = false,
+      getFunc = function() return SEH.savedVariables.showFrostbombs end,
+      setFunc = function(newValue) SEH.savedVariables.showFrostbombs = newValue end,
+    },
+    {
+      type    = "checkbox",
       name    = "Panel: Chain Pull timer",
-      default = true,
+      default = false,
       getFunc = function() return SEH.savedVariables.showChains end,
       setFunc = function(newValue) SEH.savedVariables.showChains = newValue end,
     },

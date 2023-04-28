@@ -3,7 +3,7 @@
 ## Author: @Wondernuts
 ## DependsOn: CombatAlerts LibAddonMenu-2.0
 ## OptionalDependsOn: OdySupportIcons 
-## Version: 0.2.2
+## Version: 0.2.3
 ## APIVersion: 101035 101036
 ## SavedVariables: SanitysEdgeHelperSavedVariables
 
