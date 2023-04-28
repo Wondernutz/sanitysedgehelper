@@ -44,7 +44,7 @@ SEH.settings = {
   -- Yaseyla
   showShrapnel = true,
   showFirebombs = true,
-  showChains = true,
+  showChains = false,
 
   -- Misc
   uiCustomScale = 1,
@@ -116,11 +116,12 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
-    SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 10000)
+    SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
     SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.DUEL_START, hitValue)
+    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, {-2, 0})
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
