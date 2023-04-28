@@ -44,6 +44,19 @@ function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
   end
 end
 
+function SEH.Yaseyla.Ignite(result, targetUnitId, hitValue)
+  -- Ignite Blamer feature, check to see who gets the first ignite tick
+  if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
+    local timeSec = GetGameTimeSeconds()
+    local igniteBlameDelta = timeSec - SEH.status.yaseylaLastIgniteBlame
+
+    if igniteBlameDelta > SEH.data.yaseyla_ignite_blame_cd then
+      SEH.status.yaseylaLastIgniteBlame = timeSec
+      d(string.format("%s was first to catch fire", SEH.GetNameForId(targetUnitId)))
+    end
+  end
+end
+
 function SEH.Yaseyla.Shrapnel(result, hitValue)
   if result == ACTION_RESULT_BEGIN and hitValue > 1000 then
     SEH.status.yaseylaLastShrapnel = GetGameTimeSeconds()
