@@ -9,6 +9,7 @@ SEH.data    = {
   yaseyla_deflect = 184823,
   yaseyla_fire_bombs = 183660,
   yaseyla_chain_pull = 184540,
+  yaseyla_ignite = 188188,
   yaseyla_frost_bomb_target = 185404, --185403,
   yaseyla_frost_bomb_applied = 185403,
   yaseyla_frost_bomb_applied_2 = 183783,
@@ -23,8 +24,13 @@ SEH.data    = {
   yaseyla_firebombs_preexecute_cd = 24, -- how often it can cast firebombs pre-execute
   yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
 
+  yaseyla_frostbombs_first_cd = 17, -- how soon the first frostbombs can be cast
+  yaseyla_frostbombs_cd = 25, -- how soon it can CAST frostbombs from the last bomb EXPLOSION
+
   yaseyla_chains_first_cd = 0.1, -- how soon the first chains can be cast
   yaseyla_chains_cd = 32, -- how often it can cast chains
+
+  yaseyla_ignite_blame_cd = 5.5, -- how often the Ignite Blamer reports the first instance of an ignite tick
 
   -- Ansuul
   ansuul_sunburst = 199344,

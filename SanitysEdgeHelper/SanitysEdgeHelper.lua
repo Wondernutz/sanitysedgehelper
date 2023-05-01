@@ -18,8 +18,11 @@ SEH.status = {
 
   yaseylaLastShrapnel = 0,
   yaseylaLastFirebombs = 0,
+  yaseylaLastFrostbombs = 0,
   yaseylaLastChains = 0,
+  yaseylaLastIgniteBlame = 0,
   yaseylaIsFirstFirebombs = true,
+  yaseylaIsFirstFrostbombs = true,
   yaseylaIsFirstChains = true,
   yaseylaShrapnelCount = 0,
   
@@ -44,6 +47,7 @@ SEH.settings = {
   -- Yaseyla
   showShrapnel = true,
   showFirebombs = true,
+  showFrostbombs = false,
   showChains = false,
 
   -- Misc
@@ -82,6 +86,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
 
   if abilityId == SEH.data.yaseyla_frost_bomb_applied or abilityId == SEH.data.yaseyla_frost_bomb_applied_2 then
     SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
+  end
+
+  if abilityId == SEH.data.yaseyla_ignite then
+    SEH.Yaseyla.Ignite(result, targetUnitId, hitValue)
   end
 
   if abilityId == SEH.data.yaseyla_deflect then
@@ -197,9 +205,12 @@ function SEH.ResetStatus()
   SEH.status.unitDamageTaken = {}
 
   SEH.status.yaseylaLastShrapnel = 0
+  SEH.status.yaseylaLastIgniteBlame = 0
   SEH.status.yaseylaLastFirebombs = GetGameTimeSeconds()
+  SEH.status.yaseylaLastFrostbombs = GetGameTimeSeconds()
   SEH.status.yaseylaLastChains = GetGameTimeSeconds()
   SEH.status.yaseylaIsFirstFirebombs = true
+  SEH.status.yaseylaIsFirstFrostbombs = true
   SEH.status.yaseylaIsFirstChains = true
   SEH.status.yaseylaShrapnelCount = 0
 

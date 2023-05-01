@@ -35,12 +35,27 @@ end
 
 function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
   if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
+    SEH.status.yaseylaLastFrostbombs = GetGameTimeSeconds()
+    SEH.status.yaseylaIsFirstFrostbombs = false
     SEH.AddIconForDuration(
       SEH.GetTagForId(targetUnitId),
       "SanitysEdgeHelper/icons/ice.dds",
       hitValue)
   elseif result == ACTION_RESULT_EFFECT_FADED then
     SEH.RemoveIcon(SEH.GetTagForId(targetUnitId))
+  end
+end
+
+function SEH.Yaseyla.Ignite(result, targetUnitId, hitValue)
+  -- Ignite Blamer feature, check to see who gets the first ignite tick
+  if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
+    local timeSec = GetGameTimeSeconds()
+    local igniteBlameDelta = timeSec - SEH.status.yaseylaLastIgniteBlame
+
+    if igniteBlameDelta > SEH.data.yaseyla_ignite_blame_cd then
+      SEH.status.yaseylaLastIgniteBlame = timeSec
+      d(string.format("%s was first to catch fire", SEH.GetNameForId(targetUnitId)))
+    end
   end
 end
 
@@ -81,9 +96,10 @@ function SEH.Yaseyla.UpdateTick(timeSec)
     return
   end
 
-  SEHStatus:SetHidden(not (SEH.savedVariables.showShrapnel or SEH.savedVariables.showFirebombs or SEH.savedVariables.showChains))
+  SEHStatus:SetHidden(not (SEH.savedVariables.showShrapnel or SEH.savedVariables.showFirebombs or SEH.savedVariables.showFrostbombs or SEH.savedVariables.showChains))
   SEH.Yaseyla.UpdateShrapnelTick(timeSec)
   SEH.Yaseyla.UpdateFirebombsTick(timeSec)
+  SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
   SEH.Yaseyla.UpdateChainsTick(timeSec)
 end
 
@@ -177,10 +193,33 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
   end
 end
 
+function SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
+  -- Frostbombs on HM is cast every ~30s. 
+  -- We want to show the timer for when frostbombs targets go out, but we only have a reliable way to
+  -- track when they explode, so we need to adjust/reduce the cooldown time by about -5s accordingly.
+  SEHStatusLabelYaseyla3:SetHidden(not SEH.savedVariables.showFrostbombs)
+  SEHStatusLabelYaseyla3Value:SetHidden(not SEH.savedVariables.showFrostbombs)
+
+  local frostbombsDelta = timeSec - SEH.status.yaseylaLastFrostbombs
+
+  local frostbombsTimeLeft = 0
+  if SEH.status.yaseylaIsFirstFrostbombs then
+    frostbombsTimeLeft = SEH.data.yaseyla_frostbombs_first_cd - frostbombsDelta
+  else
+    frostbombsTimeLeft = SEH.data.yaseyla_frostbombs_cd - frostbombsDelta
+  end
+
+  if frostbombsTimeLeft > 0 then 
+    SEHStatusLabelYaseyla3Value:SetText(string.format("%.0f", frostbombsTimeLeft) .. "s ")
+  else
+    SEHStatusLabelYaseyla3Value:SetText("INC")
+  end
+end
+
 function SEH.Yaseyla.UpdateChainsTick(timeSec)
   -- Chains on HM is cast every ~32s, but sometimes a lot longer in between.
-  SEHStatusLabelYaseyla3:SetHidden(not SEH.savedVariables.showChains)
-  SEHStatusLabelYaseyla3Value:SetHidden(not SEH.savedVariables.showChains)
+  SEHStatusLabelYaseyla4:SetHidden(not SEH.savedVariables.showChains)
+  SEHStatusLabelYaseyla4Value:SetHidden(not SEH.savedVariables.showChains)
 
   local chainsDelta = timeSec - SEH.status.yaseylaLastChains
 
@@ -192,8 +231,8 @@ function SEH.Yaseyla.UpdateChainsTick(timeSec)
   end
 
   if chainsTimeLeft > 0 then 
-    SEHStatusLabelYaseyla3Value:SetText(string.format("%.0f", chainsTimeLeft) .. "s ")
+    SEHStatusLabelYaseyla4Value:SetText(string.format("%.0f", chainsTimeLeft) .. "s ")
   else
-    SEHStatusLabelYaseyla3Value:SetText("INC")
+    SEHStatusLabelYaseyla4Value:SetText("INC")
   end
 end
