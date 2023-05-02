@@ -30,7 +30,7 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "Unlock UI (you need to be in the trial)",
+      name    = "Unlock UI",
       default = false,
       getFunc = function() return not SEH.status.locked end,
       setFunc = function( newValue ) SEH.UnlockUI(newValue) end,
