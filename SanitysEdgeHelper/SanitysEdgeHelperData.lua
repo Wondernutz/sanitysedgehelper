@@ -23,6 +23,7 @@ SEH.data    = {
   yaseyla_firebombs_first_cd = 9, -- how soon the first firebomb can be cast
   yaseyla_firebombs_preexecute_cd = 24, -- how often it can cast firebombs pre-execute
   yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
+  yaseyla_firebombs_execute_threshold = 27, -- the execute threshold after which it casts firebombs more often
 
   yaseyla_frostbombs_first_cd = 17, -- how soon the first frostbombs can be cast
   yaseyla_frostbombs_cd = 25, -- how soon it can CAST frostbombs from the last bomb EXPLOSION
@@ -52,6 +53,9 @@ SEH.data    = {
   twelvane_chimera_maul    = 186937, --chimera maul
   twelvane_chimera_inferno = 186948, --chimera inferno cast
   twelvane_chimera_bolt    = 186960, --chimera lightning bolt cast
+  twelvane_gryphon_wind_lance = 199132, --gryphon wind lance
+  twelvane_wamasu_impending_storm = 199119, --wamasu impending storm
+  twelvane_wamasu_repulsion_shock = 186995, --wamasu repulsion shock
   twelvane_inferno_debuff1 = 198613, --inferno debuff before sunburst
   twelvane_inferno_debuff2 = 186953, --inferno debuff before sunburst
   twelvane_inferno_debuff3 = 186952, --inferno debuff before sunburst

@@ -110,12 +110,24 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt and hitValue > 500 then
-    SEH.Alert("", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
+    SEH.Alert(sourceName, "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_chain_lightning and hitValue > 1000 then
-    SEH.Alert("", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    SEH.Alert(sourceName, "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
+
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_impending_storm then
+    SEH.Alert(sourceName, abilityName, 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  end
+
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_repulsion_shock then
+    SEH.Alert(sourceName, abilityName, 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  end
+
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_gryphon_wind_lance then
+  --  SEH.Alert(sourceName, abilityName, 0xD1F1F9FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  --end
 
   -- Ansuul
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
@@ -158,6 +170,10 @@ function SEH.UpdateTick(gameTimeMs)
     if not SEH.status.inCombat then
       -- If it switched from non-combat to combat, re-check boss names.
     end
+    SEH.status.inCombat = true
+  end
+
+  if IsUnitInCombat("player") and SEH.status.isYaseyla then
     SEH.status.inCombat = true
   end
 
