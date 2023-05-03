@@ -50,6 +50,9 @@ SEH.settings = {
   showFrostbombs = false,
   showChains = false,
 
+  -- Ansuul
+  showSplitBossHP = true,
+
   -- Misc
   uiCustomScale = 1,
 }
@@ -184,6 +187,11 @@ function SEH.UpdateTick(gameTimeMs)
   -- Boss 1: Yaseyla
   if SEH.status.isYaseyla then
     SEH.Yaseyla.UpdateTick(timeSec)
+  end
+
+  -- Boss 3: Ansuul
+  if SEH.status.isAnsuul then
+    SEH.Ansuul.UpdateTick(timeSec)
   end
 
 end
