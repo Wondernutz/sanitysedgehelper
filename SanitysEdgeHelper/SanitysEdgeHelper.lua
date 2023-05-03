@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.3.0"
+SEH.version  = "0.3.1"
 SEH.author   = "@Wondernuts"
 SEH.active   = false
 
