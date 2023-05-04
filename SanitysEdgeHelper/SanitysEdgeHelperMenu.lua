@@ -30,7 +30,7 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "Unlock UI (you need to be in the trial)",
+      name    = "Unlock UI",
       default = false,
       getFunc = function() return not SEH.status.locked end,
       setFunc = function( newValue ) SEH.UnlockUI(newValue) end,
@@ -73,6 +73,20 @@ function SEH.Menu.AddonMenu()
       default = true,
       getFunc = function() return SEH.savedVariables.showFirebombs end,
       setFunc = function(newValue) SEH.savedVariables.showFirebombs = newValue end,
+    },
+    {
+      type    = "checkbox",
+      name    = "Panel: Frostbombs timer",
+      default = false,
+      getFunc = function() return SEH.savedVariables.showFrostbombs end,
+      setFunc = function(newValue) SEH.savedVariables.showFrostbombs = newValue end,
+    },
+    {
+      type    = "checkbox",
+      name    = "Panel: Chain Pull timer",
+      default = false,
+      getFunc = function() return SEH.savedVariables.showChains end,
+      setFunc = function(newValue) SEH.savedVariables.showChains = newValue end,
     },
     {
       type = "divider",

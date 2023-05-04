@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.1.0"
+SEH.version  = "0.3.0"
 SEH.author   = "@Wondernuts"
 SEH.active   = false
 
@@ -18,7 +18,12 @@ SEH.status = {
 
   yaseylaLastShrapnel = 0,
   yaseylaLastFirebombs = 0,
+  yaseylaLastFrostbombs = 0,
+  yaseylaLastChains = 0,
+  yaseylaLastIgniteBlame = 0,
   yaseylaIsFirstFirebombs = true,
+  yaseylaIsFirstFrostbombs = true,
+  yaseylaIsFirstChains = true,
   yaseylaShrapnelCount = 0,
   
   locked = true,
@@ -46,6 +51,8 @@ SEH.settings = {
   -- Yaseyla
   showShrapnel = true,
   showFirebombs = true,
+  showFrostbombs = false,
+  showChains = false,
 
   -- Twelvane
   --showWamasuIcon  = true,
@@ -67,15 +74,16 @@ function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTa
 end
 
 function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
-  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt then
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.olms_swipe then
   --  d("Ability: " .. abilityName .. ", ID: " .. abilityId .. ", Hit Value: " .. tostring(hitValue))
+  --  d(string.format("Target name: %s, Target type: %s, targetUnitId: %d, GetNameForId: %s", targetName, targetType, targetUnitId, SEH.GetNameForId(targetUnitId)))
   --end
 
   if abilityId == SEH.data.hindered_effect then
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.yaseyla_wamasu_charge then
+  if result == ACTION_RESULT_BEGIN and (abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge) then
     SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.DUEL_START, hitValue)
     CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
   end
@@ -89,12 +97,20 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
   end
 
+  if abilityId == SEH.data.yaseyla_ignite then
+    SEH.Yaseyla.Ignite(result, targetUnitId, hitValue)
+  end
+
   if abilityId == SEH.data.yaseyla_deflect then
     SEH.Yaseyla.Shrapnel(result, hitValue)
   end
 
   if abilityId == SEH.data.yaseyla_fire_bombs then
     SEH.Yaseyla.FireBombs(result, targetType, hitValue)
+  end
+
+  if abilityId == SEH.data.yaseyla_chain_pull then
+    SEH.Yaseyla.Chain_Pull(result, targetType, hitValue)
   end
 
   -- Twelvane/Chimera
@@ -104,6 +120,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt and hitValue > 500 then
     SEH.Alert("", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
+  end
+
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_chain_lightning and hitValue > 1000 then
+    SEH.Alert("", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
 
   if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.twelvane_mantle_wamasu and targetType == COMBAT_UNIT_TYPE_PLAYER then
@@ -129,7 +149,8 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
-    SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.DUEL_START, hitValue)
+    SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, {-2, 1})
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
@@ -138,6 +159,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
 
   if abilityId == SEH.data.ansuul_poisoned_mind then
     SEH.Ansuul.Poisoned_Mind(result, targetType, targetUnitId, hitValue)
+  end
+
+  if abilityId == SEH.data.ansuul_manic_phobia then
+    SEH.Ansuul.Manic_Phobia(result, targetType, targetUnitId, hitValue)
   end
 end
 
@@ -201,8 +226,13 @@ function SEH.ResetStatus()
   SEH.status.unitDamageTaken = {}
 
   SEH.status.yaseylaLastShrapnel = 0
+  SEH.status.yaseylaLastIgniteBlame = 0
   SEH.status.yaseylaLastFirebombs = GetGameTimeSeconds()
+  SEH.status.yaseylaLastFrostbombs = GetGameTimeSeconds()
+  SEH.status.yaseylaLastChains = GetGameTimeSeconds()
   SEH.status.yaseylaIsFirstFirebombs = true
+  SEH.status.yaseylaIsFirstFrostbombs = true
+  SEH.status.yaseylaIsFirstChains = true
   SEH.status.yaseylaShrapnelCount = 0
 
   SEH.status.mainTankTag = ""

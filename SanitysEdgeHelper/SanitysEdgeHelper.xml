@@ -77,6 +77,24 @@
           <Dimensions x="600" y="50" />
           <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="40" offsetX="230"/>
       </Label>
+
+      <Label name="$(parent)LabelYaseyla3" font="ZoFontWinH1" color="66CCFF" text="Next Frostbombs:" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="80"/>
+      </Label>
+      <Label name="$(parent)LabelYaseyla3Value" font="ZoFontWinH1" color="ff8500" text="INC" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="80" offsetX="230"/>
+      </Label>
+
+      <Label name="$(parent)LabelYaseyla4" font="ZoFontWinH1" color="A8A9AD" text="Next Chain:" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="120"/>
+      </Label>
+      <Label name="$(parent)LabelYaseyla4Value" font="ZoFontWinH1" color="ff8500" text="INC" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="120" offsetX="230"/>
+      </Label>
       
       </Controls>
     </TopLevelControl>
