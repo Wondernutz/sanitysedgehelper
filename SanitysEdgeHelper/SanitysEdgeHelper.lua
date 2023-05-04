@@ -23,9 +23,9 @@ SEH.status = {
   
   locked = true,
   
-  twelvaneWamasuIcons  = {},
-  twelvaneLionIcons    = {},
-  twelvaneGryphonIcons = {},
+  twelvaneWamasuIcon  = nil,
+  twelvaneLionIcon    = nil,
+  twelvaneGryphonIcon = nil,
 
   unitDamageTaken = {}, -- unitDamageTaken[unitId] = all damage events for a given id.
   --[[ TODO: Damage events to track:
@@ -48,9 +48,9 @@ SEH.settings = {
   showFirebombs = true,
 
   -- Twelvane
-  showWamasuIcons  = true,
-  showLionIcons    = true,
-  showGryphonIcons = true,
+  --showWamasuIcon  = true,
+  --showLionIcon    = true,
+  --showGryphonIcon = true,
 
   -- Misc
   uiCustomScale = 1,
@@ -238,9 +238,9 @@ function SEH.BossesChanged()
     SEH.status.isAnsuul = false
     SEH.status.isHMBoss = false
 
-    SEH.Twelvane.RemoveWamasuIcons()
-    SEH.Twelvane.RemoveLionIcons()
-    SEH.Twelvane.RemoveGryphonIcons()
+    SEH.Twelvane.RemoveWamasuIcon()
+    SEH.Twelvane.RemoveLionIcon()
+    SEH.Twelvane.RemoveGryphonIcon()
 
 
 
@@ -265,9 +265,9 @@ function SEH.BossesChanged()
     end
     if string.match(bossName, SEH.data.twelvaneName) then
       SEH.status.isTwelvane = true
-      SEH.Twelvane.AddWamasuIcons()
-      SEH.Twelvane.AddLionIcons()
-      SEH.Twelvane.AddGryphonIcons()
+      SEH.Twelvane.AddWamasuIcon()
+      SEH.Twelvane.AddLionIcos()
+      SEH.Twelvane.AddGryphonIcon()
     end
     if string.match(bossName, SEH.data.ansuulName) then
       SEH.status.isAnsuul = true

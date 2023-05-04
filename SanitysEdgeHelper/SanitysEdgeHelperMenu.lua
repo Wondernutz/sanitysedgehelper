@@ -83,27 +83,6 @@ function SEH.Menu.AddonMenu()
       reference = "TwelvaneHeader"
     },
     {
-      type    = "checkbox",
-      name    = "Icon: Wamasu",
-      default = true,
-      getFunc = function() return SEH.savedVariables.showWamasuIcons end,
-      setFunc = function(newValue) SEH.savedVariables.showWamasuIcons = newValue end,
-    },
-    {
-      type    = "checkbox",
-      name    = "Icon: Lion",
-      default = true,
-      getFunc = function() return SEH.savedVariables.showLionIcons end,
-      setFunc = function(newValue) SEH.savedVariables.showLionIcons = newValue end,
-    },
-    {
-      type    = "checkbox",
-      name    = "Icon: Gryphon",
-      default = true,
-      getFunc = function() return SEH.savedVariables.showGryphonIcons end,
-      setFunc = function(newValue) SEH.savedVariables.showGryphonIcons = newValue end,
-    },
-    {
       type = "divider",
     },
     {
