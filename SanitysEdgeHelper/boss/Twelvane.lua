@@ -67,8 +67,8 @@ function SEH.Twelvane.AddGryphonIcon()
   end
 end
 
-function SEH.Twelvane.AddTwelvaneNumber1Icon()
-  if SEH.savedVariables.showTwelvaneNumber1Icon and table.getn(SEH.status.twelvaneNumber1Icon) == 0 and SEH.hasOSI() then
+function SEH.Twelvane.AddNumber1Icon()
+  if SEH.savedVariables.showNumber1Icon and table.getn(SEH.status.twelvaneNumber1Icon) == 0 and SEH.hasOSI() then
     for i=1,3 do
       table.insert(SEH.status.twelvaneNumber1Icon, 
         OSI.CreatePositionIcon(
@@ -81,13 +81,13 @@ function SEH.Twelvane.AddTwelvaneNumber1Icon()
   end
 end
 
-function SEH.Twelvane.RemoveTwelvaneNumber1Icon()
+function SEH.Twelvane.RemoveNumber1Icon()
   SEH.DiscardPositionIconList(SEH.status.twelvaneNumber1Icon)
   SEH.status.twelvaneNumber1Icon = {}
 end
 
-function SEH.Twelvane.AddTwelvaneNumber2Icon()
-  if SEH.savedVariables.showTwelvaneNumber2Icon and table.getn(SEH.status.twelvaneNumber2Icon) == 0 and SEH.hasOSI() then
+function SEH.Twelvane.AddNumber2Icon()
+  if SEH.savedVariables.showNumber2Icon and table.getn(SEH.status.twelvaneNumber2Icon) == 0 and SEH.hasOSI() then
     for i=1,3 do
       table.insert(SEH.status.twelvaneNumber2Icon, 
         OSI.CreatePositionIcon(
@@ -100,13 +100,13 @@ function SEH.Twelvane.AddTwelvaneNumber2Icon()
   end
 end
 
-function SEH.Twelvane.RemoveTwelvaneNumber2Icon()
+function SEH.Twelvane.RemoveNumber2Icon()
   SEH.DiscardPositionIconList(SEH.status.twelvaneNumber2Icon)
   SEH.status.twelvaneNumber2Icon = {}
 end
 
-function SEH.Twelvane.AddTwelvaneNumber3Icon()
-  if SEH.savedVariables.showTwelvaneNumber3Icon and table.getn(SEH.status.twelvaneNumber3Icon) == 0 and SEH.hasOSI() then
+function SEH.Twelvane.AddNumber3Icon()
+  if SEH.savedVariables.showNumber3Icon and table.getn(SEH.status.twelvaneNumber3Icon) == 0 and SEH.hasOSI() then
     for i=1,3 do
       table.insert(SEH.status.twelvaneNumber3Icon, 
         OSI.CreatePositionIcon(
@@ -119,13 +119,13 @@ function SEH.Twelvane.AddTwelvaneNumber3Icon()
   end
 end
 
-function SEH.Twelvane.RemoveTwelvaneNumber3Icon()
+function SEH.Twelvane.RemoveNumber3Icon()
   SEH.DiscardPositionIconList(SEH.status.twelvaneNumber3Icon)
   SEH.status.twelvaneNumber3Icon = {}
 end
 
-function SEH.Twelvane.AddTwelvaneNumber4Icon()
-  if SEH.savedVariables.showTwelvaneNumber4Icon and table.getn(SEH.status.twelvaneNumber4Icon) == 0 and SEH.hasOSI() then
+function SEH.Twelvane.AddNumber4Icon()
+  if SEH.savedVariables.showNumber4Icon and table.getn(SEH.status.twelvaneNumber4Icon) == 0 and SEH.hasOSI() then
     for i=1,3 do
       table.insert(SEH.status.twelvaneNumber4Icon, 
         OSI.CreatePositionIcon(
@@ -138,13 +138,13 @@ function SEH.Twelvane.AddTwelvaneNumber4Icon()
   end
 end
 
-function SEH.Twelvane.RemoveTwelvaneNumber4Icon()
+function SEH.Twelvane.RemoveNumber4Icon()
   SEH.DiscardPositionIconList(SEH.status.twelvaneNumber4Icon)
   SEH.status.twelvaneNumber4Icon = {}
 end
 
-function SEH.Twelvane.AddTwelvaneNumber5Icon()
-  if SEH.savedVariables.showTwelvaneNumber5Icon and table.getn(SEH.status.twelvaneNumber5Icon) == 0 and SEH.hasOSI() then
+function SEH.Twelvane.AddNumber5Icon()
+  if SEH.savedVariables.showNumber5Icon and table.getn(SEH.status.twelvaneNumber5Icon) == 0 and SEH.hasOSI() then
     for i=1,3 do
       table.insert(SEH.status.twelvaneNumber5Icon, 
         OSI.CreatePositionIcon(
@@ -157,7 +157,7 @@ function SEH.Twelvane.AddTwelvaneNumber5Icon()
   end
 end
 
-function SEH.Twelvane.RemoveTwelvaneNumber5Icon()
+function SEH.Twelvane.RemoveNumber5Icon()
   SEH.DiscardPositionIconList(SEH.status.twelvaneNumber5Icon)
   SEH.status.twelvaneNumber5Icon = {}
 end
