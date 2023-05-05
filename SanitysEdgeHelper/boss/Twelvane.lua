@@ -19,7 +19,7 @@ function SEH.Twelvane.AddWamasuIcon()
         182503,
         40390,
         222654,
-        "SanitysEdgeHelper/icons/squaretwo_green.dds",
+        "SanitysEdgeHelper/icons/Wamasu.dds",
         2 * OSI.GetIconSize())
   end
 end
@@ -41,7 +41,7 @@ function SEH.Twelvane.AddLionIcon()
         187466,
         40385,
         222654,
-        "SanitysEdgeHelper/icons/squaretwo_red.dds",
+        "SanitysEdgeHelper/icons/Lion.dds",
         2 * OSI.GetIconSize())
   end
 end
@@ -62,7 +62,7 @@ function SEH.Twelvane.AddGryphonIcon()
         184996,
         40390,
         228135,
-        "SanitysEdgeHelper/icons/squaretwo_blue.dds",
+        "SanitysEdgeHelper/icons/Gryphon.dds",
         2 * OSI.GetIconSize())
   end
 end
