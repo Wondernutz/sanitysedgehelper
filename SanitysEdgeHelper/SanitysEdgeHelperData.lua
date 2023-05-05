@@ -58,7 +58,32 @@ SEH.data    = {
   twelvane_sunburst        = 1.6   , --sunburst right after inferno debuff
   twelvane_chimera_chain_lightning = 183858, --chimera chain lightning
   twelvane_circuit_charge  = 199235, --debuff from chain lightning hit/spread
-  twelvane_add_spawn       = 28    , --wamasu/lion/gryphon spawn
+
+  twelvane_number1_pos_list = {
+    [1] = {171984,40350,238116},
+    [2] = {181899,40350,238230},
+    [3] = {191735,40350,238150},
+  },
+  twelvane_number2_pos_list = {
+    [1] = {172026,40350,242013},
+    [2] = {181903,40350,242085},
+    [3] = {191874,40350,242064},
+  },
+  twelvane_number3_pos_list = {
+    [1] = {170048,40350,242200},
+    [2] = {179948,40350,242203},
+    [3] = {189859,40350,242154},
+  },
+  twelvane_number4_pos_list = {
+    [1] = {168148,40350,242050},
+    [2] = {178072,40350,242011},
+    [3] = {187935,40350,242088},
+  },
+  twelvane_number5_pos_list = {
+    [1] = {168147,40350,238168},
+    [2] = {178065,40350,238175},
+    [3] = {187954,40350,238224},
+  },
 
   -- TODO: Consider using UnpackRGBA(0xFFFFFFFF)
   -- Colors

@@ -31,6 +31,11 @@ SEH.status = {
   twelvaneWamasuIcon  = nil,
   twelvaneLionIcon    = nil,
   twelvaneGryphonIcon = nil,
+  twelvaneNumber1Icon = {},
+  twelvaneNumber2Icon = {},
+  twelvaneNumber3Icon = {},
+  twelvaneNumber4Icon = {},
+  twelvaneNumber5Icon = {},
 
   unitDamageTaken = {}, -- unitDamageTaken[unitId] = all damage events for a given id.
   --[[ TODO: Damage events to track:
@@ -55,9 +60,11 @@ SEH.settings = {
   showChains = false,
 
   -- Twelvane
-  --showWamasuIcon  = true,
-  --showLionIcon    = true,
-  --showGryphonIcon = true,
+  showNumber1Icon = true,
+  showNumber2Icon = true,
+  showNumber3Icon = true,
+  showNumber4Icon = true,
+  showNumber5Icon = true,
 
   -- Misc
   uiCustomScale = 1,
@@ -271,8 +278,11 @@ function SEH.BossesChanged()
     SEH.Twelvane.RemoveWamasuIcon()
     SEH.Twelvane.RemoveLionIcon()
     SEH.Twelvane.RemoveGryphonIcon()
-
-
+    SEH.Twelvane.RemoveNumber1Icon()
+    SEH.Twelvane.RemoveNumber2Icon()
+    SEH.Twelvane.RemoveNumber3Icon()
+    SEH.Twelvane.RemoveNumber4Icon()
+    SEH.Twelvane.RemoveNumber5Icon()
 
     local currentTargetHP, maxTargetHP, effmaxTargetHP = GetUnitPower("boss1", POWERTYPE_HEALTH)
     local hardmodeHealth = {
@@ -298,6 +308,13 @@ function SEH.BossesChanged()
       SEH.Twelvane.AddWamasuIcon()
       SEH.Twelvane.AddLionIcos()
       SEH.Twelvane.AddGryphonIcon()
+      if SEH.status.isHMBoss then
+        SEH.Twelvane.AddNumber1Icon()
+        SEH.Twelvane.AddNumber2Icon()
+        SEH.Twelvane.AddNumber3Icon()
+        SEH.Twelvane.AddNumber4Icon()
+        SEH.Twelvane.AddNumber5Icon()
+      end
     end
     if string.match(bossName, SEH.data.ansuulName) then
       SEH.status.isAnsuul = true
