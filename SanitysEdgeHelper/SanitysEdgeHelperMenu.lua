@@ -141,6 +141,21 @@ function SEH.Menu.AddonMenu()
     },
     {
       type = "header",
+      name = "Ansuul",
+      reference = "AnsuulHeader"
+    },
+    {
+      type    = "checkbox",
+      name    = "Panel: Show Split Bosses HP (NOT FUNCTIONAL)",
+      default = false,
+      getFunc = function() return SEH.savedVariables.showSplitBossHP end,
+      setFunc = function(newValue) SEH.savedVariables.showSplitBossHP = newValue end,
+    },
+    {
+      type = "divider",
+    },
+    {
+      type = "header",
       name = "Misc",
       reference = "SanitysEdgeMiscMenu"
     },

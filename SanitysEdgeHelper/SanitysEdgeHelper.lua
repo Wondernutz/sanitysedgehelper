@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.3.0"
+SEH.version  = "0.3.1"
 SEH.author   = "@Wondernuts"
 SEH.active   = false
 
@@ -66,6 +66,9 @@ SEH.settings = {
   showNumber4Icon = true,
   showNumber5Icon = true,
 
+  -- Ansuul
+  showSplitBossHP = false,
+
   -- Misc
   uiCustomScale = 1,
 }
@@ -91,8 +94,8 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and (abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge) then
-    SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.DUEL_START, hitValue)
-    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
+    SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 1})
   end
 
   -- Yaseyla
@@ -126,11 +129,23 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt and hitValue > 500 then
-    SEH.Alert("", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
+    SEH.Alert("Chimera", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_chain_lightning and hitValue > 1000 then
-    SEH.Alert("", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    SEH.Alert("Chimera", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  end
+
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_impending_storm then
+  --  SEH.Alert("Ascendant Wamasu", "Impending Storm", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  --end
+
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_repulsion_shock then
+  --  SEH.Alert("Ascendant Wamasu", "Repulsion Shock", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  --end
+
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_gryphon_wind_lance then
+    SEH.Alert("Ascendant Gryphon", "Wind Lance", 0xD1F1F9FF, abilityId, SOUNDS.BATTLEGROUND_CAPTURE_FLAG_RETURNED, hitValue)
   end
 
   if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.twelvane_mantle_wamasu and targetType == COMBAT_UNIT_TYPE_PLAYER then
@@ -156,8 +171,9 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
-    SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, {-2, 1})
+    local offset = 2000
+    SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue + offset)
+    CombatAlerts.AlertCast(abilityId, abilityName, hitValue + offset, {-2, 1})
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
@@ -189,6 +205,10 @@ function SEH.UpdateTick(gameTimeMs)
     SEH.status.inCombat = true
   end
 
+  if IsUnitInCombat("player") and SEH.status.isYaseyla then
+    SEH.status.inCombat = true
+  end
+
   if SEH.status.inCombat == false then
     return
   end
@@ -197,6 +217,11 @@ function SEH.UpdateTick(gameTimeMs)
   if SEH.status.isYaseyla then
     SEH.Yaseyla.UpdateTick(timeSec)
   end
+
+  -- Boss 3: Ansuul (disabled, not working)
+  --if SEH.status.isAnsuul then
+  --  SEH.Ansuul.UpdateTick(timeSec)
+  --end
 
 end
 
@@ -259,10 +284,10 @@ end
 function SEH.BossesChanged()
   local bossName = SEH.GetBossName()
   local lastBossName = SEH.status.currentBoss
+  --d("[SEH] Boss change. Name = " .. bossName .. ". Last boss name = " .. lastBossName)
   if bossName ~= nil then
     if SEH.status.currentBoss == SEH.data.ansuulName and bossName == "" then
       -- Do not reset Ansuul for empty, this helps the clearing on wipes.
-      -- TODO: Remove UI after killing Ansuul.
     else
       if bossName ~= SEH.status.currentBoss then
         --d("[SEH] Boss change. Name = " .. bossName)
