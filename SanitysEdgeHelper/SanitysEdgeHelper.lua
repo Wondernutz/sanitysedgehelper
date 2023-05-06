@@ -78,8 +78,8 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and (abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge) then
-    SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.DUEL_START, hitValue)
-    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 0})
+    SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-3, 1})
   end
 
   -- Yaseyla
@@ -113,23 +113,23 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt and hitValue > 500 then
-    SEH.Alert(sourceName, "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
+    SEH.Alert("", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_chain_lightning and hitValue > 1000 then
-    SEH.Alert(sourceName, "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    SEH.Alert("", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_impending_storm then
-    SEH.Alert(sourceName, abilityName, 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-  end
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_impending_storm then
+  --  SEH.Alert("Ascendant Wamasu", "Impending Storm", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  --end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_repulsion_shock then
-    SEH.Alert(sourceName, abilityName, 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-  end
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_repulsion_shock then
+  --  SEH.Alert("Ascendant Wamasu", "Repulsion Shock", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  --end
 
   --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_gryphon_wind_lance then
-  --  SEH.Alert(sourceName, abilityName, 0xD1F1F9FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  --  SEH.Alert("Ascendant Gryphon", "Wind Lance", 0xD1F1F9FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   --end
 
   -- Ansuul
@@ -143,8 +143,9 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
-    SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, {-2, 1})
+    local offset = 2000
+    SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue + offset)
+    CombatAlerts.AlertCast(abilityId, abilityName, hitValue + offset, {-2, 1})
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
