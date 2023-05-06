@@ -93,8 +93,8 @@ function SEH.Menu.AddonMenu()
     },
     {
       type = "header",
-      name = "Twelvane",
-      reference = "TwelvaneHeader"
+      name = "Chimera",
+      reference = "ChimeraHeader"
     },
     {
       type    = "checkbox",
