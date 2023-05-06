@@ -171,7 +171,7 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
   local firebombsTimeLeft = 0
   if SEH.status.yaseylaIsFirstFirebombs then
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_first_cd - firebombsDelta
-  elseif currentHealthPercentage > 26 then
+  elseif currentHealthPercentage > SEH.data.yaseyla_firebombs_execute_threshold then
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_preexecute_cd - firebombsDelta
   else
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
