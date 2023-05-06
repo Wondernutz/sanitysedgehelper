@@ -113,11 +113,11 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt and hitValue > 500 then
-    SEH.Alert("", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
+    SEH.Alert("Chimera", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_chain_lightning and hitValue > 1000 then
-    SEH.Alert("", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    SEH.Alert("Chimera", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
 
   --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_impending_storm then
@@ -128,9 +128,9 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   --  SEH.Alert("Ascendant Wamasu", "Repulsion Shock", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   --end
 
-  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_gryphon_wind_lance then
-  --  SEH.Alert("Ascendant Gryphon", "Wind Lance", 0xD1F1F9FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-  --end
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_gryphon_wind_lance then
+    SEH.Alert("Ascendant Gryphon", "Wind Lance", 0xD1F1F9FF, abilityId, SOUNDS.BATTLEGROUND_CAPTURE_FLAG_RETURNED, hitValue)
+  end
 
   -- Ansuul
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
@@ -256,10 +256,10 @@ end
 function SEH.BossesChanged()
   local bossName = SEH.GetBossName()
   local lastBossName = SEH.status.currentBoss
+  --d("[SEH] Boss change. Name = " .. bossName .. ". Last boss name = " .. lastBossName)
   if bossName ~= nil then
     if SEH.status.currentBoss == SEH.data.ansuulName and bossName == "" then
       -- Do not reset Ansuul for empty, this helps the clearing on wipes.
-      -- TODO: Remove UI after killing Ansuul.
     else
       if bossName ~= SEH.status.currentBoss then
         --d("[SEH] Boss change. Name = " .. bossName)
