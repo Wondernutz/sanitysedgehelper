@@ -98,42 +98,10 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "(HM) Icon: Show Number 1",
+      name    = "(HM) Icon: Show Crystal Numbers",
       default = true,
-      getFunc = function() return SEH.savedVariables.showNumber1Icon end,
-      setFunc = function(newValue) SEH.savedVariables.showNumber1Icon = newValue end,
-      warning = requiresOSI
-    },
-    {
-      type    = "checkbox",
-      name    = "(HM) Icon: Show Number 2",
-      default = true,
-      getFunc = function() return SEH.savedVariables.showNumber2Icon end,
-      setFunc = function(newValue) SEH.savedVariables.showNumber2Icon = newValue end,
-      warning = requiresOSI
-    },
-    {
-      type    = "checkbox",
-      name    = "(HM) Icon: Show Number 3",
-      default = true,
-      getFunc = function() return SEH.savedVariables.showNumber3Icon end,
-      setFunc = function(newValue) SEH.savedVariables.showNumber3Icon = newValue end,
-      warning = requiresOSI
-    },
-    {
-      type    = "checkbox",
-      name    = "(HM) Icon: Show Number 4",
-      default = true,
-      getFunc = function() return SEH.savedVariables.showNumber4Icon end,
-      setFunc = function(newValue) SEH.savedVariables.showNumber4Icon = newValue end,
-      warning = requiresOSI
-    },
-    {
-      type    = "checkbox",
-      name    = "(HM) Icon: Show Number 5",
-      default = true,
-      getFunc = function() return SEH.savedVariables.showNumber5Icon end,
-      setFunc = function(newValue) SEH.savedVariables.showNumber5Icon = newValue end,
+      getFunc = function() return SEH.savedVariables.showCrystalNumberIcons end,
+      setFunc = function(newValue) SEH.savedVariables.showCrystalNumberIcons = newValue end,
       warning = requiresOSI
     },
     {

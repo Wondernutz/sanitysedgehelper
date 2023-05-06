@@ -60,12 +60,7 @@ SEH.settings = {
   showChains = false,
 
   -- Chimera
-  showNumber1Icon = true,
-  showNumber2Icon = true,
-  showNumber3Icon = true,
-  showNumber4Icon = true,
-  showNumber5Icon = true,
-
+  showCrystalNumberIcons = true,
   -- Ansuul
   showSplitBossHP = false,
 
@@ -303,11 +298,7 @@ function SEH.BossesChanged()
     SEH.Chimera.RemoveWamasuIcon()
     SEH.Chimera.RemoveLionIcon()
     SEH.Chimera.RemoveGryphonIcon()
-    SEH.Chimera.RemoveNumber1Icon()
-    SEH.Chimera.RemoveNumber2Icon()
-    SEH.Chimera.RemoveNumber3Icon()
-    SEH.Chimera.RemoveNumber4Icon()
-    SEH.Chimera.RemoveNumber5Icon()
+    SEH.Chimera.RemoveCrystalNumberIcons()
 
     local currentTargetHP, maxTargetHP, effmaxTargetHP = GetUnitPower("boss1", POWERTYPE_HEALTH)
     local hardmodeHealth = {
@@ -333,12 +324,9 @@ function SEH.BossesChanged()
       SEH.Chimera.AddWamasuIcon()
       SEH.Chimera.AddLionIcos()
       SEH.Chimera.AddGryphonIcon()
+
       if SEH.status.isHMBoss then
-        SEH.Chimera.AddNumber1Icon()
-        SEH.Chimera.AddNumber2Icon()
-        SEH.Chimera.AddNumber3Icon()
-        SEH.Chimera.AddNumber4Icon()
-        SEH.Chimera.AddNumber5Icon()
+        SEH.Chimera.AddCrytalNumberIcons()
       end
     end
     if string.match(bossName, SEH.data.ansuulName) then
