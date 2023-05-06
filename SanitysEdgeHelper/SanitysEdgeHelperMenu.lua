@@ -98,8 +98,8 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "Panel: Show Split Bosses HP",
-      default = true,
+      name    = "Panel: Show Split Bosses HP (NOT FUNCTIONAL)",
+      default = false,
       getFunc = function() return SEH.savedVariables.showSplitBossHP end,
       setFunc = function(newValue) SEH.savedVariables.showSplitBossHP = newValue end,
     },

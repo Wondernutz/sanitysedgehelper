@@ -50,16 +50,20 @@ function SEH.Ansuul.UpdateSplitBossHPTick(timeSec)
       bossHealth.percentage[i] = bossHealth.currentHP[i] / bossHealth.maxHP[i] * 100
       bossHealth.labels[i]:SetText(string.format("%.1f", bossHealth.percentage[i]) .. " %")
       bossHealth.hide[i] = false
+
+      --d("Boss Tag: " .. bossTag .. ", Boss Name: " .. GetUnitName(bossTag) .. ", Boss HP: " .. bossHealth.currentHP[i])
     else
-      bossHealth.labels[i]:SetText("-")
+      if bossHealth.labels[i] ~= nil then
+        bossHealth.labels[i]:SetText("-")
+      end
       bossHealth.hide[i] = true
     end
   end
 
-  SEHStatusLabelAnsuul1:SetHidden(bossHealth.hide[2] or not SEH.savedVariables.showSplitBossHP)
-  SEHStatusLabelAnsuul1Value:SetHidden(bossHealth.hide[2] or not SEH.savedVariables.showSplitBossHP)
-  SEHStatusLabelAnsuul2:SetHidden(bossHealth.hide[3] or not SEH.savedVariables.showSplitBossHP)
-  SEHStatusLabelAnsuul2Value:SetHidden(bossHealth.hide[3] or not SEH.savedVariables.showSplitBossHP)
-  SEHStatusLabelAnsuul3:SetHidden(bossHealth.hide[4] or not SEH.savedVariables.showSplitBossHP)
-  SEHStatusLabelAnsuul3Value:SetHidden(bossHealth.hide[4] or not SEH.savedVariables.showSplitBossHP)
+  SEHStatusLabelAnsuul1:SetHidden(bossHealth.hide[1] or not SEH.savedVariables.showSplitBossHP)
+  SEHStatusLabelAnsuul1Value:SetHidden(bossHealth.hide[1] or not SEH.savedVariables.showSplitBossHP)
+  SEHStatusLabelAnsuul2:SetHidden(bossHealth.hide[2] or not SEH.savedVariables.showSplitBossHP)
+  SEHStatusLabelAnsuul2Value:SetHidden(bossHealth.hide[2] or not SEH.savedVariables.showSplitBossHP)
+  SEHStatusLabelAnsuul3:SetHidden(bossHealth.hide[3] or not SEH.savedVariables.showSplitBossHP)
+  SEHStatusLabelAnsuul3Value:SetHidden(bossHealth.hide[3] or not SEH.savedVariables.showSplitBossHP)
 end

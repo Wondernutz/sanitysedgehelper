@@ -51,7 +51,7 @@ SEH.settings = {
   showChains = false,
 
   -- Ansuul
-  showSplitBossHP = true,
+  showSplitBossHP = false,
 
   -- Misc
   uiCustomScale = 1,
@@ -79,7 +79,7 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
 
   if result == ACTION_RESULT_BEGIN and (abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge) then
     SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-3, 1})
+    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 1})
   end
 
   -- Yaseyla
@@ -190,10 +190,10 @@ function SEH.UpdateTick(gameTimeMs)
     SEH.Yaseyla.UpdateTick(timeSec)
   end
 
-  -- Boss 3: Ansuul
-  if SEH.status.isAnsuul then
-    SEH.Ansuul.UpdateTick(timeSec)
-  end
+  -- Boss 3: Ansuul (disabled, not working)
+  --if SEH.status.isAnsuul then
+  --  SEH.Ansuul.UpdateTick(timeSec)
+  --end
 
 end
 
