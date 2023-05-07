@@ -66,7 +66,7 @@ function SEH.Chimera.AddGryphonIcon()
   end
 end
 
-function SEH.Chimera.AddCrytalNumberIcons()
+function SEH.Chimera.AddHMCrystalNumberIcons()
   if SEH.savedVariables.showHMCrystalNumberIcons and SEH.hasOSI() then
 
     if table.getn(SEH.status.ChimeraNumber1Icon) == 0 then

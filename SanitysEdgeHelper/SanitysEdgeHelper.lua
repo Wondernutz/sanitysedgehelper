@@ -336,7 +336,7 @@ function SEH.BossesChanged()
       SEH.Chimera.AddGryphonIcon()
       
       if SEH.status.isHMBoss then
-        SEH.Chimera.AddCrytalNumberIcons()
+        SEH.Chimera.AddHMCrystalNumberIcons()
       end
     end
     if string.match(bossName, SEH.data.ansuulName) then
