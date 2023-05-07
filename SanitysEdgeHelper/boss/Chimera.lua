@@ -77,7 +77,7 @@ function SEH.Chimera.AddCrytalNumberIcons()
             SEH.data.chimera_number1_pos_list[i][2],
             SEH.data.chimera_number1_pos_list[i][3],
             "SanitysEdgeHelper/icons/1.dds",
-            2 * OSI.GetIconSize()))
+            1 * OSI.GetIconSize()))
       end
     end
 
@@ -89,7 +89,7 @@ function SEH.Chimera.AddCrytalNumberIcons()
             SEH.data.chimera_number2_pos_list[i][2],
             SEH.data.chimera_number2_pos_list[i][3],
             "SanitysEdgeHelper/icons/2.dds",
-            2 * OSI.GetIconSize()))
+            1 * OSI.GetIconSize()))
       end
     end
 
@@ -101,7 +101,7 @@ function SEH.Chimera.AddCrytalNumberIcons()
             SEH.data.chimera_number3_pos_list[i][2],
             SEH.data.chimera_number3_pos_list[i][3],
             "SanitysEdgeHelper/icons/3.dds",
-            2 * OSI.GetIconSize()))
+            1 * OSI.GetIconSize()))
       end
     end
 
@@ -113,7 +113,7 @@ function SEH.Chimera.AddCrytalNumberIcons()
             SEH.data.chimera_number4_pos_list[i][2],
             SEH.data.chimera_number4_pos_list[i][3],
             "SanitysEdgeHelper/icons/4.dds",
-            2 * OSI.GetIconSize()))
+            1 * OSI.GetIconSize()))
       end
     end
 
@@ -125,7 +125,7 @@ function SEH.Chimera.AddCrytalNumberIcons()
             SEH.data.chimera_number5_pos_list[i][2],
             SEH.data.chimera_number5_pos_list[i][3],
             "SanitysEdgeHelper/icons/5.dds",
-            2 * OSI.GetIconSize()))
+            1 * OSI.GetIconSize()))
       end
     end
   end
