@@ -57,10 +57,10 @@ function SEH.Ansuul.AddBlueIcon()
   if SEH.status.AnsuulBlueIcon == nil and SEH.hasOSI() then
     SEH.status.AnsuulBlueIcon =
       OSI.CreatePositionIcon(
-        196570,
+        203417,
         30199,
-        38049,
-        "SanitysEdgeHelper/icons/squaretwo_blue.dds.dds",
+        38080,
+        "SanitysEdgeHelper/icons/squaretwo_blue.dds",
         2 * OSI.GetIconSize())
   end
 end

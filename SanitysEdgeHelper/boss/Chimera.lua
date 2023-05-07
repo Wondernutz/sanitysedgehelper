@@ -16,14 +16,13 @@ function SEH.Chimera.AddWamasuIcon()
   if SEH.status.ChimeraWamasuIcon == nil and SEH.hasOSI() then
     SEH.status.ChimeraWamasuIcon =
       OSI.CreatePositionIcon(
-        182503,
-        40390,
-        222654,
+        182466,
+        40391,
+        222635,
         "SanitysEdgeHelper/icons/Wamasu.dds",
         2 * OSI.GetIconSize())
   end
 end
-
 
 function SEH.Chimera.RemoveLionIcon()
   if SEH.status.ChimeraLionIcon ~= nil then
@@ -38,9 +37,9 @@ function SEH.Chimera.AddLionIcon()
   if SEH.status.ChimeraLionIcon == nil and SEH.hasOSI() then
     SEH.status.ChimeraLionIcon =
       OSI.CreatePositionIcon(
-        187466,
-        40385,
-        222654,
+        187456,
+        40387,
+        222644,
         "SanitysEdgeHelper/icons/Lion.dds",
         2 * OSI.GetIconSize())
   end
@@ -59,9 +58,9 @@ function SEH.Chimera.AddGryphonIcon()
   if SEH.status.ChimeraGryphonIcon == nil and SEH.hasOSI() then
     SEH.status.ChimeraGryphonIcon =
       OSI.CreatePositionIcon(
-        184996,
+        185015,
         40390,
-        228135,
+        228119,
         "SanitysEdgeHelper/icons/Gryphon.dds",
         2 * OSI.GetIconSize())
   end
