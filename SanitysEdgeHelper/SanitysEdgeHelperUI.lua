@@ -1,6 +1,23 @@
 SEH = SEH or {}
 local SEH = SEH
 
+SEH.prefix = "[SEH]: "
+
+-- -----------------------------------------------------------------------------
+-- Level of debug output
+-- 1: Low    - Basic debug info, show core functionality
+-- 2: Medium - More information about skills and addon details
+-- 3: High   - Everything
+SEH.debugMode = 0
+-- -----------------------------------------------------------------------------
+
+function SEH:Trace(debugLevel, ...)
+  if debugLevel <= SEH.debugMode then
+    local message = zo_strformat(...)
+    d(SEH.prefix .. message)
+  end
+end
+
 function SEH.OnSEHMessage1Move()
   SEH.savedVariables.message1Left = SEHMessage1:GetLeft()
   SEH.savedVariables.message1Top = SEHMessage1:GetTop()
@@ -123,13 +140,25 @@ end
 
 
 function SEH.CommandLine(param)
-  local help = "[SEH] Usage: /seh {lock,unlock}"
+  local help = "[SEH] Usage: /seh {lock,unlock,debug [0-3]}"
   if param == nil or param == "" then
     d(help)
   elseif param == "lock" then
     SEH.Lock()
   elseif param == "unlock" then
     SEH.Unlock()
+  elseif param == "debug 0" then
+    d(SEH.prefix .. "Setting debug level to 0 (Off)")
+    SEH.debugMode = 0
+  elseif param == "debug 1" then
+    d(SEH.prefix .. "Setting debug level to 1 (Low)")
+    SEH.debugMode = 1
+  elseif param == "debug 2" then
+    d(SEH.prefix .. "Setting debug level to 2 (Low)")
+    SEH.debugMode = 2
+  elseif param == "debug 3" then
+    d(SEH.prefix .. "Setting debug level to 3 (Low)")
+    SEH.debugMode = 3
   else
     d(help)
   end
