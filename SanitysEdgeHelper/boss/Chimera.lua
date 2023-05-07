@@ -70,9 +70,9 @@ end
 function SEH.Chimera.AddCrytalNumberIcons()
   if SEH.savedVariables.showCrystalNumberIcons and SEH.hasOSI() then
 
-    if table.getn(SEH.status.chimeraNumber1Icon) == 0 then
+    if table.getn(SEH.status.ChimeraNumber1Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.chimeraNumber1Icon, 
+        table.insert(SEH.status.ChimeraNumber1Icon, 
           OSI.CreatePositionIcon(
             SEH.data.chimera_number1_pos_list[i][1],
             SEH.data.chimera_number1_pos_list[i][2],
@@ -82,9 +82,9 @@ function SEH.Chimera.AddCrytalNumberIcons()
       end
     end
 
-    if table.getn(SEH.status.chimeraNumber2Icon) == 0 then
+    if table.getn(SEH.status.ChimeraNumber2Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.chimeraNumber2Icon, 
+        table.insert(SEH.status.ChimeraNumber2Icon, 
           OSI.CreatePositionIcon(
             SEH.data.chimera_number2_pos_list[i][1],
             SEH.data.chimera_number2_pos_list[i][2],
@@ -94,9 +94,9 @@ function SEH.Chimera.AddCrytalNumberIcons()
       end
     end
 
-    if table.getn(SEH.status.chimeraNumber3Icon) == 0 then
+    if table.getn(SEH.status.ChimeraNumber3Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.chimeraNumber3Icon, 
+        table.insert(SEH.status.ChimeraNumber3Icon, 
           OSI.CreatePositionIcon(
             SEH.data.chimera_number3_pos_list[i][1],
             SEH.data.chimera_number3_pos_list[i][2],
@@ -106,9 +106,9 @@ function SEH.Chimera.AddCrytalNumberIcons()
       end
     end
 
-    if table.getn(SEH.status.chimeraNumber4Icon) == 0 then
+    if table.getn(SEH.status.ChimeraNumber4Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.chimeraNumber4Icon, 
+        table.insert(SEH.status.ChimeraNumber4Icon, 
           OSI.CreatePositionIcon(
             SEH.data.chimera_number4_pos_list[i][1],
             SEH.data.chimera_number4_pos_list[i][2],
@@ -118,9 +118,9 @@ function SEH.Chimera.AddCrytalNumberIcons()
       end
     end
 
-    if table.getn(SEH.status.chimeraNumber5Icon) == 0 then
+    if table.getn(SEH.status.ChimeraNumber5Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.chimeraNumber5Icon, 
+        table.insert(SEH.status.ChimeraNumber5Icon, 
           OSI.CreatePositionIcon(
             SEH.data.chimera_number5_pos_list[i][1],
             SEH.data.chimera_number5_pos_list[i][2],
@@ -133,18 +133,18 @@ function SEH.Chimera.AddCrytalNumberIcons()
 end
 
 function SEH.Chimera.RemoveCrystalNumberIcons()
-  SEH.DiscardPositionIconList(SEH.status.chimeraNumber1Icon)
-  SEH.status.chimeraNumber1Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraNumber1Icon)
+  SEH.status.ChimeraNumber1Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.chimeraNumber2Icon)
-  SEH.status.chimeraNumber2Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraNumber2Icon)
+  SEH.status.ChimeraNumber2Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.chimeraNumber3Icon)
-  SEH.status.chimeraNumber3Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraNumber3Icon)
+  SEH.status.ChimeraNumber3Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.chimeraNumber4Icon)
-  SEH.status.chimeraNumber4Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraNumber4Icon)
+  SEH.status.ChimeraNumber4Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.chimeraNumber5Icon)
-  SEH.status.chimeraNumber5Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraNumber5Icon)
+  SEH.status.ChimeraNumber5Icon = {}
 end
