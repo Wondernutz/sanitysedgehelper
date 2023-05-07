@@ -322,7 +322,7 @@ function SEH.BossesChanged()
     if string.match(bossName, SEH.data.chimeraName) then
       SEH.status.isChimera = true
       SEH.Chimera.AddWamasuIcon()
-      SEH.Chimera.AddLionIcos()
+      SEH.Chimera.AddLionIcon()
       SEH.Chimera.AddGryphonIcon()
 
       if SEH.status.isHMBoss then
