@@ -64,7 +64,7 @@ SEH.settings = {
   showChains = false,
 
   -- Chimera
-  showCrystalNumberIcons = true,
+  showHMCrystalNumberIcons = true,
   -- Ansuul
   showSplitBossHP = false,
 
@@ -304,7 +304,7 @@ function SEH.BossesChanged()
     SEH.Chimera.RemoveWamasuIcon()
     SEH.Chimera.RemoveLionIcon()
     SEH.Chimera.RemoveGryphonIcon()
-    SEH.Chimera.RemoveCrystalNumberIcons()
+    SEH.Chimera.RemoveHMCrystalNumberIcons()
 
     SEH.Ansuul.RemoveGreenIcon()
     SEH.Ansuul.RemoveRedIcon()

@@ -100,8 +100,8 @@ function SEH.Menu.AddonMenu()
       type    = "checkbox",
       name    = "(HM) Icon: Show Crystal Numbers",
       default = true,
-      getFunc = function() return SEH.savedVariables.showCrystalNumberIcons end,
-      setFunc = function(newValue) SEH.savedVariables.showCrystalNumberIcons = newValue end,
+      getFunc = function() return SEH.savedVariables.showHMCrystalNumberIcons end,
+      setFunc = function(newValue) SEH.savedVariables.showHMCrystalNumberIcons = newValue end,
       warning = requiresOSI
     },
     {

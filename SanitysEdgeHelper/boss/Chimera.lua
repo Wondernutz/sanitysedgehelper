@@ -132,7 +132,7 @@ function SEH.Chimera.AddCrytalNumberIcons()
   end
 end
 
-function SEH.Chimera.RemoveCrystalNumberIcons()
+function SEH.Chimera.RemoveHMCrystalNumberIcons()
   SEH.DiscardPositionIconList(SEH.status.ChimeraNumber1Icon)
   SEH.status.ChimeraNumber1Icon = {}
 
