@@ -37,6 +37,10 @@ SEH.status = {
   ChimeraNumber4Icon = {},
   ChimeraNumber5Icon = {},
 
+  AnsuulGreenIcon  = nil,
+  AnsuulRedIcon    = nil,
+  AnsuulBlueIcon   = nil,
+
   unitDamageTaken = {}, -- unitDamageTaken[unitId] = all damage events for a given id.
   --[[ TODO: Damage events to track:
     ACTION_RESULT_DAMAGE,
@@ -302,6 +306,10 @@ function SEH.BossesChanged()
     SEH.Chimera.RemoveGryphonIcon()
     SEH.Chimera.RemoveCrystalNumberIcons()
 
+    SEH.Ansuul.RemoveGreenIcon()
+    SEH.Ansuul.RemoveRedIcon()
+    SEH.Ansuul.RemoveBlueIcon()
+
     local currentTargetHP, maxTargetHP, effmaxTargetHP = GetUnitPower("boss1", POWERTYPE_HEALTH)
     local hardmodeHealth = {
       [SEH.data.yaseylaName] = 80000000, -- vet 65M, HM 97.8M
@@ -326,13 +334,16 @@ function SEH.BossesChanged()
       SEH.Chimera.AddWamasuIcon()
       SEH.Chimera.AddLionIcon()
       SEH.Chimera.AddGryphonIcon()
-
+      
       if SEH.status.isHMBoss then
         SEH.Chimera.AddCrytalNumberIcons()
       end
     end
     if string.match(bossName, SEH.data.ansuulName) then
       SEH.status.isAnsuul = true
+      SEH.Ansuul.AddGreenIcon()
+      SEH.Ansuul.AddRedIcon()
+      SEH.Ansuul.AddBlueIcon()
     end
   end
 end
