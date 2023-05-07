@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.3.1"
+SEH.version  = "0.4.0"
 SEH.author   = "@Wondernuts"
 SEH.active   = false
 
@@ -79,11 +79,13 @@ function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTa
 end
 
 function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
-  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.olms_swipe then
-  --  d("Ability: " .. abilityName .. ", ID: " .. abilityId .. ", Hit Value: " .. tostring(hitValue))
-  --  d(string.format("Target name: %s, Target type: %s, targetUnitId: %d, GetNameForId: %s", targetName, targetType, targetUnitId, SEH.GetNameForId(targetUnitId)))
-  --end
-
+  -- Debug ability casts of NPCs (unit type None)
+  if result == ACTION_RESULT_BEGIN and sourceType == COMBAT_UNIT_TYPE_NONE then
+    SEH:Trace(3, string.format(
+      "Ability: %s, ID: %d, Hit Value: %d, Source name: %s, Target name: %s", abilityName, abilityId, hitValue, sourceName, targetName
+    ))
+  end
+  
   if abilityId == SEH.data.hindered_effect then
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end

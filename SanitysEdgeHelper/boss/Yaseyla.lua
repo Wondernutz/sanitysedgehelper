@@ -177,18 +177,11 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
   end
 
-  if firebombsTimeLeft > 0 then 
-    SEHStatusLabelYaseyla2Value:SetColor(
-      SEH.data.color.orange[1],
-      SEH.data.color.orange[2],
-      SEH.data.color.orange[3])
+  if firebombsTimeLeft > 5 then 
     SEHStatusLabelYaseyla2Value:SetText(string.format("%.0f", firebombsTimeLeft) .. "s ")
+  elseif firebombsTimeLeft > 0 then 
+    SEHStatusLabelYaseyla2Value:SetText(string.format("%.1f", firebombsTimeLeft) .. "s ")
   else
-    -- If you wipe during green, it would stay green without this color re-set.
-    SEHStatusLabelYaseyla2Value:SetColor(
-      SEH.data.color.orange[1],
-      SEH.data.color.orange[2],
-      SEH.data.color.orange[3])
     SEHStatusLabelYaseyla2Value:SetText("INC")
   end
 end
