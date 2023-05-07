@@ -13,7 +13,7 @@ SEH.data    = {
   yaseyla_frost_bomb_target = 185404, --185403,
   yaseyla_frost_bomb_applied = 185403,
   yaseyla_frost_bomb_applied_2 = 183783,
-  yaseyla_wamasu_charge = 191133,
+  yaseyla_wamasu_charge = 200544,
   yaseyla_archer_true_shot = 184802,
 
   yaseyla_shrapnel_execute_cd = 52, -- how often it can cast shrapnel in execute
@@ -46,23 +46,48 @@ SEH.data    = {
 
   hindered_effect = 165972,
   
-  -- Archwizard Twelvane / Chimera
-  twelvane_mantle_wamasu   = 184984, --green portal buff
-  twelvane_mantle_lion     = 184983, --red portal buff
-  twelvane_mantle_gryphon  = 183640, --blue portal buff
-  twelvane_chimera_maul    = 186937, --chimera maul
-  twelvane_chimera_inferno = 186948, --chimera inferno cast
-  twelvane_chimera_bolt    = 186960, --chimera lightning bolt cast
-  twelvane_gryphon_wind_lance = 199132, --gryphon wind lance
-  twelvane_wamasu_impending_storm = 199119, --wamasu impending storm
-  twelvane_wamasu_repulsion_shock = 186995, --wamasu repulsion shock
-  twelvane_inferno_debuff1 = 198613, --inferno debuff before sunburst
-  twelvane_inferno_debuff2 = 186953, --inferno debuff before sunburst
-  twelvane_inferno_debuff3 = 186952, --inferno debuff before sunburst
-  twelvane_sunburst        = 1.6   , --sunburst right after inferno debuff
-  twelvane_chimera_chain_lightning = 183858, --chimera chain lightning
-  twelvane_circuit_charge  = 199235, --debuff from chain lightning hit/spread
-  twelvane_add_spawn       = 28    , --wamasu/lion/gryphon spawn
+  -- Chimera
+  chimera_mantle_wamasu   = 184984, --green portal buff
+  chimera_mantle_lion     = 184983, --red portal buff
+  chimera_mantle_gryphon  = 183640, --blue portal buff
+  chimera_chimera_maul    = 186937, --chimera maul
+  chimera_chimera_inferno = 186948, --chimera inferno cast
+  chimera_chimera_bolt    = 186960, --chimera lightning bolt cast
+  chimera_gryphon_wind_lance = 199132, --gryphon wind lance
+  chimera_wamasu_impending_storm = 199119, --wamasu impending storm
+  chimera_wamasu_repulsion_shock = 186995, --wamasu repulsion shock
+  chimera_inferno_debuff1 = 198613, --inferno debuff before sunburst
+  chimera_inferno_debuff2 = 186953, --inferno debuff before sunburst
+  chimera_inferno_debuff3 = 186952, --inferno debuff before sunburst
+  chimera_sunburst        = 1.6   , --sunburst right after inferno debuff
+  chimera_chimera_chain_lightning = 183858, --chimera chain lightning
+  chimera_circuit_charge  = 199235, --debuff from chain lightning hit/spread
+
+  chimera_number1_pos_list = {
+    [1] = {171984,40350,238116},
+    [2] = {181899,40350,238230},
+    [3] = {191735,40350,238150},
+  },
+  chimera_number2_pos_list = {
+    [1] = {172026,40350,242013},
+    [2] = {181903,40350,242085},
+    [3] = {191874,40350,242064},
+  },
+  chimera_number3_pos_list = {
+    [1] = {170048,40350,242200},
+    [2] = {179948,40350,242203},
+    [3] = {189859,40350,242154},
+  },
+  chimera_number4_pos_list = {
+    [1] = {168148,40350,242050},
+    [2] = {178072,40350,242011},
+    [3] = {187935,40350,242088},
+  },
+  chimera_number5_pos_list = {
+    [1] = {168147,40350,238168},
+    [2] = {178065,40350,238175},
+    [3] = {187954,40350,238224},
+  },
 
   -- TODO: Consider using UnpackRGBA(0xFFFFFFFF)
   -- Colors
@@ -86,7 +111,7 @@ SEH.data    = {
   -- Boss names.
   -- String lower, to make sure changes here keep strings in lowercase.
   yaseylaName = string.lower("Exarchanic Yaseyla"),
-  twelvaneName = string.lower("Archwizard Twelvane"),
+  chimeraName = string.lower("Chimera"),
   ansuulName = string.lower("Ansuul the Tormentor"),
 
   --default_color = { 1, 0.7, 0, 0.5 },

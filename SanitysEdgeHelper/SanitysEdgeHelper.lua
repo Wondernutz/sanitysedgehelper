@@ -12,7 +12,7 @@ SEH.status = {
 
   currentBoss = "",
   isYaseyla = false,
-  isTwelvane = false,
+  isChimera = false,
   isAnsuul = false,
   isHMBoss = false,
 
@@ -28,6 +28,15 @@ SEH.status = {
   
   locked = true,
   
+  ChimeraWamasuIcon  = nil,
+  ChimeraLionIcon    = nil,
+  ChimeraGryphonIcon = nil,
+  ChimeraNumber1Icon = {},
+  ChimeraNumber2Icon = {},
+  ChimeraNumber3Icon = {},
+  ChimeraNumber4Icon = {},
+  ChimeraNumber5Icon = {},
+
   unitDamageTaken = {}, -- unitDamageTaken[unitId] = all damage events for a given id.
   --[[ TODO: Damage events to track:
     ACTION_RESULT_DAMAGE,
@@ -50,6 +59,8 @@ SEH.settings = {
   showFrostbombs = false,
   showChains = false,
 
+  -- Chimera
+  showCrystalNumberIcons = true,
   -- Ansuul
   showSplitBossHP = false,
 
@@ -107,29 +118,41 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.Chain_Pull(result, targetType, hitValue)
   end
 
-  -- Twelvane/Chimera
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_inferno then
+  -- Chimera/Chimera
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_inferno then
     SEH.Alert("", "Sunbursts", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_bolt and hitValue > 500 then
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_bolt and hitValue > 500 then
     SEH.Alert("Chimera", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_chimera_chain_lightning and hitValue > 1000 then
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_chain_lightning and hitValue > 1000 then
     SEH.Alert("Chimera", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
 
-  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_impending_storm then
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_wamasu_impending_storm then
   --  SEH.Alert("Ascendant Wamasu", "Impending Storm", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   --end
 
-  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_wamasu_repulsion_shock then
+  --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_wamasu_repulsion_shock then
   --  SEH.Alert("Ascendant Wamasu", "Repulsion Shock", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   --end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.twelvane_gryphon_wind_lance then
+  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_gryphon_wind_lance then
     SEH.Alert("Ascendant Gryphon", "Wind Lance", 0xD1F1F9FF, abilityId, SOUNDS.BATTLEGROUND_CAPTURE_FLAG_RETURNED, hitValue)
+  end
+
+  if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.chimera_mantle_wamasu and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    SEH.Alert("", "Wamasu Portal", 0x02FF00FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 5000)
+  end
+
+  if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.chimera_mantle_lion and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    SEH.Alert("", "Lion Portal", 0xFF0000FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 5000)
+  end
+
+  if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.chimera_mantle_gryphon and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    SEH.Alert("", "Gryphon Portal", 0x0005FFFF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 5000)
   end
 
   -- Ansuul
@@ -268,15 +291,20 @@ function SEH.BossesChanged()
     end
     
     SEH.status.isYaseyla = false
-    SEH.status.isTwelvane = false
+    SEH.status.isChimera = false
     SEH.status.isAnsuul = false
     SEH.status.isHMBoss = false
 
+    SEH.Chimera.RemoveWamasuIcon()
+    SEH.Chimera.RemoveLionIcon()
+    SEH.Chimera.RemoveGryphonIcon()
+    SEH.Chimera.RemoveCrystalNumberIcons()
+
     local currentTargetHP, maxTargetHP, effmaxTargetHP = GetUnitPower("boss1", POWERTYPE_HEALTH)
     local hardmodeHealth = {
-      [SEH.data.yaseylaName] = 70000000, -- vet 65M, HM 97.8M
-      [SEH.data.twelvaneName] = 25000000,  -- vet 17.4M, HM 34.9M
-      [SEH.data.ansuulName] = 100000000, -- vet: 69M, HM ?
+      [SEH.data.yaseylaName] = 80000000, -- vet 65M, HM 97.8M
+      [SEH.data.chimeraName] = 70000000,  -- vet 46.5M, HM 93.1M
+      [SEH.data.ansuulName] = 100000000, -- vet: 69M, HM 160.7M
     }
 
     -- Check for HM.
@@ -291,8 +319,15 @@ function SEH.BossesChanged()
     if string.match(bossName, SEH.data.yaseylaName) then
       SEH.status.isYaseyla = true
     end
-    if string.match(bossName, SEH.data.twelvaneName) then
-      SEH.status.isTwelvane = true
+    if string.match(bossName, SEH.data.chimeraName) then
+      SEH.status.isChimera = true
+      SEH.Chimera.AddWamasuIcon()
+      SEH.Chimera.AddLionIcon()
+      SEH.Chimera.AddGryphonIcon()
+
+      if SEH.status.isHMBoss then
+        SEH.Chimera.AddCrytalNumberIcons()
+      end
     end
     if string.match(bossName, SEH.data.ansuulName) then
       SEH.status.isAnsuul = true

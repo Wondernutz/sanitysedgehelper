@@ -93,6 +93,22 @@ function SEH.Menu.AddonMenu()
     },
     {
       type = "header",
+      name = "Chimera",
+      reference = "ChimeraHeader"
+    },
+    {
+      type    = "checkbox",
+      name    = "(HM) Icon: Show Crystal Numbers",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showCrystalNumberIcons end,
+      setFunc = function(newValue) SEH.savedVariables.showCrystalNumberIcons = newValue end,
+      warning = requiresOSI
+    },
+    {
+      type = "divider",
+    },
+    {
+      type = "header",
       name = "Ansuul",
       reference = "AnsuulHeader"
     },
