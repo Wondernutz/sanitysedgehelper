@@ -2,6 +2,13 @@ SEH = SEH or {}
 local SEH = SEH
 SEH.Yaseyla = {}
 
+function SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, abilityId)
+  if result == ACTION_RESULT_BEGIN then
+    SEH.Alert("Wamasu Charge", SEH.GetNameForId(targetUnitId), 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 1})
+  end
+end
+
 function SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   local isDPS, isHeal, isTank = GetPlayerRoles()
   if isDPS then
@@ -19,7 +26,7 @@ function SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
 end
 
-function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValue)
+function SEH.Yaseyla.FrostBombTarget(result, targetType, targetUnitId, hitValue)
   if targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Frost Bomb (self)", 0x66CCFFFF, SEH.data.yaseyla_frost_bomb_target, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
@@ -33,7 +40,7 @@ function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValu
   end
 end
 
-function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
+function SEH.Yaseyla.FrostBombApplied(result, targetUnitId, hitValue)
   if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
     SEH.status.yaseylaLastFrostbombs = GetGameTimeSeconds()
     SEH.status.yaseylaIsFirstFrostbombs = false
@@ -79,7 +86,7 @@ function SEH.Yaseyla.FireBombs(result, targetType, hitValue)
   end
 end
 
-function SEH.Yaseyla.Chain_Pull(result, targetType, hitValue)
+function SEH.Yaseyla.ChainPull(result, targetType, hitValue)
   if result == ACTION_RESULT_BEGIN then
     SEH.status.yaseylaLastChains = GetGameTimeSeconds()
     SEH.status.yaseylaIsFirstChains = false
