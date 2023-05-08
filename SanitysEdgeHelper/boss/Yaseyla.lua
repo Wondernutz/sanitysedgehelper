@@ -4,8 +4,8 @@ SEH.Yaseyla = {}
 
 function SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, abilityId)
   if result == ACTION_RESULT_BEGIN then
-    SEH.Alert("Wamasu Charge", SEH.GetNameForId(targetUnitId), 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 1})
+    SEH.Alert("Wamasu", string.format("Charge -> %s", SEH.GetNameForId(targetUnitId)), 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    CombatAlerts.AlertCast(abilityId, "", hitValue, {-2, 1})
   end
 end
 
