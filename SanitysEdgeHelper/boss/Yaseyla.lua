@@ -149,20 +149,13 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
       SEH.data.color.orange[3])
     SEHStatusLabelYaseyla1Value:SetText(displayText)
 
-  elseif shrapnelTimeLeftExecute > 0 then 
-    SEHStatusLabelYaseyla1Value:SetColor(
-      SEH.data.color.orange[1],
-      SEH.data.color.orange[2],
-      SEH.data.color.orange[3])
-    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", shrapnelTimeLeftExecute) .. "s ")
-
   else
     -- If you wipe during green, it would stay green without this color re-set.
     SEHStatusLabelYaseyla1Value:SetColor(
       SEH.data.color.orange[1],
       SEH.data.color.orange[2],
       SEH.data.color.orange[3])
-    SEHStatusLabelYaseyla1Value:SetText("INC")
+    SEHStatusLabelYaseyla1Value:SetText(SEH.GetSecondsRemainingString(shrapnelTimeLeftExecute))
   end
 end
 
@@ -184,13 +177,7 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
   end
 
-  if firebombsTimeLeft > 5 then 
-    SEHStatusLabelYaseyla2Value:SetText(string.format("%.0f", firebombsTimeLeft) .. "s ")
-  elseif firebombsTimeLeft > 0 then 
-    SEHStatusLabelYaseyla2Value:SetText(string.format("%.1f", firebombsTimeLeft) .. "s ")
-  else
-    SEHStatusLabelYaseyla2Value:SetText("INC")
-  end
+  SEHStatusLabelYaseyla2Value:SetText(SEH.GetSecondsRemainingString(firebombsTimeLeft))
 end
 
 function SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
@@ -209,11 +196,7 @@ function SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
     frostbombsTimeLeft = SEH.data.yaseyla_frostbombs_cd - frostbombsDelta
   end
 
-  if frostbombsTimeLeft > 0 then 
-    SEHStatusLabelYaseyla3Value:SetText(string.format("%.0f", frostbombsTimeLeft) .. "s ")
-  else
-    SEHStatusLabelYaseyla3Value:SetText("INC")
-  end
+  SEHStatusLabelYaseyla3Value:SetText(SEH.GetSecondsRemainingString(frostbombsTimeLeft))
 end
 
 function SEH.Yaseyla.UpdateChainsTick(timeSec)
@@ -230,9 +213,5 @@ function SEH.Yaseyla.UpdateChainsTick(timeSec)
     chainsTimeLeft = SEH.data.yaseyla_chains_cd - chainsDelta
   end
 
-  if chainsTimeLeft > 0 then 
-    SEHStatusLabelYaseyla4Value:SetText(string.format("%.0f", chainsTimeLeft) .. "s ")
-  else
-    SEHStatusLabelYaseyla4Value:SetText("INC")
-  end
+  SEHStatusLabelYaseyla4Value:SetText(SEH.GetSecondsRemainingString(chainsTimeLeft))
 end
