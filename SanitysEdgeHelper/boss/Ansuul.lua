@@ -2,67 +2,50 @@ SEH = SEH or {}
 local SEH = SEH
 SEH.Ansuul = {}
 
-function SEH.Ansuul.RemoveGreenIcon()
-  if SEH.status.AnsuulGreenIcon ~= nil then
-    if SEH.hasOSI() then
-      OSI.DiscardPositionIcon(SEH.status.AnsuulGreenIcon)
+function SEH.Chimera.AddAnsuulCornerIcons()
+  if SEH.savedVariables.showAnsuulCornerIcons and SEH.hasOSI() then
+
+    if table.getn(SEH.status.AnsuulGreenIcon) == 0 then
+      table.insert(SEH.status.AnsuulGreenIcon, 
+        OSI.CreatePositionIcon(
+          196570,
+          30199,
+          38049,
+          "SanitysEdgeHelper/icons/squaretwo_green.dds",
+          2 * OSI.GetIconSize()))
     end
-    SEH.status.AnsuulGreenIcon = nil
-  end
-end
 
-function SEH.Ansuul.AddGreenIcon()
-  if SEH.status.AnsuulGreenIcon == nil and SEH.hasOSI() then
-    SEH.status.AnsuulGreenIcon =
-      OSI.CreatePositionIcon(
-        196570,
-        30199,
-        38049,
-        "SanitysEdgeHelper/icons/squaretwo_green.dds",
-        2 * OSI.GetIconSize())
-  end
-end
-
-function SEH.Ansuul.RemoveRedIcon()
-  if SEH.status.AnsuulRedIcon ~= nil then
-    if SEH.hasOSI() then
-      OSI.DiscardPositionIcon(SEH.status.AnsuulRedIcon)
+    if table.getn(SEH.status.AnsuulRedIcon) == 0 then
+      table.insert(SEH.status.AnsuulRedIcon, 
+        OSI.CreatePositionIcon(
+          200014,
+          30199,
+          44150,
+          "SanitysEdgeHelper/icons/squaretwo_red.dds",
+          2 * OSI.GetIconSize()))
     end
-    SEH.status.AnsuulRedIcon = nil
-  end
-end
 
-function SEH.Ansuul.AddRedIcon()
-  if SEH.status.AnsuulRedIcon == nil and SEH.hasOSI() then
-    SEH.status.AnsuulRedIcon =
-      OSI.CreatePositionIcon(
-        200014,
-        30199,
-        44150,
-        "SanitysEdgeHelper/icons/squaretwo_red.dds",
-        2 * OSI.GetIconSize())
-  end
-end
-
-function SEH.Ansuul.RemoveBlueIcon()
-  if SEH.status.AnsuulBlueIcon ~= nil then
-    if SEH.hasOSI() then
-      OSI.DiscardPositionIcon(SEH.status.AnsuulBlueIcon)
+    if table.getn(SEH.status.AnsuulBlueIcon) == 0 then
+      table.insert(SEH.status.AnsuulBlueIcon, 
+        OSI.CreatePositionIcon(
+          203417,
+          30199,
+          38080,
+          "SanitysEdgeHelper/icons/squaretwo_blue.dds",
+          2 * OSI.GetIconSize()))
     end
-    SEH.status.AnsuulBlueIcon = nil
   end
 end
 
-function SEH.Ansuul.AddBlueIcon()
-  if SEH.status.AnsuulBlueIcon == nil and SEH.hasOSI() then
-    SEH.status.AnsuulBlueIcon =
-      OSI.CreatePositionIcon(
-        203417,
-        30199,
-        38080,
-        "SanitysEdgeHelper/icons/squaretwo_blue.dds",
-        2 * OSI.GetIconSize())
-  end
+function SEH.Ansuul.RemoveAnsuulCornerIcons()
+  SEH.DiscardPositionIconList(SEH.status.AnsuulGreenIcon)
+  SEH.status.AnsuulGreenIcon = {}
+
+  SEH.DiscardPositionIconList(SEH.status.AnsuulRedIcon)
+  SEH.status.AnsuulRedIcon = {}
+
+  SEH.DiscardPositionIconList(SEH.status.AnsuulBlueIcon)
+  SEH.status.AnsuulBlueIcon = {}
 end
 
 function SEH.Ansuul.Poisoned_Mind(result, targetType, targetUnitId, hitValue)

@@ -63,17 +63,38 @@ SEH.data    = {
   chimera_chimera_chain_lightning = 183858, --chimera chain lightning
   chimera_circuit_charge  = 199235, --debuff from chain lightning hit/spread
 
-  chimera_number1_pos_list = {
+  chimera_nonhmnumber1_pos_list = {
     [1] = {171984,40350,238116},
     [2] = {181899,40350,238230},
     [3] = {191735,40350,238150},
   },
-  chimera_number2_pos_list = {
+  chimera_nonhmnumber2_pos_list = {
     [1] = {172026,40350,242013},
     [2] = {181903,40350,242085},
     [3] = {191874,40350,242064},
   },
-  chimera_number3_pos_list = {
+  chimera_nonhmnumber3_pos_list = {
+    [1] = {170048,40350,242200},
+    [2] = {179948,40350,242203},
+    [3] = {189859,40350,242154},
+  },
+  chimera_nonnumber4_pos_list = {
+    [1] = {168148,40350,242050},
+    [2] = {178072,40350,242011},
+    [3] = {187935,40350,242088},
+  },
+
+  chimera_hmnumber1_pos_list = {
+    [1] = {171984,40350,238116},
+    [2] = {181899,40350,238230},
+    [3] = {191735,40350,238150},
+  },
+  chimera_hmnumber2_pos_list = {
+    [1] = {172026,40350,242013},
+    [2] = {181903,40350,242085},
+    [3] = {191874,40350,242064},
+  },
+  chimera_hmnumber3_pos_list = {
     [1] = {170048,40350,242200},
     [2] = {179948,40350,242203},
     [3] = {189859,40350,242154},
@@ -83,7 +104,7 @@ SEH.data    = {
     [2] = {178072,40350,242011},
     [3] = {187935,40350,242088},
   },
-  chimera_number5_pos_list = {
+  chimera_hmnumber5_pos_list = {
     [1] = {168147,40350,238168},
     [2] = {178065,40350,238175},
     [3] = {187954,40350,238224},
