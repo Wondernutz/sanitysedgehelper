@@ -106,7 +106,7 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "(Non-HM) Icon: Show Crystal Numbers (wip)",
+      name    = "(Non-HM) Icon: Show Crystal Numbers",
       default = true,
       getFunc = function() return SEH.savedVariables.showNonHMCrystalNumberIcons end,
       setFunc = function(newValue) SEH.savedVariables.showNonHMCrystalNumberIcons = newValue end,
