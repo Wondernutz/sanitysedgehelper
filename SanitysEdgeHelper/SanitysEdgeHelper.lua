@@ -333,11 +333,11 @@ function SEH.BossesChanged()
     if string.match(bossName, SEH.data.chimeraName) then
       SEH.status.isChimera = true
       SEH.Chimera.AddChimeraAddIcons()
-      SEH.Chimera.AddNonHMCrystalNumberIcons()
       
       if SEH.status.isHMBoss then
-        SEH.Chimera.RemoveNonHMCrystalNumberIcons()
         SEH.Chimera.AddHMCrystalNumberIcons()
+      else
+        SEH.Chimera.AddNonHMCrystalNumberIcons()
       end
     end
     if string.match(bossName, SEH.data.ansuulName) then
