@@ -178,6 +178,16 @@ function SEH.trimName(name)
   return ""
 end
 
+function SEH.GetSecondsRemainingString(seconds)
+  if seconds > 5 then 
+    return string.format("%.0f", seconds) .. "s "
+  elseif seconds > 0 then 
+    return string.format("%.1f", seconds) .. "s "
+  else
+    return "INC"
+  end
+end
+
 function SEH.GetSecondsString(seconds)
   return string.format("%.0f", seconds) .. "s "
 end

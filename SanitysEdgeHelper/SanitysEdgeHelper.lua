@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.4.2"
+SEH.version  = "0.4.3"
 SEH.author   = "@Wondernuts"
 SEH.active   = false
 
@@ -97,18 +97,17 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
 
-  if result == ACTION_RESULT_BEGIN and (abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge) then
-    SEH.Alert("", "Wamasu Charge", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-    CombatAlerts.AlertCast(abilityId, "Wamasu Charge", hitValue, {-2, 1})
+  if abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge then
+    SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, abilityId)
   end
 
   -- Yaseyla
   if abilityId == SEH.data.yaseyla_frost_bomb_target then
-    SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValue)
+    SEH.Yaseyla.FrostBombTarget(result, targetType, targetUnitId, hitValue)
   end
 
   if abilityId == SEH.data.yaseyla_frost_bomb_applied or abilityId == SEH.data.yaseyla_frost_bomb_applied_2 then
-    SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
+    SEH.Yaseyla.FrostBombApplied(result, targetUnitId, hitValue)
   end
 
   if abilityId == SEH.data.yaseyla_ignite then
@@ -124,7 +123,7 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 
   if abilityId == SEH.data.yaseyla_chain_pull then
-    SEH.Yaseyla.Chain_Pull(result, targetType, hitValue)
+    SEH.Yaseyla.ChainPull(result, targetType, hitValue)
   end
 
   -- Chimera/Chimera
@@ -288,7 +287,9 @@ end
 function SEH.BossesChanged()
   local bossName = SEH.GetBossName()
   local lastBossName = SEH.status.currentBoss
-  --d("[SEH] Boss change. Name = " .. bossName .. ". Last boss name = " .. lastBossName)
+  SEH:Trace(1, string.format(
+    "Boss change. Name = " .. bossName .. ". Last boss name = " .. lastBossName
+  ))
   if bossName ~= nil then
     if SEH.status.currentBoss == SEH.data.ansuulName and bossName == "" then
       -- Do not reset Ansuul for empty, this helps the clearing on wipes.

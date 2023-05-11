@@ -23,7 +23,7 @@ SEH.data    = {
   yaseyla_firebombs_first_cd = 9, -- how soon the first firebomb can be cast
   yaseyla_firebombs_preexecute_cd = 23.5, -- how often it can cast firebombs pre-execute
   yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
-  yaseyla_firebombs_execute_threshold = 27, -- the execute threshold after which it casts firebombs more often
+  yaseyla_firebombs_execute_threshold = 26.5, -- the execute threshold after which it casts firebombs more often
 
   yaseyla_frostbombs_first_cd = 17, -- how soon the first frostbombs can be cast
   yaseyla_frostbombs_cd = 25, -- how soon it can CAST frostbombs from the last bomb EXPLOSION
