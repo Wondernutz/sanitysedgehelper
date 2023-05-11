@@ -2,6 +2,13 @@ SEH = SEH or {}
 local SEH = SEH
 SEH.Yaseyla = {}
 
+function SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, abilityId)
+  if result == ACTION_RESULT_BEGIN then
+    SEH.Alert("Wamasu", string.format("Charge -> %s", SEH.GetNameForId(targetUnitId)), 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    CombatAlerts.AlertCast(abilityId, "", hitValue, {-2, 1})
+  end
+end
+
 function SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   local isDPS, isHeal, isTank = GetPlayerRoles()
   if isDPS then
@@ -19,7 +26,7 @@ function SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
   end
 end
 
-function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValue)
+function SEH.Yaseyla.FrostBombTarget(result, targetType, targetUnitId, hitValue)
   if targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Frost Bomb (self)", 0x66CCFFFF, SEH.data.yaseyla_frost_bomb_target, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
@@ -33,7 +40,7 @@ function SEH.Yaseyla.Frost_Bomb_Target(result, targetType, targetUnitId, hitValu
   end
 end
 
-function SEH.Yaseyla.Frost_Bomb_Applied(result, targetUnitId, hitValue)
+function SEH.Yaseyla.FrostBombApplied(result, targetUnitId, hitValue)
   if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
     SEH.status.yaseylaLastFrostbombs = GetGameTimeSeconds()
     SEH.status.yaseylaIsFirstFrostbombs = false
@@ -79,7 +86,7 @@ function SEH.Yaseyla.FireBombs(result, targetType, hitValue)
   end
 end
 
-function SEH.Yaseyla.Chain_Pull(result, targetType, hitValue)
+function SEH.Yaseyla.ChainPull(result, targetType, hitValue)
   if result == ACTION_RESULT_BEGIN then
     SEH.status.yaseylaLastChains = GetGameTimeSeconds()
     SEH.status.yaseylaIsFirstChains = false
@@ -142,20 +149,13 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
       SEH.data.color.orange[3])
     SEHStatusLabelYaseyla1Value:SetText(displayText)
 
-  elseif shrapnelTimeLeftExecute > 0 then 
-    SEHStatusLabelYaseyla1Value:SetColor(
-      SEH.data.color.orange[1],
-      SEH.data.color.orange[2],
-      SEH.data.color.orange[3])
-    SEHStatusLabelYaseyla1Value:SetText(string.format("%.0f", shrapnelTimeLeftExecute) .. "s ")
-
   else
     -- If you wipe during green, it would stay green without this color re-set.
     SEHStatusLabelYaseyla1Value:SetColor(
       SEH.data.color.orange[1],
       SEH.data.color.orange[2],
       SEH.data.color.orange[3])
-    SEHStatusLabelYaseyla1Value:SetText("INC")
+    SEHStatusLabelYaseyla1Value:SetText(SEH.GetSecondsRemainingString(shrapnelTimeLeftExecute))
   end
 end
 
@@ -177,13 +177,7 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
   end
 
-  if firebombsTimeLeft > 5 then 
-    SEHStatusLabelYaseyla2Value:SetText(string.format("%.0f", firebombsTimeLeft) .. "s ")
-  elseif firebombsTimeLeft > 0 then 
-    SEHStatusLabelYaseyla2Value:SetText(string.format("%.1f", firebombsTimeLeft) .. "s ")
-  else
-    SEHStatusLabelYaseyla2Value:SetText("INC")
-  end
+  SEHStatusLabelYaseyla2Value:SetText(SEH.GetSecondsRemainingString(firebombsTimeLeft))
 end
 
 function SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
@@ -202,11 +196,7 @@ function SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
     frostbombsTimeLeft = SEH.data.yaseyla_frostbombs_cd - frostbombsDelta
   end
 
-  if frostbombsTimeLeft > 0 then 
-    SEHStatusLabelYaseyla3Value:SetText(string.format("%.0f", frostbombsTimeLeft) .. "s ")
-  else
-    SEHStatusLabelYaseyla3Value:SetText("INC")
-  end
+  SEHStatusLabelYaseyla3Value:SetText(SEH.GetSecondsRemainingString(frostbombsTimeLeft))
 end
 
 function SEH.Yaseyla.UpdateChainsTick(timeSec)
@@ -223,9 +213,5 @@ function SEH.Yaseyla.UpdateChainsTick(timeSec)
     chainsTimeLeft = SEH.data.yaseyla_chains_cd - chainsDelta
   end
 
-  if chainsTimeLeft > 0 then 
-    SEHStatusLabelYaseyla4Value:SetText(string.format("%.0f", chainsTimeLeft) .. "s ")
-  else
-    SEHStatusLabelYaseyla4Value:SetText("INC")
-  end
+  SEHStatusLabelYaseyla4Value:SetText(SEH.GetSecondsRemainingString(chainsTimeLeft))
 end
