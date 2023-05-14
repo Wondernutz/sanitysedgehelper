@@ -128,6 +128,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Alert("", "Sunbursts", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
 
+  if result == ACTION_RESULT_EFFECT_GAINED_DURATION and abilityId == SEH.data.chimera_inferno_meteor and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, { -3, 0, false, { 1, 0.4, 0, 0.5 } })
+  end
+
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_bolt and hitValue > 500 then
     SEH.Alert("Chimera", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   end
@@ -163,7 +167,7 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   -- Ansuul
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Sunburst (self)", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, {-2, 0})
+    CombatAlerts.AlertCast(abilityId, sourceName, hitValue, { -3, 0, false, { 1, 0.4, 0, 0.5 } })
   end
 
   if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
@@ -201,6 +205,7 @@ function SEH.UpdateTick(gameTimeMs)
   if IsUnitInCombat("boss1") then
     if not SEH.status.inCombat then
       -- If it switched from non-combat to combat, re-check boss names.
+      SEH.BossesChanged()
     end
     SEH.status.inCombat = true
   end
