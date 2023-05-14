@@ -64,9 +64,9 @@ SEH.settings = {
   showChains = false,
 
   -- Chimera
-  showChimeraPortalIcons = true,
-  showNon_HM_CrystalNumberIcons = true,
-  showHM_CrystalNumberIcons = true,
+  showChimeraAddIcons = true,
+  showNonHMCrystalNumberIcons = true,
+  showHMCrystalNumberIcons = true,
   -- Ansuul
   showAnsuulCornerIcons = true,
   showSplitBossHP = false,
@@ -305,9 +305,9 @@ function SEH.BossesChanged()
     SEH.status.isAnsuul = false
     SEH.status.isHMBoss = false
 
-    SEH.Chimera.RemoveChimeraPortalIcons()
-    SEH.Chimera.RemoveNon_HM_CrystalNumberIcons()
-    SEH.Chimera.RemoveHM_CrystalNumberIcons()
+    SEH.Chimera.RemoveChimeraAddIcons()
+    SEH.Chimera.RemoveNonHMCrystalNumberIcons()
+    SEH.Chimera.RemoveHMCrystalNumberIcons()
 
     SEH.Ansuul.RemoveAnsuulCornerIcons()
 
@@ -332,12 +332,12 @@ function SEH.BossesChanged()
     end
     if string.match(bossName, SEH.data.chimeraName) then
       SEH.status.isChimera = true
-      SEH.Chimera.AddChimeraPortalIcons()
+      SEH.Chimera.AddChimeraAddIcons()
       
       if SEH.status.isHMBoss then
-        SEH.Chimera.AddHM_CrystalNumberIcons()
+        SEH.Chimera.AddHMCrystalNumberIcons()
       else
-        SEH.Chimera.AddNon_HM_CrystalNumberIcons()
+        SEH.Chimera.AddNonHMCrystalNumberIcons()
       end
     end
     if string.match(bossName, SEH.data.ansuulName) then
