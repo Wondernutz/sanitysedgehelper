@@ -63,48 +63,48 @@ SEH.data    = {
   chimera_chimera_chain_lightning = 183858, --chimera chain lightning
   chimera_circuit_charge  = 199235, --debuff from chain lightning hit/spread
 
-  chimera_nonhmnumber1_pos_list = {
+  chimera_nonhm_number1_pos_list = {
     [1] = {189899,40350,237901}, --wamasu
     [2] = {180032,40350,237903}, --lion
     [3] = {180064,40350,238017}, --gryphon
   },
-  chimera_nonhmnumber2_pos_list = {
+  chimera_nonhm_number2_pos_list = {
     [1] = {192097,40350,240155}, --wamasu
     [2] = {172287,40350,240129}, --lion
     [3] = {182226,40350,240121}, --gryphon
   },
-  chimera_nonhmnumber3_pos_list = {
+  chimera_nonhm_number3_pos_list = {
     [1] = {189881,40350,242334}, --wamasu
     [2] = {179986,40350,242334}, --lion
     [3] = {170041,40350,242334}, --gryphon
   },
-  chimera_nonhmnumber4_pos_list = {
+  chimera_nonhm_number4_pos_list = {
     [1] = {187675,40350,240085}, --wamasu
     [2] = {167838,40350,240080}, --lion
     [3] = {177789,40350,240095}, --gryphon
   },
 
-  chimera_hmnumber1_pos_list = {
+  chimera_hm_number1_pos_list = {
     [1] = {171984,40350,238116}, --wamasu
     [2] = {181899,40350,238230}, --lion
     [3] = {191735,40350,238150}, --gryphon
   },
-  chimera_hmnumber2_pos_list = {
+  chimera_hm_number2_pos_list = {
     [1] = {172026,40350,242013}, --wamasu
     [2] = {181903,40350,242085}, --lion
     [3] = {191874,40350,242064}, --gryphon
   },
-  chimera_hmnumber3_pos_list = {
+  chimera_hm_number3_pos_list = {
     [1] = {189881,40350,242334}, --wamasu
     [2] = {179986,40350,242334}, --lion
     [3] = {170041,40350,242334}, --gryphon
   },
-  chimera_hmnumber4_pos_list = {
+  chimera_hm_number4_pos_list = {
     [1] = {168148,40350,242050}, --wamasu
     [2] = {178072,40350,242011}, --lion
     [3] = {187935,40350,242088}, --gryphon
   },
-  chimera_hmnumber5_pos_list = {
+  chimera_hm_number5_pos_list = {
     [1] = {168147,40350,238168}, --wamasu
     [2] = {178065,40350,238175}, --lion
     [3] = {187954,40350,238224}, --gryphon

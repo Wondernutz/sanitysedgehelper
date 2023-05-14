@@ -2,8 +2,8 @@ SEH = SEH or {}
 local SEH = SEH
 SEH.Chimera = {}
 
-function SEH.Chimera.AddChimeraAddIcons()
-  if SEH.savedVariables.showChimeraAddIcons and SEH.hasOSI() then
+function SEH.Chimera.AddChimeraPortalIcons()
+  if SEH.savedVariables.showChimeraPortalIcons and SEH.hasOSI() then
 
     if table.getn(SEH.status.ChimeraWamasuIcon) == 0 then
       table.insert(SEH.status.ChimeraWamasuIcon, 
@@ -37,7 +37,7 @@ function SEH.Chimera.AddChimeraAddIcons()
   end
 end
 
-function SEH.Chimera.RemoveChimeraAddIcons()
+function SEH.Chimera.RemoveChimeraPortalIcons()
   SEH.DiscardPositionIconList(SEH.status.ChimeraWamasuIcon)
   SEH.status.ChimeraWamasuIcon = {}
 
@@ -48,52 +48,52 @@ function SEH.Chimera.RemoveChimeraAddIcons()
   SEH.status.ChimeraGryphonIcon = {}
 end
 
-function SEH.Chimera.AddNonHMCrystalNumberIcons()
-  if SEH.savedVariables.showNonHMCrystalNumberIcons and SEH.hasOSI() then
+function SEH.Chimera.AddNonHM_CrystalNumberIcons()
+  if SEH.savedVariables.showNonHM_CrystalNumberIcons and SEH.hasOSI() then
 
-    if table.getn(SEH.status.ChimeraNonHMNumber1Icon) == 0 then
+    if table.getn(SEH.status.ChimeraNonHM_Number1Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.ChimeraNonHMNumber1Icon, 
+        table.insert(SEH.status.ChimeraNonHM_Number1Icon, 
           OSI.CreatePositionIcon(
-            SEH.data.chimera_nonhmnumber1_pos_list[i][1],
-            SEH.data.chimera_nonhmnumber1_pos_list[i][2],
-            SEH.data.chimera_nonhmnumber1_pos_list[i][3],
+            SEH.data.chimera_nonhm_number1_pos_list[i][1],
+            SEH.data.chimera_nonhm_number1_pos_list[i][2],
+            SEH.data.chimera_nonhm_number1_pos_list[i][3],
             "SanitysEdgeHelper/icons/1.dds",
             1 * OSI.GetIconSize()))
       end
     end
 
-    if table.getn(SEH.status.ChimeraNonHMNumber2Icon) == 0 then
+    if table.getn(SEH.status.ChimeraNonHM_Number2Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.ChimeraNonHMNumber2Icon, 
+        table.insert(SEH.status.ChimeraNonHM_Number2Icon, 
           OSI.CreatePositionIcon(
-            SEH.data.chimera_nonhmnumber2_pos_list[i][1],
-            SEH.data.chimera_nonhmnumber2_pos_list[i][2],
-            SEH.data.chimera_nonhmnumber2_pos_list[i][3],
+            SEH.data.chimera_nonhm_number2_pos_list[i][1],
+            SEH.data.chimera_nonhm_number2_pos_list[i][2],
+            SEH.data.chimera_nonhm_number2_pos_list[i][3],
             "SanitysEdgeHelper/icons/2.dds",
             1 * OSI.GetIconSize()))
       end
     end
 
-    if table.getn(SEH.status.ChimeraNonHMNumber3Icon) == 0 then
+    if table.getn(SEH.status.ChimeraNonHM_Number3Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.ChimeraNonHMNumber3Icon, 
+        table.insert(SEH.status.ChimeraNonHM_Number3Icon, 
           OSI.CreatePositionIcon(
-            SEH.data.chimera_nonhmnumber3_pos_list[i][1],
-            SEH.data.chimera_nonhmnumber3_pos_list[i][2],
-            SEH.data.chimera_nonhmnumber3_pos_list[i][3],
+            SEH.data.chimera_nonhm_number3_pos_list[i][1],
+            SEH.data.chimera_nonhm_number3_pos_list[i][2],
+            SEH.data.chimera_nonhm_number3_pos_list[i][3],
             "SanitysEdgeHelper/icons/3.dds",
             1 * OSI.GetIconSize()))
       end
     end
 
-    if table.getn(SEH.status.ChimeraNonHMNumber4Icon) == 0 then
+    if table.getn(SEH.status.ChimeraNonHM_Number4Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.ChimeraNonHMNumber4Icon, 
+        table.insert(SEH.status.ChimeraNonHM_Number4Icon, 
           OSI.CreatePositionIcon(
-            SEH.data.chimera_nonhmnumber4_pos_list[i][1],
-            SEH.data.chimera_nonhmnumber4_pos_list[i][2],
-            SEH.data.chimera_nonhmnumber4_pos_list[i][3],
+            SEH.data.chimera_nonhm_number4_pos_list[i][1],
+            SEH.data.chimera_nonhm_number4_pos_list[i][2],
+            SEH.data.chimera_nonhm_number4_pos_list[i][3],
             "SanitysEdgeHelper/icons/4.dds",
             1 * OSI.GetIconSize()))
       end
@@ -101,78 +101,78 @@ function SEH.Chimera.AddNonHMCrystalNumberIcons()
   end
 end
 
-function SEH.Chimera.RemoveNonHMCrystalNumberIcons()
-  SEH.DiscardPositionIconList(SEH.status.ChimeraNonHMNumber1Icon)
-  SEH.status.ChimeraNonHMNumber1Icon = {}
+function SEH.Chimera.RemoveNonHM_CrystalNumberIcons()
+  SEH.DiscardPositionIconList(SEH.status.ChimeraNonHM_Number1Icon)
+  SEH.status.ChimeraNonHM_Number1Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.ChimeraNonHMNumber2Icon)
-  SEH.status.ChimeraNonHMNumber2Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraNonHM_Number2Icon)
+  SEH.status.ChimeraNonHM_Number2Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.ChimeraNonHMNumber3Icon)
-  SEH.status.ChimeraNonHMNumber3Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraNonHM_Number3Icon)
+  SEH.status.ChimeraNonHM_Number3Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.ChimeraNonHMNumber4Icon)
-  SEH.status.ChimeraNonHMNumber4Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraNonHM_Number4Icon)
+  SEH.status.ChimeraNonHM_Number4Icon = {}
 end
 
-function SEH.Chimera.AddHMCrystalNumberIcons()
-  if SEH.savedVariables.showHMCrystalNumberIcons and SEH.hasOSI() then
+function SEH.Chimera.AddHM_CrystalNumberIcons()
+  if SEH.savedVariables.showHM_CrystalNumberIcons and SEH.hasOSI() then
 
-    if table.getn(SEH.status.ChimeraHMNumber1Icon) == 0 then
+    if table.getn(SEH.status.ChimeraHM_Number1Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.ChimeraHMNumber1Icon, 
+        table.insert(SEH.status.ChimeraHM_Number1Icon, 
           OSI.CreatePositionIcon(
-            SEH.data.chimera_hmnumber1_pos_list[i][1],
-            SEH.data.chimera_hmnumber1_pos_list[i][2],
-            SEH.data.chimera_hmnumber1_pos_list[i][3],
+            SEH.data.chimera_hm_number1_pos_list[i][1],
+            SEH.data.chimera_hm_number1_pos_list[i][2],
+            SEH.data.chimera_hm_number1_pos_list[i][3],
             "SanitysEdgeHelper/icons/1.dds",
             1 * OSI.GetIconSize()))
       end
     end
 
-    if table.getn(SEH.status.ChimeraHMNumber2Icon) == 0 then
+    if table.getn(SEH.status.ChimeraHM_Number2Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.ChimeraHMNumber2Icon, 
+        table.insert(SEH.status.ChimeraHM_Number2Icon, 
           OSI.CreatePositionIcon(
-            SEH.data.chimera_hmnumber2_pos_list[i][1],
-            SEH.data.chimera_hmnumber2_pos_list[i][2],
-            SEH.data.chimera_hmnumber2_pos_list[i][3],
+            SEH.data.chimera_hm_number2_pos_list[i][1],
+            SEH.data.chimera_hm_number2_pos_list[i][2],
+            SEH.data.chimera_hm_number2_pos_list[i][3],
             "SanitysEdgeHelper/icons/2.dds",
             1 * OSI.GetIconSize()))
       end
     end
 
-    if table.getn(SEH.status.ChimeraHMNumber3Icon) == 0 then
+    if table.getn(SEH.status.ChimeraHM_Number3Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.ChimeraHMNumber3Icon, 
+        table.insert(SEH.status.ChimeraHM_Number3Icon, 
           OSI.CreatePositionIcon(
-            SEH.data.chimera_hmnumber3_pos_list[i][1],
-            SEH.data.chimera_hmnumber3_pos_list[i][2],
-            SEH.data.chimera_hmnumber3_pos_list[i][3],
+            SEH.data.chimera_hm_number3_pos_list[i][1],
+            SEH.data.chimera_hm_number3_pos_list[i][2],
+            SEH.data.chimera_hm_number3_pos_list[i][3],
             "SanitysEdgeHelper/icons/3.dds",
             1 * OSI.GetIconSize()))
       end
     end
 
-    if table.getn(SEH.status.ChimeraHMNumber4Icon) == 0 then
+    if table.getn(SEH.status.ChimeraHM_Number4Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.ChimeraHMNumber4Icon, 
+        table.insert(SEH.status.ChimeraHM_Number4Icon, 
           OSI.CreatePositionIcon(
-            SEH.data.chimera_hmnumber4_pos_list[i][1],
-            SEH.data.chimera_hmnumber4_pos_list[i][2],
-            SEH.data.chimera_hmnumber4_pos_list[i][3],
+            SEH.data.chimera_hm_number4_pos_list[i][1],
+            SEH.data.chimera_hm_number4_pos_list[i][2],
+            SEH.data.chimera_hm_number4_pos_list[i][3],
             "SanitysEdgeHelper/icons/4.dds",
             1 * OSI.GetIconSize()))
       end
     end
 
-    if table.getn(SEH.status.ChimeraHMNumber5Icon) == 0 then
+    if table.getn(SEH.status.ChimeraHM_Number5Icon) == 0 then
       for i=1,3 do
-        table.insert(SEH.status.ChimeraHMNumber5Icon, 
+        table.insert(SEH.status.ChimeraHM_Number5Icon, 
           OSI.CreatePositionIcon(
-            SEH.data.chimera_hmnumber5_pos_list[i][1],
-            SEH.data.chimera_hmnumber5_pos_list[i][2],
-            SEH.data.chimera_hmnumber5_pos_list[i][3],
+            SEH.data.chimera_hm_number5_pos_list[i][1],
+            SEH.data.chimera_hm_number5_pos_list[i][2],
+            SEH.data.chimera_hm_number5_pos_list[i][3],
             "SanitysEdgeHelper/icons/5.dds",
             1 * OSI.GetIconSize()))
       end
@@ -180,19 +180,19 @@ function SEH.Chimera.AddHMCrystalNumberIcons()
   end
 end
 
-function SEH.Chimera.RemoveHMCrystalNumberIcons()
-  SEH.DiscardPositionIconList(SEH.status.ChimeraHMNumber1Icon)
-  SEH.status.ChimeraHMNumber1Icon = {}
+function SEH.Chimera.RemoveHM_CrystalNumberIcons()
+  SEH.DiscardPositionIconList(SEH.status.ChimeraHM_Number1Icon)
+  SEH.status.ChimeraHM_Number1Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.ChimeraHMNumber2Icon)
-  SEH.status.ChimeraHMNumber2Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraHM_Number2Icon)
+  SEH.status.ChimeraHM_Number2Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.ChimeraHMNumber3Icon)
-  SEH.status.ChimeraHMNumber3Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraHM_Number3Icon)
+  SEH.status.ChimeraHM_Number3Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.ChimeraHMNumber4Icon)
-  SEH.status.ChimeraHMNumber4Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraHM_Number4Icon)
+  SEH.status.ChimeraHM_Number4Icon = {}
 
-  SEH.DiscardPositionIconList(SEH.status.ChimeraHMNumber5Icon)
-  SEH.status.ChimeraHMNumber5Icon = {}
+  SEH.DiscardPositionIconList(SEH.status.ChimeraHM_Number5Icon)
+  SEH.status.ChimeraHM_Number5Icon = {}
 end
