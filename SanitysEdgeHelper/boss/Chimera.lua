@@ -2,8 +2,8 @@ SEH = SEH or {}
 local SEH = SEH
 SEH.Chimera = {}
 
-function SEH.Chimera.AddChimeraAddIcons()
-  if SEH.savedVariables.showChimeraAddIcons and SEH.hasOSI() then
+function SEH.Chimera.AddChimeraPortalIcons()
+  if SEH.savedVariables.showChimeraPortalIcons and SEH.hasOSI() then
 
     if table.getn(SEH.status.ChimeraWamasuIcon) == 0 then
       table.insert(SEH.status.ChimeraWamasuIcon, 
@@ -37,7 +37,7 @@ function SEH.Chimera.AddChimeraAddIcons()
   end
 end
 
-function SEH.Chimera.RemoveChimeraAddIcons()
+function SEH.Chimera.RemoveChimeraPortalIcons()
   SEH.DiscardPositionIconList(SEH.status.ChimeraWamasuIcon)
   SEH.status.ChimeraWamasuIcon = {}
 
@@ -48,8 +48,8 @@ function SEH.Chimera.RemoveChimeraAddIcons()
   SEH.status.ChimeraGryphonIcon = {}
 end
 
-function SEH.Chimera.AddNonHMCrystalNumberIcons()
-  if SEH.savedVariables.showNonHMCrystalNumberIcons and SEH.hasOSI() then
+function SEH.Chimera.AddNon_HM_CrystalNumberIcons()
+  if SEH.savedVariables.showNon_HM_CrystalNumberIcons and SEH.hasOSI() then
 
     if table.getn(SEH.status.ChimeraNonHMNumber1Icon) == 0 then
       for i=1,3 do
@@ -101,7 +101,7 @@ function SEH.Chimera.AddNonHMCrystalNumberIcons()
   end
 end
 
-function SEH.Chimera.RemoveNonHMCrystalNumberIcons()
+function SEH.Chimera.RemoveNon_HM_CrystalNumberIcons()
   SEH.DiscardPositionIconList(SEH.status.ChimeraNonHMNumber1Icon)
   SEH.status.ChimeraNonHMNumber1Icon = {}
 
@@ -115,8 +115,8 @@ function SEH.Chimera.RemoveNonHMCrystalNumberIcons()
   SEH.status.ChimeraNonHMNumber4Icon = {}
 end
 
-function SEH.Chimera.AddHMCrystalNumberIcons()
-  if SEH.savedVariables.showHMCrystalNumberIcons and SEH.hasOSI() then
+function SEH.Chimera.AddHM_CrystalNumberIcons()
+  if SEH.savedVariables.showHM_CrystalNumberIcons and SEH.hasOSI() then
 
     if table.getn(SEH.status.ChimeraHMNumber1Icon) == 0 then
       for i=1,3 do
@@ -180,7 +180,7 @@ function SEH.Chimera.AddHMCrystalNumberIcons()
   end
 end
 
-function SEH.Chimera.RemoveHMCrystalNumberIcons()
+function SEH.Chimera.RemoveHM_CrystalNumberIcons()
   SEH.DiscardPositionIconList(SEH.status.ChimeraHMNumber1Icon)
   SEH.status.ChimeraHMNumber1Icon = {}
 
