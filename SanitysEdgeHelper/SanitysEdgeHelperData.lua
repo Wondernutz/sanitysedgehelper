@@ -64,30 +64,51 @@ SEH.data    = {
   chimera_chimera_chain_lightning = 183858, --chimera chain lightning
   chimera_circuit_charge  = 199235, --debuff from chain lightning hit/spread
 
-  chimera_number1_pos_list = {
-    [1] = {171984,40350,238116},
-    [2] = {181899,40350,238230},
-    [3] = {191735,40350,238150},
+  chimera_nonhm_number1_pos_list = {
+    [1] = {189899,40350,237901}, --wamasu
+    [2] = {180032,40350,237903}, --lion
+    [3] = {170064,40350,237906}, --gryphon
   },
-  chimera_number2_pos_list = {
-    [1] = {172026,40350,242013},
-    [2] = {181903,40350,242085},
-    [3] = {191874,40350,242064},
+  chimera_nonhm_number2_pos_list = {
+    [1] = {192097,40350,240155}, --wamasu
+    [2] = {172287,40350,240129}, --lion
+    [3] = {182226,40350,240121}, --gryphon
   },
-  chimera_number3_pos_list = {
-    [1] = {170048,40350,242200},
-    [2] = {179948,40350,242203},
-    [3] = {189859,40350,242154},
+  chimera_nonhm_number3_pos_list = {
+    [1] = {189881,40350,242334}, --wamasu
+    [2] = {180031,40350,237903}, --lion
+    [3] = {170041,40350,242334}, --gryphon
   },
-  chimera_number4_pos_list = {
-    [1] = {168148,40350,242050},
-    [2] = {178072,40350,242011},
-    [3] = {187935,40350,242088},
+  chimera_nonhm_number4_pos_list = {
+    [1] = {187675,40350,240085}, --wamasu
+    [2] = {167838,40350,240080}, --lion
+    [3] = {177789,40350,240095}, --gryphon
   },
-  chimera_number5_pos_list = {
-    [1] = {168147,40350,238168},
-    [2] = {178065,40350,238175},
-    [3] = {187954,40350,238224},
+
+  chimera_hm_number1_pos_list = {
+    [1] = {171984,40350,238116}, --wamasu
+    [2] = {181899,40350,238230}, --lion
+    [3] = {191735,40350,238150}, --gryphon
+  },
+  chimera_hm_number2_pos_list = {
+    [1] = {172026,40350,242013}, --wamasu
+    [2] = {181903,40350,242085}, --lion
+    [3] = {191874,40350,242064}, --gryphon
+  },
+  chimera_hm_number3_pos_list = {
+    [1] = {189881,40350,242334}, --wamasu
+    [2] = {180031,40350,237903}, --lion
+    [3] = {170041,40350,242334}, --gryphon
+  },
+  chimera_hm_number4_pos_list = {
+    [1] = {168148,40350,242050}, --wamasu
+    [2] = {178072,40350,242011}, --lion
+    [3] = {187935,40350,242088}, --gryphon
+  },
+  chimera_hm_number5_pos_list = {
+    [1] = {168147,40350,238168}, --wamasu
+    [2] = {178065,40350,238175}, --lion
+    [3] = {187954,40350,238224}, --gryphon
   },
 
   -- TODO: Consider using UnpackRGBA(0xFFFFFFFF)

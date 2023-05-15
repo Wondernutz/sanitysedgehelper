@@ -28,18 +28,13 @@ SEH.status = {
   
   locked = true,
   
-  ChimeraWamasuIcon  = nil,
-  ChimeraLionIcon    = nil,
-  ChimeraGryphonIcon = nil,
-  ChimeraNumber1Icon = {},
-  ChimeraNumber2Icon = {},
-  ChimeraNumber3Icon = {},
-  ChimeraNumber4Icon = {},
-  ChimeraNumber5Icon = {},
+  ChimeraWamasuIcon    = {},
+  ChimeraLionIcon      = {},
+  ChimeraGryphonIcon   = {},
 
-  AnsuulGreenIcon  = nil,
-  AnsuulRedIcon    = nil,
-  AnsuulBlueIcon   = nil,
+  AnsuulGreenIcon      = {},
+  AnsuulRedIcon        = {},
+  AnsuulBlueIcon       = {},
 
   unitDamageTaken = {}, -- unitDamageTaken[unitId] = all damage events for a given id.
   --[[ TODO: Damage events to track:
@@ -64,8 +59,11 @@ SEH.settings = {
   showChains = false,
 
   -- Chimera
-  showHMCrystalNumberIcons = true,
+  showChimeraPortalIcons = true,
+  showNonHM_CrystalNumberIcons = true,
+  showHM_CrystalNumberIcons = true,
   -- Ansuul
+  showAnsuulCornerIcons = true,
   showSplitBossHP = false,
 
   -- Misc
@@ -286,14 +284,11 @@ function SEH.BossesChanged()
     SEH.status.isAnsuul = false
     SEH.status.isHMBoss = false
 
-    SEH.Chimera.RemoveWamasuIcon()
-    SEH.Chimera.RemoveLionIcon()
-    SEH.Chimera.RemoveGryphonIcon()
-    SEH.Chimera.RemoveHMCrystalNumberIcons()
+    SEH.Chimera.RemoveChimeraPortalIcons()
+    SEH.Chimera.RemoveNonHM_CrystalNumberIcons()
+    SEH.Chimera.RemoveHM_CrystalNumberIcons()
 
-    SEH.Ansuul.RemoveGreenIcon()
-    SEH.Ansuul.RemoveRedIcon()
-    SEH.Ansuul.RemoveBlueIcon()
+    SEH.Ansuul.RemoveAnsuulCornerIcons()
 
     local currentTargetHP, maxTargetHP, effmaxTargetHP = GetUnitPower("boss1", POWERTYPE_HEALTH)
     local hardmodeHealth = {
@@ -316,19 +311,17 @@ function SEH.BossesChanged()
     end
     if string.match(bossName, SEH.data.chimeraName) then
       SEH.status.isChimera = true
-      SEH.Chimera.AddWamasuIcon()
-      SEH.Chimera.AddLionIcon()
-      SEH.Chimera.AddGryphonIcon()
+      SEH.Chimera.AddChimeraPortalIcons()
       
       if SEH.status.isHMBoss then
-        SEH.Chimera.AddHMCrystalNumberIcons()
+        SEH.Chimera.AddHM_CrystalNumberIcons()
+      else
+        SEH.Chimera.AddNonHM_CrystalNumberIcons()
       end
     end
     if string.match(bossName, SEH.data.ansuulName) then
       SEH.status.isAnsuul = true
-      SEH.Ansuul.AddGreenIcon()
-      SEH.Ansuul.AddRedIcon()
-      SEH.Ansuul.AddBlueIcon()
+      SEH.Chimera.AddAnsuulCornerIcons()
     end
   end
 end

@@ -98,10 +98,26 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
+      name    = "Icon: Show Wamasu, Lion and Gryphon Portals",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showChimeraPortalIcons end,
+      setFunc = function(newValue) SEH.savedVariables.showChimeraPortalIcons = newValue end,
+      warning = requiresOSI
+    },
+    {
+      type    = "checkbox",
+      name    = "(Non-HM) Icon: Show Crystal Numbers",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showNonHM_CrystalNumberIcons end,
+      setFunc = function(newValue) SEH.savedVariables.showNonHM_CrystalNumberIcons = newValue end,
+      warning = requiresOSI
+    },
+    {
+      type    = "checkbox",
       name    = "(HM) Icon: Show Crystal Numbers",
       default = true,
-      getFunc = function() return SEH.savedVariables.showHMCrystalNumberIcons end,
-      setFunc = function(newValue) SEH.savedVariables.showHMCrystalNumberIcons = newValue end,
+      getFunc = function() return SEH.savedVariables.showHM_CrystalNumberIcons end,
+      setFunc = function(newValue) SEH.savedVariables.showHM_CrystalNumberIcons = newValue end,
       warning = requiresOSI
     },
     {
@@ -111,6 +127,14 @@ function SEH.Menu.AddonMenu()
       type = "header",
       name = "Ansuul",
       reference = "AnsuulHeader"
+    },
+    {
+      type    = "checkbox",
+      name    = "Icon: Show Poison, Fire, Lightning Maze Corners",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showAnsuulCornerIcons end,
+      setFunc = function(newValue) SEH.savedVariables.showAnsuulCornerIcons = newValue end,
+      warning = requiresOSI
     },
     {
       type    = "checkbox",
