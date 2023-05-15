@@ -59,6 +59,7 @@ SEH.data    = {
   chimera_inferno_debuff1 = 198613, --inferno debuff before sunburst
   chimera_inferno_debuff2 = 186953, --inferno debuff before sunburst
   chimera_inferno_debuff3 = 186952, --inferno debuff before sunburst
+  chimera_inferno_meteor  = 198613, --meteors for sunburst
   chimera_sunburst        = 1.6   , --sunburst right after inferno debuff
   chimera_chimera_chain_lightning = 183858, --chimera chain lightning
   chimera_circuit_charge  = 199235, --debuff from chain lightning hit/spread
