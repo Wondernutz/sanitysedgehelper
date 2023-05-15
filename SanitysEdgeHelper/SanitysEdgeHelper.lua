@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.4.3"
+SEH.version  = "0.4.4"
 SEH.author   = "@Wondernuts"
 SEH.active   = false
 
@@ -92,49 +92,41 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   
   if abilityId == SEH.data.hindered_effect then
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
-  end
 
-  if abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge then
+  elseif abilityId == SEH.data.yaseyla_wamasu_charge or abilityId == SEH.data.trash_wamasu_charge then
     SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, abilityId)
-  end
 
   -- Yaseyla
-  if abilityId == SEH.data.yaseyla_frost_bomb_target then
+  elseif abilityId == SEH.data.yaseyla_frost_bomb_target then
     SEH.Yaseyla.FrostBombTarget(result, targetType, targetUnitId, hitValue)
-  end
 
-  if abilityId == SEH.data.yaseyla_frost_bomb_applied or abilityId == SEH.data.yaseyla_frost_bomb_applied_2 then
+  elseif abilityId == SEH.data.yaseyla_frost_bomb_applied or abilityId == SEH.data.yaseyla_frost_bomb_applied_2 then
     SEH.Yaseyla.FrostBombApplied(result, targetUnitId, hitValue)
-  end
 
-  if abilityId == SEH.data.yaseyla_ignite then
+  elseif abilityId == SEH.data.yaseyla_ignite then
     SEH.Yaseyla.Ignite(result, targetUnitId, hitValue)
-  end
 
-  if abilityId == SEH.data.yaseyla_deflect then
+  elseif abilityId == SEH.data.yaseyla_deflect then
     SEH.Yaseyla.Shrapnel(result, hitValue)
-  end
 
-  if abilityId == SEH.data.yaseyla_fire_bombs then
+  elseif abilityId == SEH.data.yaseyla_fire_bombs then
     SEH.Yaseyla.FireBombs(result, targetType, hitValue)
-  end
 
-  if abilityId == SEH.data.yaseyla_chain_pull then
+  elseif abilityId == SEH.data.yaseyla_chain_pull then
     SEH.Yaseyla.ChainPull(result, targetType, hitValue)
-  end
 
   -- Chimera/Chimera
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_inferno then
+  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_inferno then
     SEH.Alert("", "Sunbursts", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-  end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_bolt and hitValue > 500 then
+  elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION and abilityId == SEH.data.chimera_inferno_meteor and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, { -3, 0, false, { 1, 0.4, 0, 0.5 } })
+
+  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_bolt and hitValue > 500 then
     SEH.Alert("Chimera", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
-  end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_chain_lightning and hitValue > 1000 then
+  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_chain_lightning and hitValue > 1000 then
     SEH.Alert("Chimera", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-  end
 
   --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_wamasu_impending_storm then
   --  SEH.Alert("Ascendant Wamasu", "Impending Storm", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
@@ -144,47 +136,38 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   --  SEH.Alert("Ascendant Wamasu", "Repulsion Shock", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   --end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_gryphon_wind_lance then
+  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_gryphon_wind_lance then
     SEH.Alert("Ascendant Gryphon", "Wind Lance", 0xD1F1F9FF, abilityId, SOUNDS.BATTLEGROUND_CAPTURE_FLAG_RETURNED, hitValue)
-  end
 
-  if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.chimera_mantle_wamasu and targetType == COMBAT_UNIT_TYPE_PLAYER then
+  elseif result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.chimera_mantle_wamasu and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Wamasu Portal", 0x02FF00FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 5000)
-  end
 
-  if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.chimera_mantle_lion and targetType == COMBAT_UNIT_TYPE_PLAYER then
+  elseif result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.chimera_mantle_lion and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Lion Portal", 0xFF0000FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 5000)
-  end
 
-  if result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.chimera_mantle_gryphon and targetType == COMBAT_UNIT_TYPE_PLAYER then
+  elseif result == ACTION_RESULT_EFFECT_GAINED and abilityId == SEH.data.chimera_mantle_gryphon and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Gryphon Portal", 0x0005FFFF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 5000)
-  end
 
   -- Ansuul
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
+  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Sunburst (self)", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, {-2, 0})
-  end
+    CombatAlerts.AlertCast(abilityId, sourceName, hitValue, { -3, 0, false, { 1, 0.4, 0, 0.5 } })
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
+  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
     SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
-  end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
+  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
     local offset = 2000
     SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue + offset)
     CombatAlerts.AlertCast(abilityId, abilityName, hitValue + offset, {-2, 1})
-  end
 
-  if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
+  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
     SEH.Alert("", "Execute (INTERRUPT)", 0xFF0033FF, abilityId, SOUNDS.DUEL_START, hitValue)
-  end
 
-  if abilityId == SEH.data.ansuul_poisoned_mind then
+  elseif abilityId == SEH.data.ansuul_poisoned_mind then
     SEH.Ansuul.Poisoned_Mind(result, targetType, targetUnitId, hitValue)
-  end
 
-  if abilityId == SEH.data.ansuul_manic_phobia then
+  elseif abilityId == SEH.data.ansuul_manic_phobia then
     SEH.Ansuul.Manic_Phobia(result, targetType, targetUnitId, hitValue)
   end
 end
@@ -201,6 +184,7 @@ function SEH.UpdateTick(gameTimeMs)
   if IsUnitInCombat("boss1") then
     if not SEH.status.inCombat then
       -- If it switched from non-combat to combat, re-check boss names.
+      SEH.BossesChanged()
     end
     SEH.status.inCombat = true
   end
