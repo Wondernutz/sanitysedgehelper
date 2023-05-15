@@ -66,7 +66,7 @@ SEH.data    = {
   chimera_nonhm_number1_pos_list = {
     [1] = {189899,40350,237901}, --wamasu
     [2] = {180032,40350,237903}, --lion
-    [3] = {180064,40350,238017}, --gryphon
+    [3] = {170064,40350,237906}, --gryphon
   },
   chimera_nonhm_number2_pos_list = {
     [1] = {192097,40350,240155}, --wamasu
@@ -75,7 +75,7 @@ SEH.data    = {
   },
   chimera_nonhm_number3_pos_list = {
     [1] = {189881,40350,242334}, --wamasu
-    [2] = {179986,40350,242334}, --lion
+    [2] = {180031,40350,237903}, --lion
     [3] = {170041,40350,242334}, --gryphon
   },
   chimera_nonhm_number4_pos_list = {
@@ -96,7 +96,7 @@ SEH.data    = {
   },
   chimera_hm_number3_pos_list = {
     [1] = {189881,40350,242334}, --wamasu
-    [2] = {179986,40350,242334}, --lion
+    [2] = {180031,40350,237903}, --lion
     [3] = {170041,40350,242334}, --gryphon
   },
   chimera_hm_number4_pos_list = {
