@@ -1,9 +1,9 @@
 ## Title: Sanity's Edge Helper
 ## Description: Additional alerts for Sanity's Edge
-## Author: @Wondernuts
+## Author: @Wondernuts @kabs12
 ## DependsOn: CombatAlerts LibAddonMenu-2.0
 ## OptionalDependsOn: OdySupportIcons 
-## Version: 0.4.4
+## Version: 0.5.0
 ## APIVersion: 101035 101036
 ## SavedVariables: SanitysEdgeHelperSavedVariables
 
