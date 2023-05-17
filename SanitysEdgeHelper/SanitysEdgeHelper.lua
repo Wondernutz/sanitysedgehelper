@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.5.0"
+SEH.version  = "0.5.1"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -191,12 +191,15 @@ function SEH.UpdateTick(gameTimeMs)
     SEH.status.inCombat = true
   end
 
+  SEH:Trace(1, string.format("UpdateTick in combat: %b", SEH.status.inCombat))
+
   if SEH.status.inCombat == false then
     return
   end
   
   -- Boss 1: Yaseyla
   if SEH.status.isYaseyla then
+    SEH:Trace(1, "isYaseyla UpdateTick")
     SEH.Yaseyla.UpdateTick(timeSec)
   end
 
@@ -230,6 +233,7 @@ function SEH.CombatState(eventCode, inCombat)
   if inCombat then
     SEH.status.inCombat = true
     SEH.ResetStatus()
+    SEH.BossesChanged()
   else
     SEH.ClearUIOutOfCombat()
   end
@@ -270,14 +274,7 @@ function SEH.BossesChanged()
     "Boss change. Name = " .. bossName .. ". Last boss name = " .. lastBossName
   ))
   if bossName ~= nil then
-    if SEH.status.currentBoss == SEH.data.ansuulName and bossName == "" then
-      -- Do not reset Ansuul for empty, this helps the clearing on wipes.
-    else
-      if bossName ~= SEH.status.currentBoss then
-        --d("[SEH] Boss change. Name = " .. bossName)
-      end
-      SEH.status.currentBoss = bossName
-    end
+    SEH.status.currentBoss = bossName
     
     SEH.status.isYaseyla = false
     SEH.status.isChimera = false
