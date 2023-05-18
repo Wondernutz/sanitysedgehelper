@@ -20,7 +20,7 @@ SEH.data    = {
   yaseyla_shrapnel_duration = 11,
   yaseyla_shrapnel_thresholds = {81, 55, 25},
 
-  yaseyla_firebombs_first_cd = 9, -- how soon the first firebomb can be cast
+  yaseyla_firebombs_first_cd = 8.5, -- how soon the first firebomb can be cast
   yaseyla_firebombs_preexecute_cd = 23.5, -- how often it can cast firebombs pre-execute
   yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
   yaseyla_firebombs_execute_threshold = 26.5, -- the execute threshold after which it casts firebombs more often
