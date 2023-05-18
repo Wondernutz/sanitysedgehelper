@@ -191,7 +191,7 @@ function SEH.UpdateTick(gameTimeMs)
     SEH.status.inCombat = true
   end
 
-  SEH:Trace(1, string.format("UpdateTick in combat: %b", SEH.status.inCombat))
+  SEH:Trace(1, "UpdateTick in combat:", SEH.status.inCombat)
 
   if SEH.status.inCombat == false then
     return
