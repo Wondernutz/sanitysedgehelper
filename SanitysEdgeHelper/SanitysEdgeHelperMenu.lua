@@ -89,6 +89,13 @@ function SEH.Menu.AddonMenu()
       setFunc = function(newValue) SEH.savedVariables.showChains = newValue end,
     },
     {
+      type    = "checkbox",
+      name    = "Large Firebombs Countdown",
+      default = false,
+      getFunc = function() return SEH.savedVariables.showFirebombsLarge end,
+      setFunc = function(newValue) SEH.savedVariables.showFirebombsLarge = newValue end,
+    },
+    {
       type = "divider",
     },
     {

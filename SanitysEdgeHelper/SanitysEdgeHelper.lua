@@ -55,6 +55,7 @@ SEH.settings = {
   -- Yaseyla
   showShrapnel = true,
   showFirebombs = true,
+  showFirebombsLarge = false,
   showFrostbombs = false,
   showChains = false,
 
