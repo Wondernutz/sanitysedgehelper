@@ -4,7 +4,7 @@ SEH.Yaseyla = {}
 
 function SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, abilityId)
   if result == ACTION_RESULT_BEGIN then
-    SEH.Alert("Wamasu", string.format("Charge -> %s", SEH.GetNameForId(targetUnitId)), 0xFFD666FF, abilityId, SOUNDS.BATTLEGROUND_CAPTURE_FLAG_RETURNED, hitValue)
+    SEH.Alert("Wamasu", string.format("Charge -> %s", SEH.GetNameForId(targetUnitId)), 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
     CombatAlerts.AlertCast(abilityId, "", hitValue, {-2, 1})
   end
 end
@@ -163,7 +163,7 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
   -- Firebombs on HM is cast at every ~24s before execute, and every ~12s in execute.
   SEHStatusLabelYaseyla2:SetHidden(not SEH.savedVariables.showFirebombs)
   SEHStatusLabelYaseyla2Value:SetHidden(not SEH.savedVariables.showFirebombs)
-
+  
   local firebombsDelta = timeSec - SEH.status.yaseylaLastFirebombs
 
   local currentHealthPercentage = SEH.Yaseyla.CurrentHealthPercentage()
@@ -177,7 +177,12 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
   end
 
-  SEHStatusLabelYaseyla2Value:SetText(SEH.GetSecondsRemainingString(firebombsTimeLeft))
+  SEHMessage1:SetHidden(not SEH.savedVariables.showFirebombsLarge or firebombsTimeLeft > 5)
+  SEHMessage1Label:SetHidden(not SEH.savedVariables.showFirebombsLarge or firebombsTimeLeft > 5)
+
+  local secondsRemaining = SEH.GetSecondsRemainingString(firebombsTimeLeft)
+  SEHStatusLabelYaseyla2Value:SetText(secondsRemaining)
+  SEHMessage1Label:SetText(string.format("FIREBOMBS: %s", secondsRemaining))
 end
 
 function SEH.Yaseyla.UpdateFrostbombsTick(timeSec)

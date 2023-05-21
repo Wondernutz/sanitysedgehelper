@@ -6,8 +6,8 @@
       <OnMoveStop>SEH.OnSEHMessage1Move()</OnMoveStop>
 
       <Controls>
-        <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|144|soft-shadow-thick" inheritAlpha="true" color="99CCFF"
-            wrapMode="TRUNCATE" verticalAlignment="TOP" horizontalAlignment="CENTER" text="MESSAGE ONE">
+        <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|144|soft-shadow-thick" inheritAlpha="true" color="FF6600"
+            wrapMode="TRUNCATE" verticalAlignment="TOP" horizontalAlignment="CENTER" text="FIREBOMBS: 5.0">
           <Anchor point="TOP" relativeTo="$(parent)" relativePoint="TOP" />
         </Label>
       </Controls>

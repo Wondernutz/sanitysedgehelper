@@ -111,6 +111,7 @@ end
 
 function SEH.HideAllUI(hide)
   SEHMessage1:SetHidden(hide)
+  SEHMessage1Label:SetHidden(hide)
   SEHMessage2:SetHidden(hide)
   SEHMessage3:SetHidden(hide)
   SEHStatus:SetHidden(hide)
