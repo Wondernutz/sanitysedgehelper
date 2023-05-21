@@ -177,12 +177,12 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
   end
 
-  SEHMessage1:SetHidden(not SEH.savedVariables.showFirebombsLarge and firebombsTimeLeft > 5)
-  SEHMessage1Label:SetHidden(not SEH.savedVariables.showFirebombsLarge and firebombsTimeLeft > 5)
+  SEHMessage1:SetHidden(not SEH.savedVariables.showFirebombsLarge or firebombsTimeLeft > 5)
+  SEHMessage1Label:SetHidden(not SEH.savedVariables.showFirebombsLarge or firebombsTimeLeft > 5)
 
   local secondsRemaining = SEH.GetSecondsRemainingString(firebombsTimeLeft)
   SEHStatusLabelYaseyla2Value:SetText(secondsRemaining)
-  SEHMessage1Label:SetText(string.format("FIREBOMBS: %.1f", secondsRemaining))
+  SEHMessage1Label:SetText(string.format("FIREBOMBS: %s", secondsRemaining))
 end
 
 function SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
