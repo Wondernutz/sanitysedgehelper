@@ -127,7 +127,7 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "(Non-HM) Icon: Show Crystal Numbers",
+      name    = "Icon: Show Crystal Numbers (Non-HM)",
       default = true,
       getFunc = function() return SEH.savedVariables.showNonHM_CrystalNumberIcons end,
       setFunc = function(newValue) SEH.savedVariables.showNonHM_CrystalNumberIcons = newValue end,
@@ -135,7 +135,7 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "(HM) Icon: Show Crystal Numbers",
+      name    = "Icon: Show Crystal Numbers (HM)",
       default = true,
       getFunc = function() return SEH.savedVariables.showHM_CrystalNumberIcons end,
       setFunc = function(newValue) SEH.savedVariables.showHM_CrystalNumberIcons = newValue end,
