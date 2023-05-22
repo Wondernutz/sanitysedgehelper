@@ -319,7 +319,7 @@ function SEH.BossesChanged()
     end
     if string.match(bossName, SEH.data.ansuulName) then
       SEH.status.isAnsuul = true
-      SEH.Chimera.AddAnsuulCornerIcons()
+      SEH.Ansuul.AddAnsuulCornerIcons()
     end
   end
 end

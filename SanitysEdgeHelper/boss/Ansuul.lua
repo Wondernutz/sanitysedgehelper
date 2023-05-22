@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 SEH.Ansuul = {}
 
-function SEH.Chimera.AddAnsuulCornerIcons()
+function SEH.Ansuul.AddAnsuulCornerIcons()
   if SEH.savedVariables.showAnsuulCornerIcons and SEH.hasOSI() then
 
     if table.getn(SEH.status.AnsuulGreenIcon) == 0 then
