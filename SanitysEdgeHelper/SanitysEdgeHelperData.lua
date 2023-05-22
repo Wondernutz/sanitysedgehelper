@@ -63,6 +63,12 @@ SEH.data    = {
   chimera_sunburst        = 1.6   , --sunburst right after inferno debuff
   chimera_chimera_chain_lightning = 183858, --chimera chain lightning
   chimera_circuit_charge  = 199235, --debuff from chain lightning hit/spread
+  chimera_petrify = 185038, --chimera petrify (despawn)
+
+  chimera_despawn_cd = 90, -- secs till Chimera despawns from time of spawn
+
+  chimera_chain_lightning_first_cd = 5, -- how soon the first chain lightning can be cast
+  chimera_chain_lightning_cd = 20, -- how often Chimera casts chain lightning
 
   chimera_nonhm_number1_pos_list = {
     [1] = {189899,40350,237901}, --wamasu

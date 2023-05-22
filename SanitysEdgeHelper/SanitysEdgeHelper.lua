@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.5.3"
+SEH.version  = "0.6.0"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -25,6 +25,11 @@ SEH.status = {
   yaseylaIsFirstFrostbombs = true,
   yaseylaIsFirstChains = true,
   yaseylaShrapnelCount = 0,
+
+  chimeraSpawned = false,
+  chimeraSpawnTime = 0,
+  chimeraLastChainLightning = 0,
+  chimeraIsFirstChainLightning = true,
   
   locked = true,
   
@@ -60,12 +65,14 @@ SEH.settings = {
   showChains = false,
 
   -- Chimera
+  showChimeraDespawnTimer = true,
+  showChainLightning = true,
   showChimeraPortalIcons = true,
   showNonHM_CrystalNumberIcons = true,
   showHM_CrystalNumberIcons = true,
+
   -- Ansuul
   showAnsuulCornerIcons = true,
-  showSplitBossHP = false,
 
   -- Misc
   uiCustomScale = 1,
@@ -124,8 +131,11 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_bolt and hitValue > 500 then
     SEH.Alert("Chimera", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
 
-  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_chain_lightning and hitValue > 1000 then
-    SEH.Alert("Chimera", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  elseif abilityId == SEH.data.chimera_chimera_chain_lightning then
+    SEH.Chimera.ChainLightning(result, targetType, hitValue)
+
+  elseif abilityId == SEH.data.chimera_petrify then
+    SEH.Chimera.Petrify(result, targetType, hitValue)
 
   --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_wamasu_impending_storm then
   --  SEH.Alert("Ascendant Wamasu", "Impending Storm", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
@@ -204,10 +214,10 @@ function SEH.UpdateTick(gameTimeMs)
     SEH.Yaseyla.UpdateTick(timeSec)
   end
 
-  -- Boss 3: Ansuul (disabled, not working)
-  --if SEH.status.isAnsuul then
-  --  SEH.Ansuul.UpdateTick(timeSec)
-  --end
+  -- Boss 2: Chimera
+  if SEH.status.isChimera then
+    SEH.Chimera.UpdateTick(timeSec)
+  end
 
 end
 
@@ -253,6 +263,11 @@ function SEH.ResetStatus()
   SEH.status.yaseylaIsFirstFrostbombs = true
   SEH.status.yaseylaIsFirstChains = true
   SEH.status.yaseylaShrapnelCount = 0
+
+  SEH.status.chimeraSpawned = false
+  SEH.status.chimeraSpawnTime = 0
+  SEH.status.chimeraLastChainLightning = GetGameTimeSeconds()
+  SEH.status.chimeraIsFirstChainLightning = true
 
   SEH.status.mainTankTag = ""
 end
@@ -306,8 +321,7 @@ function SEH.BossesChanged()
 
     if string.match(bossName, SEH.data.yaseylaName) then
       SEH.status.isYaseyla = true
-    end
-    if string.match(bossName, SEH.data.chimeraName) then
+    elseif string.match(bossName, SEH.data.chimeraName) then
       SEH.status.isChimera = true
       SEH.Chimera.AddChimeraPortalIcons()
       
@@ -316,8 +330,7 @@ function SEH.BossesChanged()
       else
         SEH.Chimera.AddNonHM_CrystalNumberIcons()
       end
-    end
-    if string.match(bossName, SEH.data.ansuulName) then
+    elseif string.match(bossName, SEH.data.ansuulName) then
       SEH.status.isAnsuul = true
       SEH.Ansuul.AddAnsuulCornerIcons()
     end
