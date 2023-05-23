@@ -134,7 +134,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   elseif abilityId == SEH.data.chimera_chimera_chain_lightning then
     SEH.Chimera.ChainLightning(result, targetType, hitValue)
 
-  elseif abilityId == SEH.data.chimera_petrify then
+  elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION and abilityId == SEH.data.chimera_vivify then
+    SEH.Chimera.Vivify(result, targetType, hitValue)
+
+  elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION and abilityId == SEH.data.chimera_petrify then
     SEH.Chimera.Petrify(result, targetType, hitValue)
 
   --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_wamasu_impending_storm then

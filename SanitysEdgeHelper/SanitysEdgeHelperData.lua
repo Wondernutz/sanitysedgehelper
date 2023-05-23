@@ -63,7 +63,8 @@ SEH.data    = {
   chimera_sunburst        = 1.6   , --sunburst right after inferno debuff
   chimera_chimera_chain_lightning = 183858, --chimera chain lightning
   chimera_circuit_charge  = 199235, --debuff from chain lightning hit/spread
-  chimera_petrify = 185038, --chimera petrify (despawn)
+  chimera_vivify = 186000, --chimera vivify (spawn)
+  chimera_petrify = 185039, --chimera petrify (despawn)
 
   chimera_despawn_cd = 90, -- secs till Chimera despawns from time of spawn
 

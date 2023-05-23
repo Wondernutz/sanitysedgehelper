@@ -205,11 +205,15 @@ function SEH.Chimera.ChainLightning(result, targetType, hitValue)
   end
 end
 
+function SEH.Chimera.Vivify(result, targetType, hitValue)
+  SEH.status.chimeraSpawned = true
+  SEH.status.chimeraIsFirstChainLightning = true
+  SEH.status.chimeraSpawnTime = GetGameTimeSeconds()
+  SEH.status.chimeraLastChainLightning = GetGameTimeSeconds()
+end
+
 function SEH.Chimera.Petrify(result, targetType, hitValue)
-  zo_callLater(function()
-    SEH.status.chimeraSpawned = false
-    SEH.status.chimeraIsFirstChainLightning = true
-  end, 3500)
+  SEH.status.chimeraSpawned = false
 end
 
 function SEH.Chimera.UpdateTick(timeSec)
@@ -219,36 +223,30 @@ function SEH.Chimera.UpdateTick(timeSec)
 end
 
 function SEH.Chimera.UpdateDespawnTick(timeSec)
-  if not SEH.status.chimeraSpawned then
-    if IsUnitInCombat("boss1") then -- boss1 should be Chimera, if we're on the 2nd boss fight
-      SEH.status.chimeraSpawned = true
-      SEH.status.chimeraSpawnTime = timeSec
-      SEH.status.chimeraLastChainLightning = timeSec
-    end
-  end
+  SEHStatusLabelChimera1:SetHidden(not SEH.status.chimeraSpawned or not SEH.savedVariables.showChimeraDespawnTimer)
+  SEHStatusLabelChimera1Value:SetHidden(not SEH.status.chimeraSpawned or not SEH.savedVariables.showChimeraDespawnTimer)
 
   if SEH.status.chimeraSpawned then
     local timeSinceSpawn = timeSec - SEH.status.chimeraSpawnTime
     local despawnTimeLeft = SEH.data.chimera_despawn_cd - timeSinceSpawn
     SEHStatusLabelChimera1Value:SetText(SEH.GetSecondsRemainingString(despawnTimeLeft))
   end
-
-  SEHStatusLabelChimera1:SetHidden(not SEH.status.chimeraSpawned or not SEH.savedVariables.showChimeraDespawnTimer)
-  SEHStatusLabelChimera1Value:SetHidden(not SEH.status.chimeraSpawned or not SEH.savedVariables.showChimeraDespawnTimer)
 end
 
 function SEH.Chimera.UpdateChainLightningTick(timeSec)
   SEHStatusLabelChimera2:SetHidden(not SEH.status.chimeraSpawned or not SEH.savedVariables.showChainLightning)
   SEHStatusLabelChimera2Value:SetHidden(not SEH.status.chimeraSpawned or not SEH.savedVariables.showChainLightning)
   
-  local timeSinceLastChainLightning = timeSec - SEH.status.chimeraLastChainLightning
+  if SEH.status.chimeraSpawned then
+    local timeSinceLastChainLightning = timeSec - SEH.status.chimeraLastChainLightning
 
-  local chainLightningTimeLeft = 0
-  if SEH.status.chimeraIsFirstChainLightning then
-    chainLightningTimeLeft = SEH.data.chimera_chain_lightning_first_cd - timeSinceLastChainLightning
-  else
-    chainLightningTimeLeft = SEH.data.chimera_chain_lightning_cd - timeSinceLastChainLightning
+    local chainLightningTimeLeft = 0
+    if SEH.status.chimeraIsFirstChainLightning then
+      chainLightningTimeLeft = SEH.data.chimera_chain_lightning_first_cd - timeSinceLastChainLightning
+    else
+      chainLightningTimeLeft = SEH.data.chimera_chain_lightning_cd - timeSinceLastChainLightning
+    end
+
+    SEHStatusLabelChimera2Value:SetText(SEH.GetSecondsRemainingString(chainLightningTimeLeft))
   end
-
-  SEHStatusLabelChimera2Value:SetText(SEH.GetSecondsRemainingString(chainLightningTimeLeft))
 end
