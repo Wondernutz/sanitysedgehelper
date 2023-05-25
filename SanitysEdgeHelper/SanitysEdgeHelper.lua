@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.6.0"
+SEH.version  = "0.6.1"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -90,11 +90,11 @@ end
 
 function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
   -- Debug ability casts of NPCs (unit type None)
-  if result == ACTION_RESULT_BEGIN and sourceType == COMBAT_UNIT_TYPE_NONE then
-    SEH:Trace(3, string.format(
-      "Ability: %s, ID: %d, Hit Value: %d, Source name: %s, Target name: %s", abilityName, abilityId, hitValue, sourceName, targetName
-    ))
-  end
+  --if result == ACTION_RESULT_BEGIN and sourceType == COMBAT_UNIT_TYPE_NONE then
+  --  SEH:Trace(3, string.format(
+  --    "Ability: %s, ID: %d, Hit Value: %d, Source name: %s, Target name: %s", abilityName, abilityId, hitValue, sourceName, targetName
+  --  ))
+  --end
   
   if abilityId == SEH.data.hindered_effect then
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
@@ -184,12 +184,6 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 end
 
-function SEH.UpdateSlowTick(gameTimeMs)
-  if IsUnitInCombat("player") then
-    return
-  end
-end
-
 function SEH.UpdateTick(gameTimeMs)
   local timeSec = GetGameTimeSeconds()
 
@@ -205,15 +199,12 @@ function SEH.UpdateTick(gameTimeMs)
     SEH.status.inCombat = true
   end
 
-  SEH:Trace(1, "UpdateTick in combat:", SEH.status.inCombat)
-
   if SEH.status.inCombat == false then
     return
   end
   
   -- Boss 1: Yaseyla
   if SEH.status.isYaseyla then
-    SEH:Trace(1, "isYaseyla UpdateTick")
     SEH.Yaseyla.UpdateTick(timeSec)
   end
 
@@ -369,18 +360,16 @@ function SEH.PlayerActivated()
   EVENT_MANAGER:RegisterForEvent(SEH.name .. "BossChange", EVENT_BOSSES_CHANGED, SEH.BossesChanged)
   
   -- Combat state
-  EVENT_MANAGER:UnregisterForEvent(SEH.name .. "CombatState", EVENT_PLAYER_COMBAT_STATE , SEH.CombatState)
-  EVENT_MANAGER:RegisterForEvent(SEH.name .. "CombatState", EVENT_PLAYER_COMBAT_STATE , SEH.CombatState)
+  EVENT_MANAGER:UnregisterForEvent(SEH.name .. "CombatState", EVENT_PLAYER_COMBAT_STATE, SEH.CombatState)
+  EVENT_MANAGER:RegisterForEvent(SEH.name .. "CombatState", EVENT_PLAYER_COMBAT_STATE, SEH.CombatState)
   
   -- Death state
-  EVENT_MANAGER:UnregisterForEvent(SEH.name .. "DeathState", EVENT_UNIT_DEATH_STATE_CHANGED , SEH.DeathState)
-  EVENT_MANAGER:RegisterForEvent(SEH.name .. "DeathState", EVENT_UNIT_DEATH_STATE_CHANGED , SEH.DeathState)
+  EVENT_MANAGER:UnregisterForEvent(SEH.name .. "DeathState", EVENT_UNIT_DEATH_STATE_CHANGED, SEH.DeathState)
+  EVENT_MANAGER:RegisterForEvent(SEH.name .. "DeathState", EVENT_UNIT_DEATH_STATE_CHANGED, SEH.DeathState)
   
   -- Ticks
-  EVENT_MANAGER:RegisterForUpdate(SEH.name.."UpdateTick", 
-    1000/10, function(gameTimeMs) SEH.UpdateTick(gameTimeMs) end)
-  EVENT_MANAGER:RegisterForUpdate(SEH.name.."UpdateSlowTick", 
-    1000, function(gameTimeMs) SEH.UpdateSlowTick(gameTimeMs) end)
+  EVENT_MANAGER:UnregisterForUpdate(SEH.name.."UpdateTick")
+  EVENT_MANAGER:RegisterForUpdate(SEH.name.."UpdateTick", 1000/10, SEH.UpdateTick)
 end
 
 function SEH.OnAddonLoaded(event, addonName)
