@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.6.1"
+SEH.version  = "0.6.2"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -134,7 +134,7 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   elseif abilityId == SEH.data.chimera_chimera_chain_lightning then
     SEH.Chimera.ChainLightning(result, targetType, hitValue)
 
-  elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION and abilityId == SEH.data.chimera_vivify then
+  elseif result == ACTION_RESULT_EFFECT_FADED and abilityId == SEH.data.chimera_vivify then
     SEH.Chimera.Vivify(result, targetType, hitValue)
 
   elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION and abilityId == SEH.data.chimera_petrify then

@@ -66,7 +66,7 @@ SEH.data    = {
   chimera_vivify = 186000, --chimera vivify (spawn)
   chimera_petrify = 185039, --chimera petrify (despawn)
 
-  chimera_despawn_cd = 93, -- secs till Chimera despawns from time of spawn
+  chimera_despawn_cd = 92, -- secs till Chimera despawns from time of spawn
 
   chimera_chain_lightning_first_cd = 5, -- how soon the first chain lightning can be cast
   chimera_chain_lightning_cd = 20, -- how often Chimera casts chain lightning
