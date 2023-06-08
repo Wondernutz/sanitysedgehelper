@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.5.3"
+SEH.version  = "0.6.3"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -25,6 +25,11 @@ SEH.status = {
   yaseylaIsFirstFrostbombs = true,
   yaseylaIsFirstChains = true,
   yaseylaShrapnelCount = 0,
+
+  chimeraSpawned = false,
+  chimeraSpawnTime = 0,
+  chimeraLastChainLightning = 0,
+  chimeraIsFirstChainLightning = true,
   
   locked = true,
   
@@ -60,12 +65,14 @@ SEH.settings = {
   showChains = false,
 
   -- Chimera
+  showChimeraDespawnTimer = true,
+  showChainLightning = true,
   showChimeraPortalIcons = true,
   showNonHM_CrystalNumberIcons = true,
   showHM_CrystalNumberIcons = true,
+
   -- Ansuul
   showAnsuulCornerIcons = true,
-  showSplitBossHP = false,
 
   -- Misc
   uiCustomScale = 1,
@@ -83,11 +90,11 @@ end
 
 function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
   -- Debug ability casts of NPCs (unit type None)
-  if result == ACTION_RESULT_BEGIN and sourceType == COMBAT_UNIT_TYPE_NONE then
-    SEH:Trace(3, string.format(
-      "Ability: %s, ID: %d, Hit Value: %d, Source name: %s, Target name: %s", abilityName, abilityId, hitValue, sourceName, targetName
-    ))
-  end
+  --if result == ACTION_RESULT_BEGIN and sourceType == COMBAT_UNIT_TYPE_NONE then
+  --  SEH:Trace(3, string.format(
+  --    "Ability: %s, ID: %d, Hit Value: %d, Source name: %s, Target name: %s", abilityName, abilityId, hitValue, sourceName, targetName
+  --  ))
+  --end
   
   if abilityId == SEH.data.hindered_effect then
     SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
@@ -124,8 +131,14 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_bolt and hitValue > 500 then
     SEH.Alert("Chimera", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
 
-  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_chain_lightning and hitValue > 1000 then
-    SEH.Alert("Chimera", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  elseif abilityId == SEH.data.chimera_chimera_chain_lightning then
+    SEH.Chimera.ChainLightning(result, targetType, hitValue)
+
+  elseif result == ACTION_RESULT_EFFECT_FADED and abilityId == SEH.data.chimera_vivify then
+    SEH.Chimera.Vivify(result, targetType, hitValue)
+
+  elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION and abilityId == SEH.data.chimera_petrify then
+    SEH.Chimera.Petrify(result, targetType, hitValue)
 
   --if result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_wamasu_impending_storm then
   --  SEH.Alert("Ascendant Wamasu", "Impending Storm", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
@@ -171,12 +184,6 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   end
 end
 
-function SEH.UpdateSlowTick(gameTimeMs)
-  if IsUnitInCombat("player") then
-    return
-  end
-end
-
 function SEH.UpdateTick(gameTimeMs)
   local timeSec = GetGameTimeSeconds()
 
@@ -192,22 +199,19 @@ function SEH.UpdateTick(gameTimeMs)
     SEH.status.inCombat = true
   end
 
-  SEH:Trace(1, "UpdateTick in combat:", SEH.status.inCombat)
-
   if SEH.status.inCombat == false then
     return
   end
   
   -- Boss 1: Yaseyla
   if SEH.status.isYaseyla then
-    SEH:Trace(1, "isYaseyla UpdateTick")
     SEH.Yaseyla.UpdateTick(timeSec)
   end
 
-  -- Boss 3: Ansuul (disabled, not working)
-  --if SEH.status.isAnsuul then
-  --  SEH.Ansuul.UpdateTick(timeSec)
-  --end
+  -- Boss 2: Chimera
+  if SEH.status.isChimera then
+    SEH.Chimera.UpdateTick(timeSec)
+  end
 
 end
 
@@ -253,6 +257,11 @@ function SEH.ResetStatus()
   SEH.status.yaseylaIsFirstFrostbombs = true
   SEH.status.yaseylaIsFirstChains = true
   SEH.status.yaseylaShrapnelCount = 0
+
+  SEH.status.chimeraSpawned = false
+  SEH.status.chimeraSpawnTime = 0
+  SEH.status.chimeraLastChainLightning = GetGameTimeSeconds()
+  SEH.status.chimeraIsFirstChainLightning = true
 
   SEH.status.mainTankTag = ""
 end
@@ -306,8 +315,7 @@ function SEH.BossesChanged()
 
     if string.match(bossName, SEH.data.yaseylaName) then
       SEH.status.isYaseyla = true
-    end
-    if string.match(bossName, SEH.data.chimeraName) then
+    elseif string.match(bossName, SEH.data.chimeraName) then
       SEH.status.isChimera = true
       SEH.Chimera.AddChimeraPortalIcons()
       
@@ -316,10 +324,9 @@ function SEH.BossesChanged()
       else
         SEH.Chimera.AddNonHM_CrystalNumberIcons()
       end
-    end
-    if string.match(bossName, SEH.data.ansuulName) then
+    elseif string.match(bossName, SEH.data.ansuulName) then
       SEH.status.isAnsuul = true
-      SEH.Chimera.AddAnsuulCornerIcons()
+      SEH.Ansuul.AddAnsuulCornerIcons()
     end
   end
 end
@@ -353,18 +360,16 @@ function SEH.PlayerActivated()
   EVENT_MANAGER:RegisterForEvent(SEH.name .. "BossChange", EVENT_BOSSES_CHANGED, SEH.BossesChanged)
   
   -- Combat state
-  EVENT_MANAGER:UnregisterForEvent(SEH.name .. "CombatState", EVENT_PLAYER_COMBAT_STATE , SEH.CombatState)
-  EVENT_MANAGER:RegisterForEvent(SEH.name .. "CombatState", EVENT_PLAYER_COMBAT_STATE , SEH.CombatState)
+  EVENT_MANAGER:UnregisterForEvent(SEH.name .. "CombatState", EVENT_PLAYER_COMBAT_STATE, SEH.CombatState)
+  EVENT_MANAGER:RegisterForEvent(SEH.name .. "CombatState", EVENT_PLAYER_COMBAT_STATE, SEH.CombatState)
   
   -- Death state
-  EVENT_MANAGER:UnregisterForEvent(SEH.name .. "DeathState", EVENT_UNIT_DEATH_STATE_CHANGED , SEH.DeathState)
-  EVENT_MANAGER:RegisterForEvent(SEH.name .. "DeathState", EVENT_UNIT_DEATH_STATE_CHANGED , SEH.DeathState)
+  EVENT_MANAGER:UnregisterForEvent(SEH.name .. "DeathState", EVENT_UNIT_DEATH_STATE_CHANGED, SEH.DeathState)
+  EVENT_MANAGER:RegisterForEvent(SEH.name .. "DeathState", EVENT_UNIT_DEATH_STATE_CHANGED, SEH.DeathState)
   
   -- Ticks
-  EVENT_MANAGER:RegisterForUpdate(SEH.name.."UpdateTick", 
-    1000/10, function(gameTimeMs) SEH.UpdateTick(gameTimeMs) end)
-  EVENT_MANAGER:RegisterForUpdate(SEH.name.."UpdateSlowTick", 
-    1000, function(gameTimeMs) SEH.UpdateSlowTick(gameTimeMs) end)
+  EVENT_MANAGER:UnregisterForUpdate(SEH.name.."UpdateTick")
+  EVENT_MANAGER:RegisterForUpdate(SEH.name.."UpdateTick", 1000/10, SEH.UpdateTick)
 end
 
 function SEH.OnAddonLoaded(event, addonName)

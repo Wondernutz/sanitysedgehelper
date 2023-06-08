@@ -23,7 +23,7 @@ SEH.data    = {
   yaseyla_firebombs_first_cd = 8.5, -- how soon the first firebomb can be cast
   yaseyla_firebombs_preexecute_cd = 23.5, -- how often it can cast firebombs pre-execute
   yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
-  yaseyla_firebombs_execute_threshold = 26.5, -- the execute threshold after which it casts firebombs more often
+  yaseyla_firebombs_execute_threshold = 26, -- the execute threshold after which it casts firebombs more often
 
   yaseyla_frostbombs_first_cd = 17, -- how soon the first frostbombs can be cast
   yaseyla_frostbombs_cd = 25, -- how soon it can CAST frostbombs from the last bomb EXPLOSION
@@ -63,6 +63,13 @@ SEH.data    = {
   chimera_sunburst        = 1.6   , --sunburst right after inferno debuff
   chimera_chimera_chain_lightning = 183858, --chimera chain lightning
   chimera_circuit_charge  = 199235, --debuff from chain lightning hit/spread
+  chimera_vivify = 186000, --chimera vivify (spawn)
+  chimera_petrify = 185039, --chimera petrify (despawn)
+
+  chimera_despawn_cd = 92, -- secs till Chimera despawns from time of spawn
+
+  chimera_chain_lightning_first_cd = 5, -- how soon the first chain lightning can be cast
+  chimera_chain_lightning_cd = 20, -- how often Chimera casts chain lightning
 
   chimera_nonhm_number1_pos_list = {
     [1] = {189899,40350,237901}, --wamasu

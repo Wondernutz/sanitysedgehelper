@@ -105,6 +105,20 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
+      name    = "Panel: Chimera despawn timer",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showChimeraDespawnTimer end,
+      setFunc = function(newValue) SEH.savedVariables.showChimeraDespawnTimer = newValue end,
+    },
+    {
+      type    = "checkbox",
+      name    = "Panel: Chain Lightning timer",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showChainLightning end,
+      setFunc = function(newValue) SEH.savedVariables.showChainLightning = newValue end,
+    },
+    {
+      type    = "checkbox",
       name    = "Icon: Show Wamasu, Lion and Gryphon Portals",
       default = true,
       getFunc = function() return SEH.savedVariables.showChimeraPortalIcons end,
@@ -113,7 +127,7 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "(Non-HM) Icon: Show Crystal Numbers",
+      name    = "Icon: Show Crystal Numbers (Non-HM)",
       default = true,
       getFunc = function() return SEH.savedVariables.showNonHM_CrystalNumberIcons end,
       setFunc = function(newValue) SEH.savedVariables.showNonHM_CrystalNumberIcons = newValue end,
@@ -121,7 +135,7 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "(HM) Icon: Show Crystal Numbers",
+      name    = "Icon: Show Crystal Numbers (HM)",
       default = true,
       getFunc = function() return SEH.savedVariables.showHM_CrystalNumberIcons end,
       setFunc = function(newValue) SEH.savedVariables.showHM_CrystalNumberIcons = newValue end,
@@ -142,13 +156,6 @@ function SEH.Menu.AddonMenu()
       getFunc = function() return SEH.savedVariables.showAnsuulCornerIcons end,
       setFunc = function(newValue) SEH.savedVariables.showAnsuulCornerIcons = newValue end,
       warning = requiresOSI
-    },
-    {
-      type    = "checkbox",
-      name    = "Panel: Show Split Bosses HP (NOT FUNCTIONAL)",
-      default = false,
-      getFunc = function() return SEH.savedVariables.showSplitBossHP end,
-      setFunc = function(newValue) SEH.savedVariables.showSplitBossHP = newValue end,
     },
     {
       type = "divider",

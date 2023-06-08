@@ -99,10 +99,6 @@ function SEH.Yaseyla.CurrentHealthPercentage()
 end
 
 function SEH.Yaseyla.UpdateTick(timeSec)
-  if not SEH.status.isHMBoss then
-    return
-  end
-
   SEHStatus:SetHidden(not (SEH.savedVariables.showShrapnel or SEH.savedVariables.showFirebombs or SEH.savedVariables.showFrostbombs or SEH.savedVariables.showChains))
   SEH.Yaseyla.UpdateShrapnelTick(timeSec)
   SEH.Yaseyla.UpdateFirebombsTick(timeSec)
