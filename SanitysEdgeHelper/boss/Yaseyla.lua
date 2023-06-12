@@ -4,7 +4,7 @@ SEH.Yaseyla = {}
 
 function SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, abilityId)
   if result == ACTION_RESULT_BEGIN then
-    SEH.Alert("Wamasu", string.format("Charge -> %s", SEH.GetNameForId(targetUnitId)), 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    --SEH.Alert("Wamasu", string.format("Charge -> %s", SEH.GetNameForId(targetUnitId)), 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
     CombatAlerts.AlertCast(abilityId, "", hitValue, {-2, 1})
   end
 end
@@ -27,9 +27,9 @@ function SEH.Yaseyla.Hindered(result, targetUnitId, hitValue)
 end
 
 function SEH.Yaseyla.FrostBombTarget(result, targetType, targetUnitId, hitValue)
-  if targetType == COMBAT_UNIT_TYPE_PLAYER then
-    SEH.Alert("", "Frost Bomb (self)", 0x66CCFFFF, SEH.data.yaseyla_frost_bomb_target, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-  end
+  --if targetType == COMBAT_UNIT_TYPE_PLAYER then
+    --SEH.Alert("", "Frost Bomb (self)", 0x66CCFFFF, SEH.data.yaseyla_frost_bomb_target, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  --end
   if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
     SEH.AddIconForDuration(
       SEH.GetTagForId(targetUnitId),
@@ -78,7 +78,7 @@ function SEH.Yaseyla.FireBombs(result, targetType, hitValue)
   if result == ACTION_RESULT_BEGIN then
     SEH.status.yaseylaLastFirebombs = GetGameTimeSeconds()
     SEH.status.yaseylaIsFirstFirebombs = false
-    SEH.Alert("", "Fire Bombs", 0xFF6600FF, SEH.data.yaseyla_fire_bombs, SOUNDS.OBJECTIVE_DISCOVERED, 1500)
+    --SEH.Alert("", "Fire Bombs", 0xFF6600FF, SEH.data.yaseyla_fire_bombs, SOUNDS.OBJECTIVE_DISCOVERED, 1500)
 
     if targetType == COMBAT_UNIT_TYPE_PLAYER then
       CombatAlerts.AlertCast(SEH.data.yaseyla_fire_bombs, "Fire Bombs", hitValue, {-2, 0})
@@ -100,7 +100,10 @@ end
 
 function SEH.Yaseyla.UpdateTick(timeSec)
   SEHStatus:SetHidden(not (SEH.savedVariables.showShrapnel or SEH.savedVariables.showFirebombs or SEH.savedVariables.showFrostbombs or SEH.savedVariables.showChains))
-  SEH.Yaseyla.UpdateShrapnelTick(timeSec)
+
+  if SEH.status.isHMBoss then
+    SEH.Yaseyla.UpdateShrapnelTick(timeSec)
+  end
   SEH.Yaseyla.UpdateFirebombsTick(timeSec)
   SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
   SEH.Yaseyla.UpdateChainsTick(timeSec)

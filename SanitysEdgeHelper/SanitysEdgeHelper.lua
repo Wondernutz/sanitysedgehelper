@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "0.6.3"
+SEH.version  = "1.0.0"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -122,11 +122,11 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.ChainPull(result, targetType, hitValue)
 
   -- Chimera/Chimera
-  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_inferno then
-    SEH.Alert("", "Sunbursts", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+  --elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_inferno then
+    --SEH.Alert("", "Sunbursts", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
 
-  elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION and abilityId == SEH.data.chimera_inferno_meteor and targetType == COMBAT_UNIT_TYPE_PLAYER then
-    CombatAlerts.AlertCast(abilityId, abilityName, hitValue, { -3, 0, false, { 1, 0.4, 0, 0.5 } })
+  --elseif result == ACTION_RESULT_EFFECT_GAINED_DURATION and abilityId == SEH.data.chimera_inferno_meteor and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    --CombatAlerts.AlertCast(abilityId, abilityName, hitValue, { -3, 0, false, { 1, 0.4, 0, 0.5 } })
 
   elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.chimera_chimera_bolt and hitValue > 500 then
     SEH.Alert("Chimera", "Lightning Bolts", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
@@ -163,7 +163,7 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   -- Ansuul
   elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_sunburst and targetType == COMBAT_UNIT_TYPE_PLAYER then
     SEH.Alert("", "Sunburst (self)", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
-    CombatAlerts.AlertCast(abilityId, sourceName, hitValue, { -3, 0, false, { 1, 0.4, 0, 0.5 } })
+    --CombatAlerts.AlertCast(abilityId, sourceName, hitValue, { -3, 0, false, { 1, 0.4, 0, 0.5 } })
 
   elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
     SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)

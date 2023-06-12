@@ -16,7 +16,7 @@ function SEH.Menu.AddonMenu()
   local dataTable = {
     {
       type = "description",
-      text = "Trial timers, alerts and indicators for Sanity's Edge.",
+      text = "Trial timers, alerts and indicators for Sanity's Edge. This version requires Code's Combat Alerts 1.16.1 or higher, and removes notifications already present in CCA 1.16.1.",
     },
     {
       type = "divider",
