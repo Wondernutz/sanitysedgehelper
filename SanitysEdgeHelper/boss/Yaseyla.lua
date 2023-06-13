@@ -116,8 +116,8 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
 
   -- Shrapnel
   local shrapnelDelta = timeSec - SEH.status.yaseylaLastShrapnel
-  -- Time left for next cast in execute
-  local shrapnelTimeLeftExecute = SEH.data.yaseyla_shrapnel_execute_cd - shrapnelDelta
+  -- Time left for next cast
+  local shrapnelTimeLeft = SEH.data.yaseyla_shrapnel_cd - shrapnelDelta
   -- Time left of damage
   local shrapnelDamageTimeLeft = SEH.data.yaseyla_shrapnel_duration - shrapnelDelta
 
@@ -142,6 +142,11 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
     if percentageToNextShrapnel <= 0 then
       displayText = "INC"
     end
+
+    if shrapnelTimeLeft > 0 then
+      displayText = displayText .. " / " .. SEH.GetSecondsRemainingString(shrapnelTimeLeft)
+    end
+
     SEHStatusLabelYaseyla1Value:SetColor(
       SEH.data.color.orange[1],
       SEH.data.color.orange[2],
@@ -154,7 +159,7 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
       SEH.data.color.orange[1],
       SEH.data.color.orange[2],
       SEH.data.color.orange[3])
-    SEHStatusLabelYaseyla1Value:SetText(SEH.GetSecondsRemainingString(shrapnelTimeLeftExecute))
+    SEHStatusLabelYaseyla1Value:SetText(SEH.GetSecondsRemainingString(shrapnelTimeLeft))
   end
 end
 

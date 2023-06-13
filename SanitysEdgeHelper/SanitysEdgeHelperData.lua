@@ -16,7 +16,7 @@ SEH.data    = {
   yaseyla_wamasu_charge = 191133,
   yaseyla_archer_true_shot = 184802,
 
-  yaseyla_shrapnel_execute_cd = 52, -- how often it can cast shrapnel in execute
+  yaseyla_shrapnel_cd = 52, -- how often it can cast shrapnel
   yaseyla_shrapnel_duration = 11,
   yaseyla_shrapnel_thresholds = {81, 55, 25},
 
