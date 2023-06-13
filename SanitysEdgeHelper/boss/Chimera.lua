@@ -201,7 +201,7 @@ function SEH.Chimera.ChainLightning(result, targetType, hitValue)
   if result == ACTION_RESULT_BEGIN and hitValue > 1000 then
     SEH.status.chimeraLastChainLightning = GetGameTimeSeconds()
     SEH.status.chimeraIsFirstChainLightning = false
-    SEH.Alert("Chimera", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
+    --SEH.Alert("Chimera", "Chain Lightning", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
   end
 end
 
