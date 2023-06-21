@@ -16,11 +16,11 @@ SEH.data    = {
   yaseyla_wamasu_charge = 191133,
   yaseyla_archer_true_shot = 184802,
 
-  yaseyla_shrapnel_execute_cd = 52, -- how often it can cast shrapnel in execute
+  yaseyla_shrapnel_cd = 52, -- how often it can cast shrapnel
   yaseyla_shrapnel_duration = 11,
   yaseyla_shrapnel_thresholds = {81, 55, 25},
 
-  yaseyla_firebombs_first_cd = 8.5, -- how soon the first firebomb can be cast
+  yaseyla_firebombs_first_cd = 7.5, -- how soon the first firebomb can be cast
   yaseyla_firebombs_preexecute_cd = 23.5, -- how often it can cast firebombs pre-execute
   yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
   yaseyla_firebombs_execute_threshold = 26, -- the execute threshold after which it casts firebombs more often
