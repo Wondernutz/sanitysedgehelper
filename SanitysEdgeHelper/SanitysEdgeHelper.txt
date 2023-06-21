@@ -3,8 +3,8 @@
 ## Author: @Wondernuts @kabs12
 ## DependsOn: CombatAlerts LibAddonMenu-2.0
 ## OptionalDependsOn: OdySupportIcons 
-## Version: 1.0.1
-## APIVersion: 101035 101036
+## Version: 1.1.0
+## APIVersion: 101038 101039
 ## SavedVariables: SanitysEdgeHelperSavedVariables
 
 SanitysEdgeHelper.lua
@@ -16,3 +16,6 @@ boss/Yaseyla.lua
 boss/Chimera.lua
 boss/Ansuul.lua
 SanitysEdgeHelper.xml
+
+Lang/en.lua
+Lang/$(language).lua

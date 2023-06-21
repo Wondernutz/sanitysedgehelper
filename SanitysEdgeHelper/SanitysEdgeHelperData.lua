@@ -139,9 +139,10 @@ SEH.data    = {
 
   -- Boss names.
   -- String lower, to make sure changes here keep strings in lowercase.
-  yaseylaName = string.lower("Exarchanic Yaseyla"),
-  chimeraName = string.lower("Chimera"),
-  ansuulName = string.lower("Ansuul the Tormentor"),
+  yaseylaName = string.lower(GetString(SEH_Yaseyla)),	--modded
+--  twelvaneName = string.lower(GetString(SEH_Twelvane)), -- modded, not used
+  chimeraName = string.lower(GetString(SEH_Chimera)),	--modded
+  ansuulName = string.lower(GetString(SEH_Ansuul)),		--modded
 
   --default_color = { 1, 0.7, 0, 0.5 },
   dodgeDuration = GetAbilityDuration(28549),
