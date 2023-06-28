@@ -343,8 +343,7 @@ function SEH.PlayerActivated()
   end
 
   if not SEH.active and not SEH.savedVariables.hideWelcome then
-	d(GetString(SEH_InitMSG))	--modded
---    d("|cFF6200[SEH] Thanks for using Sanity Edge Helper " .. SEH.version ..".|r Please send issues on discord Wondernuts#1973")
+    d(GetString(SEH_InitMSG))
   end
   SEH.active = true
   SEHStatusLabelAddonName:SetText("Sanity's Edge Helper " .. SEH.version)

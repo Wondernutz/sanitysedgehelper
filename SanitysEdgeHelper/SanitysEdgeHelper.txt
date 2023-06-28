@@ -7,6 +7,9 @@
 ## APIVersion: 101038 101039
 ## SavedVariables: SanitysEdgeHelperSavedVariables
 
+Lang/en.lua
+Lang/$(language).lua
+
 SanitysEdgeHelper.lua
 SanitysEdgeHelperData.lua
 SanitysEdgeHelperUI.lua
@@ -16,6 +19,3 @@ boss/Yaseyla.lua
 boss/Chimera.lua
 boss/Ansuul.lua
 SanitysEdgeHelper.xml
-
-Lang/en.lua
-Lang/$(language).lua
