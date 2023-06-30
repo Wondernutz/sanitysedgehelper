@@ -1,7 +1,7 @@
 ﻿local strings = {
 	SEH_LANG = "en",
 	
-	SEH_InitMSG			=		"|cBFBC99[|r|c02fcffSEH|r|cBFBC99]:|r|cb8dbdd Thanks for using Sanity Edge Helper. Please send issues on discord|r Wondernuts#1973",
+	SEH_InitMSG			=		"|cBFBC99[|r|c02fcffSEH|r|cBFBC99]:|r|cb8dbdd Thanks for using Sanity Edge Helper. Please send issues on discord to|r wondernuts",
 	
 	SEH_Yaseyla			=		"Exarchanic Yaseyla",
 	SEH_Twelvane		=		"Archwizard Twelvane",
