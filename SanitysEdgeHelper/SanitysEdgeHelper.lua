@@ -30,6 +30,10 @@ SEH.status = {
   chimeraSpawnTime = 0,
   chimeraLastChainLightning = 0,
   chimeraIsFirstChainLightning = true,
+
+  ansuulSpawned = false,
+  ansuulLastCalamity = 0,
+  ansuulIsFirstCalamity = true,
   
   locked = true,
   
@@ -73,6 +77,7 @@ SEH.settings = {
 
   -- Ansuul
   showAnsuulCornerIcons = true,
+  showAnsuulCalamityTimer = true,
 
   -- Misc
   uiCustomScale = 1,
@@ -181,6 +186,16 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
 
   elseif abilityId == SEH.data.ansuul_manic_phobia then
     SEH.Ansuul.Manic_Phobia(result, targetType, targetUnitId, hitValue)
+
+  elseif abilityId == SEH.data.ansuul_calamity then
+    SEH.Ansuul.Calamity(result, targetType, targetUnitId, hitValue)
+
+  elseif abilityId == SEH.data.ansuul_the_ritual then
+    SEH.Ansuul.TheRitual(result, targetType, hitValue)
+
+  elseif abilityId == SEH.data.ansuul_breakdown then
+    SEH.Ansuul.Breakdown(result, targetType, hitValue)
+
   end
 end
 
@@ -262,6 +277,10 @@ function SEH.ResetStatus()
   SEH.status.chimeraSpawnTime = 0
   SEH.status.chimeraLastChainLightning = GetGameTimeSeconds()
   SEH.status.chimeraIsFirstChainLightning = true
+
+  SEH.status.ansuulSpawned = true
+  SEH.status.ansuulLastCalamity = GetGameTimeSeconds()
+  SEH.status.ansuulIsFirstCalamity = true
 
   SEH.status.mainTankTag = ""
 end

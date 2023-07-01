@@ -44,8 +44,14 @@ SEH.data    = {
   ansuul_poisoned_mind = 184710,
   ansuul_manic_phobia = 185117,
 
+  ansuul_the_ritual = 183855, -- the buff ansuul gains during the maze
+  ansuul_breakdown = 188760, -- the buff ansuul gains during triplet phase
+
+  ansuul_calamity_first_cd = 10, -- how soon the first calamity can be cast
+  ansuul_calamity_cd = 25, -- how often ansuul can cast calamity
+
   hindered_effect = 165972,
-  
+
   -- Chimera
   chimera_mantle_wamasu   = 184984, --green portal buff
   chimera_mantle_lion     = 184983, --red portal buff
