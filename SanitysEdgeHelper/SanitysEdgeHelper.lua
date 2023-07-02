@@ -228,6 +228,11 @@ function SEH.UpdateTick(gameTimeMs)
     SEH.Chimera.UpdateTick(timeSec)
   end
 
+  -- Boss 3: Ansuul
+  if SEH.status.isAnsuul then
+    SEH.Ansuul.UpdateTick(timeSec)
+  end
+
 end
 
 function SEH.DeathState(event, unitTag, isDead)

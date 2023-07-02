@@ -103,6 +103,11 @@ function SEH.Ansuul.Breakdown(result, targetType, targetUnitId, hitValue)
   end
 end
 
+function SEH.Ansuul.UpdateTick(timeSec)
+  SEHStatus:SetHidden(not SEH.savedVariables.showAnsuulCalamityTimer)
+  SEH.Ansuul.UpdateCalamityTick(timeSec)
+end
+
 function SEH.Ansuul.UpdateCalamityTick(timeSec)
   SEHStatusLabelAnsuul1:SetHidden(not SEH.status.ansuulSpawned or not SEH.savedVariables.showAnsuulCalamityTimer)
   SEHStatusLabelAnsuul1Value:SetHidden(not SEH.status.ansuulSpawned or not SEH.savedVariables.showAnsuulCalamityTimer)
