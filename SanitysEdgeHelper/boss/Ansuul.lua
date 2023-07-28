@@ -69,3 +69,59 @@ function SEH.Ansuul.Manic_Phobia(result, targetType, targetUnitId, hitValue)
     --SEH.Alert("Manic Phobia", SEH.GetNameForId(targetUnitId), 0x303B4CFF, SEH.data.ansuul_manic_phobia, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
   --end
 end
+
+function SEH.Ansuul.Calamity(result, targetType, targetUnitId, hitValue)
+  if result == ACTION_RESULT_BEGIN then
+    SEH.status.ansuulIsFirstCalamity = false
+    SEH.status.ansuulLastCalamity = GetGameTimeSeconds()
+  end
+end
+
+function SEH.Ansuul.TheRitual(result, targetType, targetUnitId, hitValue)
+  if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
+    -- Maze starts
+    SEH.status.ansuulSpawned = false
+    
+  elseif result == ACTION_RESULT_EFFECT_FADED then
+    -- Maze ends
+    SEH.status.ansuulSpawned = true
+    SEH.status.ansuulLastCalamity = GetGameTimeSeconds()
+    SEH.status.ansuulIsFirstCalamity = true
+  end
+end
+
+function SEH.Ansuul.Breakdown(result, targetType, targetUnitId, hitValue)
+  if result == ACTION_RESULT_EFFECT_GAINED_DURATION then
+    -- Triplet phase starts, red clone performs the calamity move
+    SEH.status.ansuulLastCalamity = GetGameTimeSeconds()
+    SEH.status.ansuulIsFirstCalamity = true
+    
+  elseif result == ACTION_RESULT_EFFECT_FADED then
+    -- Triplet phase ends
+    SEH.status.ansuulLastCalamity = GetGameTimeSeconds()
+    SEH.status.ansuulIsFirstCalamity = true
+  end
+end
+
+function SEH.Ansuul.UpdateTick(timeSec)
+  SEHStatus:SetHidden(not SEH.savedVariables.showAnsuulCalamityTimer)
+  SEH.Ansuul.UpdateCalamityTick(timeSec)
+end
+
+function SEH.Ansuul.UpdateCalamityTick(timeSec)
+  SEHStatusLabelAnsuul1:SetHidden(not SEH.status.ansuulSpawned or not SEH.savedVariables.showAnsuulCalamityTimer)
+  SEHStatusLabelAnsuul1Value:SetHidden(not SEH.status.ansuulSpawned or not SEH.savedVariables.showAnsuulCalamityTimer)
+
+  if SEH.status.ansuulSpawned then
+    local calamityDelta = timeSec - SEH.status.ansuulLastCalamity
+
+    local calamityTimeLeft = 0
+    if SEH.status.ansuulIsFirstCalamity then
+      calamityTimeLeft = SEH.data.ansuul_calamity_first_cd - calamityDelta
+    else
+      calamityTimeLeft = SEH.data.ansuul_calamity_cd - calamityDelta
+    end
+
+    SEHStatusLabelAnsuul1Value:SetText(SEH.GetSecondsRemainingString(calamityTimeLeft))
+  end
+end

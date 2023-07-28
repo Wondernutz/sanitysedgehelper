@@ -158,6 +158,13 @@ function SEH.Menu.AddonMenu()
       warning = requiresOSI
     },
     {
+      type    = "checkbox",
+      name    = "Panel: Calamity timer",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showAnsuulCalamityTimer end,
+      setFunc = function(newValue) SEH.savedVariables.showAnsuulCalamityTimer = newValue end,
+    },
+    {
       type = "divider",
     },
     {

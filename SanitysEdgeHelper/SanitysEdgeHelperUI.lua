@@ -135,6 +135,12 @@ function SEH.HideAllUI(hide)
   SEHStatusLabelChimera1Value:SetHidden(hide)
   SEHStatusLabelChimera2:SetHidden(hide)
   SEHStatusLabelChimera2Value:SetHidden(hide)
+
+  -- Ansuul
+  SEHStatusLabelAnsuul1:SetHidden(hide)
+  SEHStatusLabelAnsuul1Value:SetHidden(hide)
+  SEHStatusLabelAnsuul2:SetHidden(hide)
+  SEHStatusLabelAnsuul2Value:SetHidden(hide)
 end
 
 
