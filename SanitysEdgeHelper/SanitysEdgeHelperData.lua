@@ -10,9 +10,8 @@ SEH.data    = {
   yaseyla_fire_bombs = 183660,
   yaseyla_chain_pull = 184540,
   yaseyla_ignite = 188188,
-  yaseyla_frost_bomb_target = 185404, --185403,
-  yaseyla_frost_bomb_applied = 185403,
-  yaseyla_frost_bomb_applied_2 = 183783,
+  yaseyla_frost_bomb_target = { 183768, 185392 },
+  yaseyla_frost_bomb_applied = { 185403, 183783 },
   yaseyla_wamasu_charge = 191133,
   yaseyla_archer_true_shot = 184802,
 
@@ -45,9 +44,9 @@ SEH.data    = {
   ansuul_manic_phobia = 185117,
 
   ansuul_the_ritual = 183855, -- the buff ansuul gains during the maze
-  ansuul_breakdown = 188760, -- the buff ansuul gains during triplet phase
+  ansuul_breakdown = { 188760, 188766, 188769 }, -- the buff ansuul gains during triplet phase
 
-  ansuul_calamity_first_cd = 10, -- how soon the first calamity can be cast
+  ansuul_calamity_first_cd = 9, -- how soon the first calamity can be cast
   ansuul_calamity_cd = 25, -- how often ansuul can cast calamity
 
   hindered_effect = 165972,

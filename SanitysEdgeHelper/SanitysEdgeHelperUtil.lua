@@ -230,6 +230,16 @@ function SEH.Alert( textMinor, textMajor, color, icon, sound, duration )
 	return(id)
 end
 
+function SEH.HasValue(table, val)
+  for index, value in ipairs(table) do
+    if value == val then
+      return true
+    end
+  end
+
+  return false
+end
+
 -- Debug functions
 
 function SEH.GroupNames()
