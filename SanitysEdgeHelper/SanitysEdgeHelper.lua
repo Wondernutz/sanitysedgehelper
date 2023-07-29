@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "1.1.1"
+SEH.version  = "1.1.2"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -108,10 +108,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, abilityId)
 
   -- Yaseyla
-  elseif abilityId == SEH.data.yaseyla_frost_bomb_target then
-    SEH.Yaseyla.FrostBombTarget(result, targetType, targetUnitId, hitValue)
+  --elseif SEH.HasValue(SEH.data.yaseyla_frost_bomb_target, abilityId) then
+  --  SEH.Yaseyla.FrostBombTarget(result, targetType, targetUnitId, hitValue)
 
-  elseif abilityId == SEH.data.yaseyla_frost_bomb_applied or abilityId == SEH.data.yaseyla_frost_bomb_applied_2 then
+  elseif SEH.HasValue(SEH.data.yaseyla_frost_bomb_applied, abilityId) then
     SEH.Yaseyla.FrostBombApplied(result, targetUnitId, hitValue)
 
   elseif abilityId == SEH.data.yaseyla_ignite then
@@ -191,10 +191,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
     SEH.Ansuul.Calamity(result, targetType, targetUnitId, hitValue)
 
   elseif abilityId == SEH.data.ansuul_the_ritual then
-    SEH.Ansuul.TheRitual(result, targetType, hitValue)
+    SEH.Ansuul.TheRitual(result, targetType, targetUnitId, hitValue)
 
-  elseif abilityId == SEH.data.ansuul_breakdown then
-    SEH.Ansuul.Breakdown(result, targetType, hitValue)
+  elseif SEH.HasValue(SEH.data.ansuul_breakdown, abilityId) then
+    SEH.Ansuul.Breakdown(result, targetType, targetUnitId, hitValue)
 
   end
 end
