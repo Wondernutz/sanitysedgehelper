@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "1.1.2"
+SEH.version  = "1.2.0"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -178,10 +178,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
     SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
 
-  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
-    local offset = 2000
-    SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue + offset)
-    CombatAlerts.AlertCast(abilityId, abilityName, hitValue + offset, {-2, 1})
+  --elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
+  --  local offset = 2000
+  --  SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue + offset)
+  --  CombatAlerts.AlertCast(abilityId, abilityName, hitValue + offset, {-2, 1})
 
   elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
     SEH.Alert("", "Execute (INTERRUPT)", 0xFF0033FF, abilityId, SOUNDS.DUEL_START, hitValue)
