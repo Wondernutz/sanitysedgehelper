@@ -78,6 +78,7 @@ SEH.settings = {
   -- Ansuul
   showAnsuulCornerIcons = true,
   showAnsuulCalamityTimer = true,
+  showSplitBossHP = true,
 
   -- Misc
   uiCustomScale = 1,
@@ -91,6 +92,10 @@ function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTa
   -- EFFECT_RESULT_GAINED = 1
   -- EFFECT_RESULT_FADED = 2
   -- EFFECT_RESULT_UPDATED = 3
+
+  if SEH.status.isAnsuul then
+    SEH.Ansuul.UpdateSplitsHPOnReticleOver(unitId, unitTag)
+  end
 end
 
 function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId, overflow)
@@ -193,9 +198,13 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   elseif abilityId == SEH.data.ansuul_the_ritual then
     SEH.Ansuul.TheRitual(result, targetType, targetUnitId, hitValue)
 
-  elseif SEH.HasValue(SEH.data.ansuul_breakdown, abilityId) then
-    SEH.Ansuul.Breakdown(result, targetType, targetUnitId, hitValue)
+  elseif abilityId == SEH.data.ansuul_red_split_breakdown or abilityId == SEH.data.ansuul_blue_split_breakdown or abilityId == SEH.data.ansuul_green_split_breakdown then
+    SEH.Ansuul.Breakdown(result, targetType, targetUnitId, hitValue, abilityId)
 
+  end
+
+  if SEH.status.isAnsuul then
+    SEH.Ansuul.TrackCombatEventsToSplits(result, targetUnitId, hitValue, powerType)
   end
 end
 
@@ -286,6 +295,7 @@ function SEH.ResetStatus()
   SEH.status.ansuulSpawned = true
   SEH.status.ansuulLastCalamity = GetGameTimeSeconds()
   SEH.status.ansuulIsFirstCalamity = true
+  SEH.Ansuul.Init()
 
   SEH.status.mainTankTag = ""
 end

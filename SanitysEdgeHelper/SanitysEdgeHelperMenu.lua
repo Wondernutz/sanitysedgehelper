@@ -165,6 +165,13 @@ function SEH.Menu.AddonMenu()
       setFunc = function(newValue) SEH.savedVariables.showAnsuulCalamityTimer = newValue end,
     },
     {
+      type    = "checkbox",
+      name    = "Panel: Show Split Bosses HP. Disable if impacts performance during splits.",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showSplitBossHP end,
+      setFunc = function(newValue) SEH.savedVariables.showSplitBossHP = newValue end,
+    },
+    {
       type = "divider",
     },
     {

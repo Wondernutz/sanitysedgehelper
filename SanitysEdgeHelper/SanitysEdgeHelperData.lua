@@ -21,7 +21,7 @@ SEH.data    = {
 
   yaseyla_firebombs_first_cd = 7.5, -- how soon the first firebomb can be cast
   yaseyla_firebombs_preexecute_cd = 23.5, -- how often it can cast firebombs pre-execute
-  yaseyla_firebombs_execute_cd = 12, -- how often it can cast firebombs execute
+  yaseyla_firebombs_execute_cd = 11, -- how often it can cast firebombs execute
   yaseyla_firebombs_execute_threshold = 26, -- the execute threshold after which it casts firebombs more often
 
   yaseyla_frostbombs_first_cd = 17, -- how soon the first frostbombs can be cast
@@ -44,7 +44,15 @@ SEH.data    = {
   ansuul_manic_phobia = 185117,
 
   ansuul_the_ritual = 183855, -- the buff ansuul gains during the maze
-  ansuul_breakdown = { 188760, 188766, 188769 }, -- the buff ansuul gains during triplet phase
+  ansuul_breakdown = { 188760, 188766, 188768, 188769 }, -- the buff ansuul gains during triplet phase
+
+  ansuul_red_split_breakdown = 188766,
+  ansuul_blue_split_breakdown = 188768,
+  ansuul_green_split_breakdown = 188769,
+
+  ansuul_split_normal_hp = 1136086, --1.1m
+  ansuul_split_hp = 3881032, --3.88m
+  ansuul_split_hm_hp = 8926374, --8.93m
 
   ansuul_calamity_first_cd = 9, -- how soon the first calamity can be cast
   ansuul_calamity_cd = 25, -- how often ansuul can cast calamity
