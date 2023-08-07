@@ -184,6 +184,12 @@ function SEH.Ansuul.UpdateCalamityTick(timeSec)
   end
 end
 
+--[[
+The code below is used to track the HP of Ansuul's splits during Breakdown. Since those are not bosses, tracking them
+has to be done by looking at all damage ticks done to the splits through all combat events, and then using the 
+"reticleover" EffectChanged event to get precise HP updates when available. Credits to Skittile for core implementation.
+--]]
+
 function SEH.Ansuul.UpdateSplitBossHPTick(timeSec)
   local splitTrackingDisabled = not (SEH.savedVariables.showSplitBossHP and SEH.Ansuul.IsSplit)
 
@@ -210,11 +216,10 @@ function SEH.Ansuul.UpdateSplitBossHPTick(timeSec)
   end
 end
 
-function SEH.Ansuul.UpdateSplitsHPOnReticleOver(unitId, unitTag)
+function SEH.Ansuul.UpdateSplitsHPOnReticleOver(unitId, unitTag, curhp, maxhp)
   if not (SEH.savedVariables.showSplitBossHP and SEH.Ansuul.IsSplit) then return end
 
-  if SEH.Ansuul.Splits[unitId] and unitTag == "reticleover" then
-    local curhp, maxhp = GetUnitPower("reticleover", POWERTYPE_HEALTH)
+  if SEH.Ansuul.Splits[unitId] then
     SEH.Ansuul.Splits[unitId].hp = curhp
     SEH.Ansuul.Splits[unitId].maxhp = maxhp
     if curhp < 25000 then SEH.Ansuul.Splits[unitId].complete = true end

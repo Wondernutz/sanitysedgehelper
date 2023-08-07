@@ -166,7 +166,7 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
-      name    = "Panel: Show Split Bosses HP. Disable if impacts performance during splits.",
+      name    = "Panel: Show Split Bosses HP",
       default = true,
       getFunc = function() return SEH.savedVariables.showSplitBossHP end,
       setFunc = function(newValue) SEH.savedVariables.showSplitBossHP = newValue end,
