@@ -86,12 +86,7 @@ SEH.settings = {
 SEH.units = {}
 SEH.unitsTag = {}
 
-function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, sourceType )
-  if SEH.status.isAnsuul and SEH.Ansuul.IsSplit and unitTag == "reticleover" then
-    local curhp, maxhp = GetUnitPower("reticleover", POWERTYPE_HEALTH)
-    SEH.Ansuul.UpdateSplitsHPOnReticleOver(unitId, unitTag, curhp, maxhp)
-  end
-
+function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, sourceType)
   SEH.IdentifyUnit(unitTag, unitName, unitId)
   -- EFFECT_RESULT_GAINED = 1
   -- EFFECT_RESULT_FADED = 2

@@ -187,7 +187,9 @@ end
 --[[
 The code below is used to track the HP of Ansuul's splits during Breakdown. Since those are not bosses, tracking them
 has to be done by looking at all damage ticks done to the splits through all combat events, and then using the 
-"reticleover" EffectChanged event to get precise HP updates when available. Credits to Skittile for core implementation.
+"reticleover" EffectChanged event to get precise HP updates when available.
+
+Credits to Skittile for initial implementation.
 --]]
 
 function SEH.Ansuul.UpdateSplitBossHPTick(timeSec)
@@ -201,7 +203,9 @@ function SEH.Ansuul.UpdateSplitBossHPTick(timeSec)
   SEHStatusLabelAnsuul5Value:SetHidden(splitTrackingDisabled)
 
   if splitTrackingDisabled then return end
-  
+
+  SEH.Ansuul.UpdateSplitsHPOnReticleOver()
+
   for unitId, split_data in pairs(SEH.Ansuul.Splits) do
     if split_data.complete then
       split_data.ui_text_element:SetColor(
@@ -216,13 +220,51 @@ function SEH.Ansuul.UpdateSplitBossHPTick(timeSec)
   end
 end
 
-function SEH.Ansuul.UpdateSplitsHPOnReticleOver(unitId, unitTag, curhp, maxhp)
-  if not (SEH.savedVariables.showSplitBossHP and SEH.Ansuul.IsSplit) then return end
+function SEH.Ansuul.UpdateSplitsHPOnReticleOver()
+  if not DoesUnitExist("reticleover") then return end
+  if GetUnitName("reticleover") ~= "Ansuul the Tormentor" then return end
 
-  if SEH.Ansuul.Splits[unitId] then
-    SEH.Ansuul.Splits[unitId].hp = curhp
-    SEH.Ansuul.Splits[unitId].maxhp = maxhp
-    if curhp < 25000 then SEH.Ansuul.Splits[unitId].complete = true end
+  local color = 0
+	local abilityId
+
+  -- Identify which split this is by looking at the buffs of the unit since they all have the same name
+	for i = 1, GetNumBuffs("reticleover") do
+		_, _, _, _, _, _, _, _, _, _, abilityId, _ = GetUnitBuffInfo("reticleover", i)
+
+    if abilityId == SEH.data.ansuul_red_split_breakdown then
+      color = RED
+      break
+    elseif abilityId == SEH.data.ansuul_green_split_breakdown then
+      color = GREEN
+      break
+    elseif abilityId == SEH.data.ansuul_blue_split_breakdown then 
+      color = BLUE
+      break
+    end
+	end
+  
+  if color ~= 0 then
+    local split_unit_id = SEH.Ansuul.GetSplitUnitIDByColor(color)
+
+    if split_unit_id ~= nil then
+      local curhp, maxhp = GetUnitPower("reticleover", POWERTYPE_HEALTH)
+      SEH.Ansuul.Splits[split_unit_id].hp = curhp
+      SEH.Ansuul.Splits[split_unit_id].maxhp = maxhp
+
+      if curhp < 25000 then 
+        SEH.Ansuul.Splits[split_unit_id].complete = true 
+      end
+
+      break
+    end
+  end
+end
+
+function SEH.Ansuul.GetSplitUnitIDByColor(color)
+  for unitId, split_data in pairs(SEH.Ansuul.Splits) do
+    if split_data.color == color then
+      return unitId
+    end
   end
 end
 
