@@ -101,10 +101,11 @@ end
 function SEH.Yaseyla.UpdateTick(timeSec)
   SEHStatus:SetHidden(not (SEH.savedVariables.showShrapnel or SEH.savedVariables.showFirebombs or SEH.savedVariables.showFrostbombs or SEH.savedVariables.showChains))
 
+  local percentageToNextShrapnel = nil
   if SEH.status.isHMBoss then
-    SEH.Yaseyla.UpdateShrapnelTick(timeSec)
+    percentageToNextShrapnel = SEH.Yaseyla.UpdateShrapnelTick(timeSec)
   end
-  SEH.Yaseyla.UpdateFirebombsTick(timeSec)
+  SEH.Yaseyla.UpdateFirebombsTick(timeSec, percentageToNextShrapnel)
   SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
   SEH.Yaseyla.UpdateChainsTick(timeSec)
 end
@@ -120,7 +121,8 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
   local shrapnelTimeLeft = SEH.data.yaseyla_shrapnel_cd - shrapnelDelta
   -- Time left of damage
   local shrapnelDamageTimeLeft = SEH.data.yaseyla_shrapnel_duration - shrapnelDelta
-
+  
+  local percentageToNextShrapnel = nil
   local currentHealthPercentage = SEH.Yaseyla.CurrentHealthPercentage()
 
   if shrapnelDamageTimeLeft > 0 then
@@ -137,8 +139,8 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
   
   elseif SEH.status.yaseylaShrapnelCount < 3 then
     local nextShrapnelPercentage = SEH.data.yaseyla_shrapnel_thresholds[SEH.status.yaseylaShrapnelCount + 1]
-    local percentageToNextShrapnel = currentHealthPercentage - nextShrapnelPercentage
-    local displayText = string.format("%.0f", percentageToNextShrapnel) .. "% "
+    percentageToNextShrapnel = currentHealthPercentage - nextShrapnelPercentage
+    local displayText = string.format("%.1f", percentageToNextShrapnel) .. "% "
     if percentageToNextShrapnel <= 0 then
       displayText = "INC"
     end
@@ -161,9 +163,11 @@ function SEH.Yaseyla.UpdateShrapnelTick(timeSec)
       SEH.data.color.orange[3])
     SEHStatusLabelYaseyla1Value:SetText(SEH.GetSecondsRemainingString(shrapnelTimeLeft))
   end
+
+  return percentageToNextShrapnel
 end
 
-function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
+function SEH.Yaseyla.UpdateFirebombsTick(timeSec, percentageToNextShrapnel)
   -- Firebombs on HM is cast at every ~24s before execute, and every ~12s in execute.
   SEHStatusLabelYaseyla2:SetHidden(not SEH.savedVariables.showFirebombs)
   SEHStatusLabelYaseyla2Value:SetHidden(not SEH.savedVariables.showFirebombs)
@@ -185,6 +189,10 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec)
   SEHMessage1Label:SetHidden(not SEH.savedVariables.showFirebombsLarge or firebombsTimeLeft > 5)
 
   local secondsRemaining = SEH.GetSecondsRemainingString(firebombsTimeLeft)
+  if percentageToNextShrapnel ~= nil and currentHealthPercentage < (SEH.data.yaseyla_firebombs_execute_threshold + 3) then
+    secondsRemaining = string.format("%s [%.1f%%]", secondsRemaining, percentageToNextShrapnel)
+  end
+
   SEHStatusLabelYaseyla2Value:SetText(secondsRemaining)
   SEHMessage1Label:SetText(string.format("FIREBOMBS: %s", secondsRemaining))
 end
