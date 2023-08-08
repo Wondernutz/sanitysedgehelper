@@ -134,6 +134,33 @@
           <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="40" offsetX="250"/>
       </Label>
 
+      <Label name="$(parent)LabelAnsuul3" font="ZoFontWinH1" color="FF0000" text="Red Boss:" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="80"/>
+      </Label>
+      <Label name="$(parent)LabelAnsuul3Value" font="ZoFontWinH1" color="ff8500" text="100.0%" verticalAlignment="CENTER" horizontalAlignment="LEFT" alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="80" offsetX="250"/>
+      </Label>
+
+      <Label name="$(parent)LabelAnsuul4" font="ZoFontWinH1" color="00FF00" text="Green Boss:" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="120"/>
+      </Label>
+      <Label name="$(parent)LabelAnsuul4Value" font="ZoFontWinH1" color="ff8500" text="100.0%" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="120" offsetX="250"/>
+      </Label>
+
+      <Label name="$(parent)LabelAnsuul5" font="ZoFontWinH1" color="0000FF" text="Blue Boss:" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="160"/>
+      </Label>
+      <Label name="$(parent)LabelAnsuul5Value" font="ZoFontWinH1" color="ff8500" text="100.0%" verticalAlignment="CENTER" horizontalAlignment="LEFT"  alpha="0.85">
+          <Dimensions x="600" y="50" />
+          <Anchor point="CENTER"  relativeTo="$(parent)" relativePoint="CENTER" offsetY="160" offsetX="250"/>
+      </Label>
+
       </Controls>
     </TopLevelControl>
 

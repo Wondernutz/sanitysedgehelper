@@ -16,7 +16,7 @@ function SEH.Menu.AddonMenu()
   local dataTable = {
     {
       type = "description",
-      text = "Trial timers, alerts and indicators for Sanity's Edge. This version requires Code's Combat Alerts 1.16.1 or higher, and removes notifications already present in CCA 1.16.1.",
+      text = "Trial timers, alerts and indicators for Sanity's Edge. This version requires Code's Combat Alerts 1.16.4 or higher, and removes notifications already present in CCA 1.16.4.",
     },
     {
       type = "divider",
@@ -163,6 +163,13 @@ function SEH.Menu.AddonMenu()
       default = true,
       getFunc = function() return SEH.savedVariables.showAnsuulCalamityTimer end,
       setFunc = function(newValue) SEH.savedVariables.showAnsuulCalamityTimer = newValue end,
+    },
+    {
+      type    = "checkbox",
+      name    = "Panel: Show Split Bosses HP",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showSplitBossHP end,
+      setFunc = function(newValue) SEH.savedVariables.showSplitBossHP = newValue end,
     },
     {
       type = "divider",

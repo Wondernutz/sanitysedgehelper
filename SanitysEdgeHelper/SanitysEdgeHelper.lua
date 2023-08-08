@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "1.1.2"
+SEH.version  = "1.2.0"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -78,6 +78,7 @@ SEH.settings = {
   -- Ansuul
   showAnsuulCornerIcons = true,
   showAnsuulCalamityTimer = true,
+  showSplitBossHP = true,
 
   -- Misc
   uiCustomScale = 1,
@@ -85,9 +86,8 @@ SEH.settings = {
 SEH.units = {}
 SEH.unitsTag = {}
 
-function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, sourceType )
+function SEH.EffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, sourceType)
   SEH.IdentifyUnit(unitTag, unitName, unitId)
-  local timeSec = GetGameTimeSeconds()
   -- EFFECT_RESULT_GAINED = 1
   -- EFFECT_RESULT_FADED = 2
   -- EFFECT_RESULT_UPDATED = 3
@@ -173,10 +173,10 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrack then
     SEH.Alert("", "Wrack (KITE!)", 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, 2000)
 
-  elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
-    local offset = 2000
-    SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue + offset)
-    CombatAlerts.AlertCast(abilityId, abilityName, hitValue + offset, {-2, 1})
+  --elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_wrathstorm then
+  --  local offset = 2000
+  --  SEH.Alert("", "Wrathstorm", 0xFF6600FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue + offset)
+  --  CombatAlerts.AlertCast(abilityId, abilityName, hitValue + offset, {-2, 1})
 
   elseif result == ACTION_RESULT_BEGIN and abilityId == SEH.data.ansuul_execute then
     SEH.Alert("", "Execute (INTERRUPT)", 0xFF0033FF, abilityId, SOUNDS.DUEL_START, hitValue)
@@ -193,9 +193,13 @@ function SEH.CombatEvent(eventCode, result, isError, abilityName, abilityGraphic
   elseif abilityId == SEH.data.ansuul_the_ritual then
     SEH.Ansuul.TheRitual(result, targetType, targetUnitId, hitValue)
 
-  elseif SEH.HasValue(SEH.data.ansuul_breakdown, abilityId) then
-    SEH.Ansuul.Breakdown(result, targetType, targetUnitId, hitValue)
+  elseif abilityId == SEH.data.ansuul_red_split_breakdown or abilityId == SEH.data.ansuul_blue_split_breakdown or abilityId == SEH.data.ansuul_green_split_breakdown then
+    SEH.Ansuul.Breakdown(result, targetType, targetUnitId, hitValue, abilityId)
 
+  end
+
+  if SEH.status.isAnsuul then
+    SEH.Ansuul.TrackCombatEventsToSplits(result, targetUnitId, hitValue, powerType)
   end
 end
 
@@ -286,6 +290,7 @@ function SEH.ResetStatus()
   SEH.status.ansuulSpawned = true
   SEH.status.ansuulLastCalamity = GetGameTimeSeconds()
   SEH.status.ansuulIsFirstCalamity = true
+  SEH.Ansuul.Init()
 
   SEH.status.mainTankTag = ""
 end

@@ -141,6 +141,12 @@ function SEH.HideAllUI(hide)
   SEHStatusLabelAnsuul1Value:SetHidden(hide)
   SEHStatusLabelAnsuul2:SetHidden(hide)
   SEHStatusLabelAnsuul2Value:SetHidden(hide)
+  SEHStatusLabelAnsuul3:SetHidden(hide)
+  SEHStatusLabelAnsuul3Value:SetHidden(hide)
+  SEHStatusLabelAnsuul4:SetHidden(hide)
+  SEHStatusLabelAnsuul4Value:SetHidden(hide)
+  SEHStatusLabelAnsuul5:SetHidden(hide)
+  SEHStatusLabelAnsuul5Value:SetHidden(hide)
 end
 
 
