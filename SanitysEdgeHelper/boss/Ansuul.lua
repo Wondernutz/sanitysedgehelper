@@ -254,8 +254,6 @@ function SEH.Ansuul.UpdateSplitsHPOnReticleOver()
       if curhp < 25000 then 
         SEH.Ansuul.Splits[split_unit_id].complete = true 
       end
-
-      break
     end
   end
 end
