@@ -17,11 +17,11 @@ SEH.data    = {
 
   yaseyla_shrapnel_cd = 52, -- how often it can cast shrapnel
   yaseyla_shrapnel_duration = 11,
-  yaseyla_shrapnel_thresholds = {81, 55, 25},
+  yaseyla_shrapnel_thresholds = {81, 55, 26},
 
   yaseyla_firebombs_first_cd = 7.5, -- how soon the first firebomb can be cast
   yaseyla_firebombs_preexecute_cd = 23.5, -- how often it can cast firebombs pre-execute
-  yaseyla_firebombs_execute_cd = 11, -- how often it can cast firebombs execute
+  yaseyla_firebombs_execute_cd = 11.5, -- how often it can cast firebombs execute
   yaseyla_firebombs_execute_threshold = 26, -- the execute threshold after which it casts firebombs more often
 
   yaseyla_frostbombs_first_cd = 17, -- how soon the first frostbombs can be cast
@@ -30,7 +30,7 @@ SEH.data    = {
   yaseyla_chains_first_cd = 0.1, -- how soon the first chains can be cast
   yaseyla_chains_cd = 32, -- how often it can cast chains
 
-  yaseyla_ignite_blame_cd = 5.5, -- how often the Ignite Blamer reports the first instance of an ignite tick
+  yaseyla_ignite_blame_cd = 7.5, -- how often the Ignite Blamer reports the first instance of an ignite tick
 
   -- Ansuul
   ansuul_sunburst = 199344,
