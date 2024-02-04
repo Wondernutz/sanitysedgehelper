@@ -185,13 +185,20 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec, percentageToNextShrapnel)
     firebombsTimeLeft = SEH.data.yaseyla_firebombs_execute_cd - firebombsDelta
   end
 
-  SEHMessage1:SetHidden(not SEH.savedVariables.showFirebombsLarge or firebombsTimeLeft > 5)
-  SEHMessage1Label:SetHidden(not SEH.savedVariables.showFirebombsLarge or firebombsTimeLeft > 5)
-
   local secondsRemaining = SEH.GetSecondsRemainingString(firebombsTimeLeft)
+  local closeToExecuteThreshold = false
   if percentageToNextShrapnel ~= nil and percentageToNextShrapnel > 0 and currentHealthPercentage < (SEH.data.yaseyla_firebombs_execute_threshold + 3) then
     secondsRemaining = string.format("%s [%.1f%%]", secondsRemaining, percentageToNextShrapnel)
+
+    if currentHealthPercentage < (SEH.data.yaseyla_firebombs_execute_threshold + 1.5) then
+      closeToExecuteThreshold = true
+    end
   end
+
+  local showLargeFirebombs = SEH.savedVariables.showFirebombsLarge and (firebombsTimeLeft < 5 or closeToExecuteThreshold)
+
+  SEHMessage1:SetHidden(not showLargeFirebombs)
+  SEHMessage1Label:SetHidden(not showLargeFirebombs)
 
   SEHStatusLabelYaseyla2Value:SetText(secondsRemaining)
   SEHMessage1Label:SetText(string.format("FIREBOMBS: %s", secondsRemaining))
