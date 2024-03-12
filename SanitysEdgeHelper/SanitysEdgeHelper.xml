@@ -6,7 +6,7 @@
       <OnMoveStop>SEH.OnSEHMessage1Move()</OnMoveStop>
 
       <Controls>
-        <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|144|soft-shadow-thick" inheritAlpha="true" color="FF6600"
+        <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|72|soft-shadow-thick" inheritAlpha="true" color="FF6600"
             wrapMode="TRUNCATE" verticalAlignment="TOP" horizontalAlignment="CENTER" text="FIREBOMBS: 5.0">
           <Anchor point="TOP" relativeTo="$(parent)" relativePoint="TOP" />
         </Label>
@@ -19,7 +19,7 @@
       <OnMoveStop>SEH.OnSEHMessage2Move()</OnMoveStop>
       
       <Controls>
-        <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|144|soft-shadow-thick" inheritAlpha="true" color="FF5733"
+        <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|72|soft-shadow-thick" inheritAlpha="true" color="FF5733"
             wrapMode="TRUNCATE" verticalAlignment="TOP" horizontalAlignment="CENTER" text="MESSAGE TWO" alpha="0.85">
           <Anchor point="TOP" relativeTo="$(parent)" relativePoint="TOP" />
         </Label>
@@ -32,7 +32,7 @@
       <OnMoveStop>SEH.OnSEHMessage3Move()</OnMoveStop>
       
       <Controls>
-        <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|144|soft-shadow-thick" inheritAlpha="true" color="FF00FF"
+        <Label name="$(parent)Label" width="800" height="200" font="EsoUI/Common/Fonts/univers67.otf|72|soft-shadow-thick" inheritAlpha="true" color="FF00FF"
             wrapMode="TRUNCATE" verticalAlignment="TOP" horizontalAlignment="CENTER" text="MESSAGE THREE" alpha="0.85">
           <Anchor point="TOP" relativeTo="$(parent)" relativePoint="TOP" />
         </Label>
