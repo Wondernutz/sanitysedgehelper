@@ -18,10 +18,11 @@ function SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, ab
     --SEH.Alert("Wamasu", string.format("Charge -> %s", SEH.GetNameForId(targetUnitId)), 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
     CombatAlerts.AlertCast(abilityId, "", hitValue, {-2, 1})
 
-    local unitTag = SEH.GetTagForId(targetUnitId)
-    local icon = SEH.AddGroundIconOnPlayerForDuration(unitTag, "SanitysEdgeHelper/icons/meeting-point.dds", hitValue + 1000)
-
-    table.insert(SEH.Yaseyla.chargeIcons, icon)
+    if SEH.savedVariables.showWamasuChargeIcon then
+      local unitTag = SEH.GetTagForId(targetUnitId)
+      local icon = SEH.AddGroundIconOnPlayerForDuration(unitTag, "SanitysEdgeHelper/icons/meeting-point.dds", hitValue + 1000)
+      table.insert(SEH.Yaseyla.chargeIcons, icon)
+    end
   end
 end
 

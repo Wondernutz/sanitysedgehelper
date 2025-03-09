@@ -62,6 +62,7 @@ SEH.settings = {
   showHinderedIcon = true,
 
   -- Yaseyla
+  showWamasuChargeIcon = true,
   showShrapnel = true,
   showFirebombs = true,
   showFirebombsLarge = false,

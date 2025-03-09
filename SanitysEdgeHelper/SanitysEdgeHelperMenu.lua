@@ -62,6 +62,13 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
+      name    = "Wamasu Charge Icons",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showWamasuChargeIcon end,
+      setFunc = function(newValue) SEH.savedVariables.showWamasuChargeIcon = newValue end,
+    },
+    {
+      type    = "checkbox",
       name    = "Panel: Shrapnel timer",
       default = true,
       getFunc = function() return SEH.savedVariables.showShrapnel end,
