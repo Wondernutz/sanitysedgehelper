@@ -105,6 +105,7 @@ function SEH.ClearUIOutOfCombat()
 
   SEH.ResetStatus()
   SEH.ResetAllPlayerIcons()
+  SEH.Yaseyla.ClearChargeIcons()
   SEH.HideAllUI(true)
   SEH.LoadSavedScale()
 end

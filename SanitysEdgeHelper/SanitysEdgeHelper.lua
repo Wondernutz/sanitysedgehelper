@@ -2,7 +2,7 @@ SEH = SEH or {}
 local SEH = SEH
 
 SEH.name     = "SanitysEdgeHelper"
-SEH.version  = "1.2.3"
+SEH.version  = "1.2.4"
 SEH.author   = "@Wondernuts, @kabs12"
 SEH.active   = false
 
@@ -62,6 +62,7 @@ SEH.settings = {
   showHinderedIcon = true,
 
   -- Yaseyla
+  showWamasuChargeIcon = true,
   showShrapnel = true,
   showFirebombs = true,
   showFirebombsLarge = false,

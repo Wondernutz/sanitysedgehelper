@@ -62,6 +62,13 @@ function SEH.Menu.AddonMenu()
     },
     {
       type    = "checkbox",
+      name    = "Wamasu Charge Icons",
+      default = true,
+      getFunc = function() return SEH.savedVariables.showWamasuChargeIcon end,
+      setFunc = function(newValue) SEH.savedVariables.showWamasuChargeIcon = newValue end,
+    },
+    {
+      type    = "checkbox",
       name    = "Panel: Shrapnel timer",
       default = true,
       getFunc = function() return SEH.savedVariables.showShrapnel end,
@@ -94,6 +101,13 @@ function SEH.Menu.AddonMenu()
       default = false,
       getFunc = function() return SEH.savedVariables.showFirebombsLarge end,
       setFunc = function(newValue) SEH.savedVariables.showFirebombsLarge = newValue end,
+    },
+    {
+      type = "description",
+      text = "NOTE: Firebombs timer goes from ~23.5s to 11s when Yaseyla crosses the 26% HP threshold. "..
+             "Thus, if >11s has elapsed since the last firebombs (meaning the timer is under ~12.5s) when Yaseyla hits 26%, she will do instant firebombs. "..
+             "When close to the 26% HP threshold, the Large Firebombs display is now color-coded to indicate this, as well as show the percentage to the threshold, "..
+             "like so: FIREBOMBS: |cB2E80B15.5s|r [0.5%]",
     },
     {
       type = "divider",

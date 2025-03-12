@@ -100,13 +100,15 @@ end
 
 function SEH.AddGroundIconOnPlayerForDuration(unitTag, texture, durationMillisec)
   local pworld, px, py, pz = GetUnitWorldPosition(unitTag)
-  local name = SEH.name .. "AddGroundIconOnPlayerForDuration" .. unitTag
+  local name = SEH.name .. "AddGroundIconOnPlayerForDuration" .. unitTag .. tostring(GetGameTimeSeconds())
 
   local icon = SEH.AddGroundCustomIcon(px, py, pz, texture)
-  EVENT_MANAGER:RegisterForUpdate(name, durationMillisec, function() 
+  EVENT_MANAGER:RegisterForUpdate(name, durationMillisec, function()
     EVENT_MANAGER:UnregisterForUpdate(name)
     SEH.DiscardPositionIconList({icon})
     end )
+
+  return icon
 end
 
 function SEH.AddIconForDurationDisplayName(displayName, texture, durationMillisec)

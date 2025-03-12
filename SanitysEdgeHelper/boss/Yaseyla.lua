@@ -1,11 +1,28 @@
 SEH = SEH or {}
 local SEH = SEH
-SEH.Yaseyla = {}
+SEH.Yaseyla = {
+  chargeIcons = {},
+}
+
+function SEH.Yaseyla.Initialize() 
+  SEH.Yaseyla.chargeIcons = {}
+end
+
+function SEH.Yaseyla.ClearChargeIcons()
+  SEH.DiscardPositionIconList(SEH.Yaseyla.chargeIcons)
+  SEH.Yaseyla.chargeIcons = {}
+end
 
 function SEH.Yaseyla.WamasuCharge(result, targetType, targetUnitId, hitValue, abilityId)
-  if result == ACTION_RESULT_BEGIN then
+  if result == ACTION_RESULT_BEGIN  and hitValue > 200 then
     --SEH.Alert("Wamasu", string.format("Charge -> %s", SEH.GetNameForId(targetUnitId)), 0xFFD666FF, abilityId, SOUNDS.OBJECTIVE_DISCOVERED, hitValue)
     CombatAlerts.AlertCast(abilityId, "", hitValue, {-2, 1})
+
+    if SEH.savedVariables.showWamasuChargeIcon then
+      local unitTag = SEH.GetTagForId(targetUnitId)
+      local icon = SEH.AddGroundIconOnPlayerForDuration(unitTag, "SanitysEdgeHelper/icons/meeting-point.dds", hitValue + 1000)
+      table.insert(SEH.Yaseyla.chargeIcons, icon)
+    end
   end
 end
 
@@ -186,11 +203,22 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec, percentageToNextShrapnel)
   end
 
   local secondsRemaining = SEH.GetSecondsRemainingString(firebombsTimeLeft)
-  local closeToExecuteThreshold = false
-  if percentageToNextShrapnel ~= nil and percentageToNextShrapnel > 0 and currentHealthPercentage < (SEH.data.yaseyla_firebombs_execute_threshold + 3) then
-    secondsRemaining = string.format("%s [%.1f%%]", secondsRemaining, percentageToNextShrapnel)
+  local firebombsPanelStr = secondsRemaining
+  local largeFirebombsStr = secondsRemaining
 
-    if currentHealthPercentage < (SEH.data.yaseyla_firebombs_execute_threshold + 1.5) then
+  local percentageToExecute = currentHealthPercentage - SEH.data.yaseyla_firebombs_execute_threshold
+  local closeToExecuteThreshold = false
+
+  if percentageToExecute > 0 and percentageToExecute < 5 then
+    firebombsPanelStr = string.format("%s [%.1f%%]", secondsRemaining, percentageToExecute)
+
+    local secondsRemainingColor = "E8540B"
+    if firebombsTimeLeft > (SEH.data.yaseyla_firebombs_preexecute_cd - SEH.data.yaseyla_firebombs_execute_cd) then
+      secondsRemainingColor = "B2E80B"
+    end
+    largeFirebombsStr = string.format("|c%s%s|r [%.1f%%]", secondsRemainingColor, secondsRemaining, percentageToExecute)
+
+    if currentHealthPercentage < (SEH.data.yaseyla_firebombs_execute_threshold + 3.5) then
       closeToExecuteThreshold = true
     end
   end
@@ -200,8 +228,8 @@ function SEH.Yaseyla.UpdateFirebombsTick(timeSec, percentageToNextShrapnel)
   SEHMessage1:SetHidden(not showLargeFirebombs)
   SEHMessage1Label:SetHidden(not showLargeFirebombs)
 
-  SEHStatusLabelYaseyla2Value:SetText(secondsRemaining)
-  SEHMessage1Label:SetText(string.format("FIREBOMBS: %s", secondsRemaining))
+  SEHStatusLabelYaseyla2Value:SetText(firebombsPanelStr)
+  SEHMessage1Label:SetText(string.format("FIREBOMBS: %s", largeFirebombsStr))
 end
 
 function SEH.Yaseyla.UpdateFrostbombsTick(timeSec)
